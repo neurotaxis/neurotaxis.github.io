@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Services</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 1000px; /* Increased max-width */
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+        }
+        .question {
+            margin: 20px 0;
+        }
+        .question label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="email"] {
+            width: 100%; /* Make input fields take up the full width */
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+        .checklist li {
+            margin: 5px 0;
+        }
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>    <div class="container">        <h1>Data Services</h1>        <form><h4>Tell us about your data
+</h4><br /><textarea style="width: 1000px; height: 100px;"></textarea><h4>What do you want to know about it?
+</h4><br /><textarea style="width: 1000px; height: 100px;"></textarea><h4>What type of data are included?
+</h4><br /><label><input type="checkbox">Spike time-series
+</label><label><input type="checkbox">Behavioral videos
+</label><label><input type="checkbox">Extracted behavior time-series
+</label><label><input type="checkbox">Calcium data
+</label><label><input type="checkbox">EMG
+</label><label><input type="checkbox">EEG
+</label><label><input type="checkbox">BOLD
+</label><label><input type="checkbox">Connectomics
+</label><label><input type="checkbox">Other:
+</label><textarea style="width: 200px; height: 25px;"></textarea><h4>How big is the dataset?
+</h4><br /><textarea style="width: 1000px; height: 50px;"></textarea><h4>How is it currently stored?
+</h4><br /><label><input type="checkbox">local directory
+</label><label><input type="checkbox">database system
+</label><label><input type="checkbox">cloud
+</label><label><input type="checkbox">Other:
+</label><textarea style="width: 200px; height: 25px;"></textarea><h4>What file types are included?
+</h4><br /><label><input type="checkbox">.nwb
+</label><label><input type="checkbox">.mat
+</label><label><input type="checkbox">.hdf5
+</label><label><input type="checkbox">.csv
+</label><label><input type="checkbox">.npy
+</label><label><input type="checkbox">FICTRAC
+</label><textarea style="width: 200px; height: 25px;"></textarea><h4>What are its notable features?
+</h4><br /><textarea style="width: 1000px; height: 100px;"></textarea><h4>Signatures of data correctness?
+</h4><br /><textarea style="width: 1000px; height: 100px;"></textarea><h4>Predictions?
+</h4><br /><textarea style="width: 1000px; height: 100px;"></textarea><h4>Which of the following services are you interested in?
+</h4><br /><h5>Curation
+</h5><br /><label><input type="checkbox">Reformatting
+</label><label><input type="checkbox">Conversion to NWB
+</label><label><input type="checkbox">Overview of structure/organization
+</label><label><input type="checkbox">Analysis of file sizes
+</label><label><input type="checkbox">Artifact identification
+</label><label><input type="checkbox">Cleaning
+</label><label><input type="checkbox">Compression
+</label><h5>Pre-processing
+</h5><br /><label><input type="checkbox">Video segmentation
+</label><label><input type="checkbox">Behavior tracking
+</label><label><input type="checkbox">Spike-sorting
+</label><label><input type="checkbox">Time-series filtering
+</label><h5>Summary reports
+</h5><br /><label><input type="checkbox">Basic report of data structure
+</label><label><input type="checkbox">Report with example data shown, and basic stats
+</label><label><input type="checkbox">Summarize most interesting features of the data (5 fun facts)
+</label><h5>Basic analyses
+</h5><br /><label><input type="checkbox">Spike rasters
+</label><label><input type="checkbox">PSTHs
+</label><label><input type="checkbox">Tuning curves
+</label><label><input type="checkbox">Bin spikes to rates
+</label><label><input type="checkbox">PCA
+</label><label><input type="checkbox">Timescale analysis
+</label><h5>Analyses
+</h5><br /><label><input type="checkbox">Notable features
+</label><label><input type="checkbox">Correlation analyses
+</label><h5>Dimensionality reduction
+</h5><br /><label><input type="checkbox">CNMF
+</label><label><input type="checkbox">neural net-based
+</label><label><input type="checkbox">manifold identification
+</label><h5>Hypothesis testing
+</h5><br /><label><input type="checkbox">Targeted model comparison
+</label><label><input type="checkbox">Quantification and testing of hypotheses
+</label><h5>Model fitting
+</h5><br /><label><input type="checkbox">Fit linear models
+</label><label><input type="checkbox">Fit GLM
+</label><label><input type="checkbox">Spike-triggered average
+</label><label><input type="checkbox">Spike-triggered covariance analysis
+</label><label><input type="checkbox">Fit HMM
+</label><label><input type="checkbox">Fit GLM-HMM
+</label><label><input type="checkbox">Fit dynamical systems
+</label><label><input type="checkbox">Fit attractor network
+</label><label><input type="checkbox">Fit biophysical model
+</label><label><input type="checkbox">Neural ODE
+</label><label><input type="checkbox">Fit recurrent neural network model
+</label><label><input type="checkbox">Model lesioning study
+</label><label><input type="checkbox">Build model to explain key features of your data
+</label><textarea style="width: 200px; height: 25px;"></textarea><h5>Predictive modeling
+</h5><br /><label><input type="checkbox">Fit neural network
+</label><label><input type="checkbox">Time-series models
+</label><h5>Auxiliary
+</h5><br /><label><input type="checkbox">Create artificial datasets as analysis controls
+</label><label><input type="checkbox">Generate null datasets
+</label><label><input type="checkbox">Create data mask
+</label><h5>Other/custom:
+</h5><br /><textarea style="width: 1000px; height: 100px;"></textarea>            <button type="submit">Submit</button>        </form>    </div></body>
+</html>
