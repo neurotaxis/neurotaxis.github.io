@@ -52,7 +52,7 @@
 <div class="container">       
 <h1>Analysis workflow</h1>
     
-    We strive to make our work as reproducible as possible in two key ways. Primary reproducibility means treating a codebase like a precision methods section, so that it can be understood and rewritten by anyone with suitable domain knowledge generations in the future. Secondary reproducibility refers to the ability to run and extend the code. We aim to optimize both primary and secondary reproducibility simultaneously. Our workflow consists not of specific software but of a system for organizing and growing a multi-faceted scientific analysis.
+    We strive to make our work as reproducible as possible. Primary reproducibility means treating a codebase like a precision methods section, so that it can be understood and reproduced by anyone with suitable domain knowledge generations in the future. Secondary reproducibility refers to the ability to run and extend the code using currently accessible technology. We aim to optimize both primary and secondary reproducibility simultaneously. Our workflow consists not of specific software but of a system for organizing and growing a multi-faceted scientific analysis.
     <br /><br />
      Simply put, a project codebase contains an ordered list of folders, each implementing a batch of analysis/processing steps that depend only on preceding folders.
     
@@ -82,11 +82,14 @@
     
     <h3>How it works</h3>
     
-    The folder <code>0000_cpu_dataset_metadata_notes</code> contains all of the original data and associated materials but no code. All of the subsequent folders contain code that can take as input any output produced by any of the preceding directories. Generally, upon rerunning directory N, one should rerun all directories > N. Strictly speaking, the folders form a directed acyclic graph (DAG), with each node except for the root (<code>0000</code>) having one or more parent nodes from which it takes input data.
+    The folder <code>0000_cpu_dataset_metadata_notes</code> contains all of the original data and associated materials but no code. All of the subsequent folders contain code that can take as input any output produced by any of the preceding directories. The output of, say <code>0004_...</code> will be stored in the <code>0004_...</code> folder. Generally, upon rerunning directory N, one should rerun all directories > N. Strictly speaking, the folders form a directed acyclic graph (DAG), with each node except for the root (<code>0000</code>) having one or more parent nodes from which it takes input data.
     <br /><br />
     Such a system supports a wide variety of analysis sequences, and it is easy to prune unused analyses to condense the final codebase. The basic system can also be applied widely across different programming languages.
     <br /><br />
     <code>README.md</code> lists the parents and children of each node, as well as various other metadata (e.g. when it was last run, how long it took to run, what output files it creates, etc.), and instructions for installing the software needed to run the codebase. Auxiliary files like <code>env_cpu.txt</code> provide additional installation information. The "cpu" or "gpu" in the folder name specifies the basic compute hardware required to run the folder. 
+    
+    <h3>What we send back to you</h3>
+    Either the whole or pruned project directory, together with all output files.
 </div>
 </body>
 </html>
