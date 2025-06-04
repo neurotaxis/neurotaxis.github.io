@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Three things everyone should know about time-series analysis</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <a href="#"><img src="../../name_logo_dark.png" alt="Logo"></a>
+      </div>
+      <nav>
+        <a href="#">About</a>
+        <a href="../../blog/archive.html">Blog</a>
+        <a href="#">Courses</a>
+        <a href="#">Research</a>
+        <a href="../../faq.html">FAQ</a>
+      </nav>
+    </header>
+
+    <main>
+        
+      <section class="hero">
+        
+        <h1>Three things everyone should know about time-series analysis</h1>
+          (draft) 2025-05-31
+          <h3>Data leakage through correlated train and test data</h3>
+        <p>In modern times we often fit models on training data and evaluate their performance them on separate validation or test data that was not used to fit the model.
+        Ideally, the test data is sampled independently from the training data but from the same distribution.
+            For instance, if you repeat an experiment 100 times in identical conditions, you might use the first 80 data points as training data and the last 20 as test data.
+        </p>
+          <p>In time-series data, however, your data arrives sequentially. How do you divide a time-series dataset into train and test data?</p>
+          <p>The <strong>wrong</strong> thing to do is select a random set of timepoints to use as training data and to use the rest as test data.
+          The problem is that when signals change more slowly than your sample rate, neighboring timepoints will be correlated and possibly very similar to one another.
+          This makes the test data correlated with the training data, and so good prediction of the test data can in fact be an artifact of overfitting the train data.
+          </p>
+          <p>
+          There are various ways to fix this, with various advantages and disadvantages. 
+          First, if you have truly independently sampled repeats of the entire time-series then you can use a subset of those as training data and the rest as test data.
+          However, if you have only one long continuous time-series, then you'll need a way to break it up into approximately independent samples.
+          One way of doing this is to estimate the autocorrelation function of the data and see if it has a characteristic timescale.
+          For instance, if the autocorrelation time is 100 ms, then timepoints separated by much more than 100 ms can be treated as approximately independent samples, so as long as each test data point is sufficiently far away from all training data points, then it is fair to treat them as independent.
+          Note, however, that this requires that the signal has both a well-defined and relatively short autocorrelation time, which will not be the case for e.g. nonstationary time-series data.
+          </p>
+        
+          <h3>Multicollinearity destabilizes estimated filter weights</h3>
+          <p>One very common technique in analyzing time-series data is to fit filters that predict one time point, say y(t) from some other set of timepoints say x(t-1), x(t-2), ... x(t-T).
+          This means that one assigns a weight to each timepoint of the predictor series, e.g. w_1, ..., w_T, then weights the predictors x(t-1), ..., x(T) by these weights, sums them up, and then uses the sum to predict y(t), possibly including an additional nonlinearity or transformation.
+          </p>
+          <p>However, when x(t) are very correlated, which means that x(t-n) is very similar to x(t-n-1), then there is an effective ambiguity in how to assign the weights.
+          If the ground truth is y(t) = 3x(t-n), then y(t) can also be predicted pretty well by 3x(t-n-1), or 1.5x(t-n) + 1.5x(t-n-1).
+          If there is any noise in the data, then without additional constraints there can be huge instabilities when trying to learn these weights, making estimates of them completely unreliable, EVEN if they predict the test data quite well (because this is NOT a consequence of overfitting).</p>
+          <p>In fact, there is no "correct" solution here. There is simply an unresolvable ambiguity. 
+          The best one can do is instead to choose how resolve this ambiguity, while being aware of the consequences of the choice you make.
+          Practically speaking, a common option is choosing a regularizer. 
+          A good rule of thumb is that an L2 regularizer "balances", i.e. assigns similar weights to predictors that have similar variability and similar predictive power, whereas an L1 regularizer "sparsifies", assigning nonzero weights to only a number of predictors, and setting the rest identically to zero.</p>
+          <p>As you can see, many of the most significant problems analyzing real-world time-series data come from temporal correlations.</p>
+          
+        <h3>Statistical testing</h3>
+          <p>
+          How do argue that a result you extracted from your data was unlikely to have emerged by chance?
+          While there are entire books of statistical tests to use in different situations, the hard truth is that for many datasets, none of these apply.
+          </p>
+          <p>As Allen Downey says, there is only one test.
+          First create a "null distribution" of your data, convert that to a null distribution of your statistic of interest, then estimate the probability of getting a value equal to or great than your measured value from the null distribution.</p>
+
+      </section>
+        
+    </main>
+
+    <footer>
+      <p>&copy; 2025 Rich Pang. All rights reserved.</p>
+    </footer>
+  </div>
+</body>
+</html>

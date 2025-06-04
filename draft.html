@@ -8,107 +8,74 @@
 </head>
 <body>
   <div class="container">
-    <header>
-      <div class="logo">
-        <a href="#"><img src="name_logo_dark.png" alt="Logo"></a>
-      </div>
-      <nav>
-        <a href="#">About</a>
-        <a href="#">Blog</a>
-        <a href="#">Courses</a>
-        <a href="#">Research</a>
-        <a href="#">Careers</a>
-        <a href="#">Contact</a>
-      </nav>
-    </header>
+    <div id="header-placeholder"></div>
+
+    <script>
+        fetch('header.html')
+          .then(response => response.text())
+          .then(data => {
+            document.getElementById('header-placeholder').innerHTML = data;
+          })
+          .catch(error => console.error('Error loading header:', error));
+      </script>
 
     <main>
-      <section class="hero">
-        <h1>(site draft)</h1>
+      <section>
+        <h2>(site draft)</h2>
       </section>
         
       <section class="hero">
-        <h1>Expert consulting in neural data science</h1>
-          <p>We provide expert services and resources for helping efficiently extract scientific results from complex data. Check out our blog and courses or scroll down to view a list of services we offer.</p>
-          <p>Write to us today!</p><p><a href="#">neurotaxis@gmail.com</a></p>
-      </section>
+          <div class="hero-content">
+    <div class="hero-text">
+      <h1>Expert consulting in neural data science</h1>
+          <p>We provide high quality services and resources to help efficiently extract scientific results from complex data.</p>
+          <p>Check out our blog our courses for how to get started on your own.</p>
+        <br /><br /><br /><br />
+    </div>
+    <div class="hero-image">
+      <img src="hero-image.png" alt="Neural data analysis examples">
+    </div>
+  </div>
+          
         
-      <section class="hero">
+          
+      </section>
+
+      <section class="sidekick">
         <h1>Experience in</h1>
         <p>Time-series analysis, mathematical modeling, simulations, spike trains, calcium imaging, behavioral recordings, data management strategies</p>
         <p>We also offer manuscript review services.</p>
         
       </section>
 
-      <section class="hero">
+      <section class="sidekick">
         <h1>Recommended reading</h1>
           <p>
               <a href="blog/2025/getting_started_with_a_new_dataset.html">Getting started with a new dataset</a>
           </p>
         <p>
-            <a href="#">Three things everyone should know about analyzing time-series data</a>
+            <a href="blog/2025/three_things_everyone_should_know_about_time_series_analysis.html">Three things everyone should know about analyzing time-series data</a>
         </p>
 
         <p>
-            <a href="#">The inverse problem in data science</a>
+            <a href="#">The inverse problem of data science</a>
         </p>
         
         <p>
-            <a href="#">Field guide to analyzing time-series data in neuroscience</a>
+            <a href="#">How to write an interesting data paper in two weeks</a>
         </p>
-        
-      </section>
-        
-      <section class="hero">
-        <h1>FAQ</h1>
-        <p>
-        <strong>Can I pay for your services using my NIH grant?</strong><br />
-        Yes! Our services are covered under the <a href="https://grants.nih.gov/grants/policy/nihgps/HTML5/section_7/7.9_allowability_of_costs_activities.htm#Professional_Services_Costs">Professional Services Costs section</a> of the NIH Grants Policy statement on Allowability of Costs/Activities. If you will need to move funds from other budget items to pay for our services please see <a href="https://grants.nih.gov/grants/policy/nihgps/html5/section_8/8.1_changes_in_project_and_budget.htm">Changes in Project Budget</a>.
-        </p>
-        
-        <p>
-        <strong>How does authorship work?</strong><br />
-        By default we do not expect authorship on papers published by your research group. However, we are all scientists and if a natural collaboration should arise as a result of our contributions we would be happy to discuss the possibility of co-authorship.
-        </p>
-        
-        <p>
-        <strong>Is this just going to take away projects from students and postdocs?</strong><br />
-        No! Our goal is to help give researchers <em>more</em> time to think deeply about big questions.
-        We achieve this by providing the opportunity to contract out routine data tasks so that you have more time to be creative and push the frontier.
-        We do believe that it's important for trainees to understand the complexities and nuances of data processing and analysis, and therefore highly encourage young scientists to learn to implement these methods on their own.
-        However, repeated, routine implementation of many common methods can take substantial time without necessarily providing substantial benefit to the investigator.
-        Luckily, we're here to help!
-        </p>
-        
-        <p>
-        <strong>Do you provide custom modeling/data analyses?</strong><br />
-        Yes! If you're interested in a service not listed on our services page, just <a href="#">write us to inquire</a>.
-        </p>
-        
-        <p>
-        <strong>How can I trust the results of your analyses?</strong><br />
-        Trusting analysis results is a complex topic in the biological sciences that we have spent extensive time thinking about.
-        Our main philosophy is to validate analyses not like software engineers but like scientists.
-        This means that while we strive to write excellent code, we focus on sanity checks and scientific controls over mechanical application of commercial testing strategies, which can be highly involved yet miss fundamental scientific errors.
-        One common approach we take, for instance, is to test analyses on artificial data, making it far easier to trust the results when applied to real datasets.
-        </p>
-        
-        <p>
-        <strong>Do we get to see the code used for analyzing our data?</strong><br />
-        Yes! We return all code and processed data to you.
-        Please see our <a href="analysis_workflow.html">analysis workflow</a> for a comprehensive understanding of how we write reliable, interpretable code that can be easily reused and modified by others.
-        </p>
+
       </section>
 
-      <section class="hero">
-        <h1>Vision</h1>
-        <p>Our goal is to help great scientists do their best work. To do so, we believe in creating new, sustainable spaces for doing basic science research.</p>
+      <section class="sidekick">
+        <h1>Get in touch</h1>
+        <p>Need help with your data? Write to us today!</p><p><a href="#">neurotaxis@gmail.com</a></p>
       </section>
         
     </main>
 
     <footer>
-      <p>&copy; 2025 Rich Pang. All rights reserved.</p>
+      <p>&copy; 2025 Neurotaxis. All rights reserved.</p>
     </footer>
   </div>
 </body>
