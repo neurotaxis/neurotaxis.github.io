@@ -8,22 +8,24 @@
 </head>
 <body>
   <div class="container">
-    <header>
-      <div class="logo">
-        <a href="#"><img src="name_logo_dark.png" alt="Logo"></a>
-      </div>
-      <nav>
-        <a href="#">About</a>
-        <a href="blog/archive.html">Blog</a>
-        <a href="#">Courses</a>
-        <a href="#">Research</a>
-        <a href="faq.html">FAQ</a>
-      </nav>
-    </header>
+    <div id="header-placeholder"></div>
+
+    <script>
+    fetch('../../header.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('header-placeholder').innerHTML = data;
+      })
+      .catch(error => console.error('Error loading header:', error));
+    </script>
 
     <main>
         
-      <section class="hero">
+      <section>
+        <h2>(site draft)</h2>
+      </section>
+        
+      <section class="sidekick">
         <h1>Frequently asked questions</h1>
         <p>
         <strong>Can I pay for your services using my NIH grant?</strong><br />

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expert consulting in neuroscience</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div id="header-placeholder"></div>
+
+    <script>
+        fetch('header.html')
+          .then(response => response.text())
+          .then(data => {
+            document.getElementById('header-placeholder').innerHTML = data;
+          })
+          .catch(error => console.error('Error loading header:', error));
+      </script>
+
+    <main>
+      <section>
+        <h2>(site draft)</h2>
+      </section>
+        
+      <section class="sidekick">
+        <h1>Field guide to analyzing time-series data in neuroscience</h1>
+          
+      </section>
+
+        <section class="sidekick">
+        <h1>Statistical physics for biologists</h1>
+
+      </section>
+        
+    </main>
+
+    <footer>
+      <p>&copy; 2025 Rich Pang. All rights reserved.</p>
+    </footer>
+  </div>
+</body>
+</html>
