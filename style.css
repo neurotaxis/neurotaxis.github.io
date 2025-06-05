@@ -78,6 +78,15 @@ section {
   margin-bottom: 20px;
 }
 
+a {
+  text-decoration: none; /* Remove the underline */
+  color: #3498db; /* Set a custom color */
+}
+
+a:hover {
+    color: #00008b; /* Change text color */
+}
+
 .rec-reading a {
       text-decoration: none; /* Remove the underline */
       color: #3498db; /* Set a custom color */
@@ -89,14 +98,18 @@ section {
 
 /* Hover effect */
 .rec-reading a:hover {
-      background-color: #3498db; /* Change background */
-      color: white; /* Change text color */
-      transform: scale(1.1); /* Slight zoom effect */
+      /* background-color: #3498db; /* Change background */
+      color: #00008b; /* Change text color */
     }
 
 /* Active state */
 .rec-reading a:active {
-      background-color: #2980b9; /* Darker background when clicked */
+      color: #2980b9; /* Darker background when clicked */
+    }
+
+header a:hover {
+      /* background-color: #3498db; /* Change background */
+      color: #aaaaaa; /* Change text color */
     }
 
 footer {
@@ -106,6 +119,12 @@ footer {
   padding: 1rem 0;
   margin-top: 0; /* Removes space between content and footer */
 }
+
+hr { 
+    height: 1px; 
+    background-color: #bbb; 
+    border: none; 
+} 
 
 @media (max-width: 768px) {
   .hero-content {
