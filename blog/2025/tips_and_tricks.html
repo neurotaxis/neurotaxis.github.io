@@ -25,10 +25,10 @@
         
         <h1>Three things everyone should know about analyzing time-series data</h1>
           <strong>Rich Pang</strong><br />2025-07-07
-          
-          <h2>Data leakage through correlated train and test data</h2>
-        <p>We usually fit models on training data and evaluate their performance on held-out validation or test data, which helps us avoid overfitting.
+          <h3>Data leakage through correlated train and test data</h3>
+        <p>We usually fit models on training data and evaluate their performance them on held-out validation or test data, which helps us avoid overfitting.
         Ideally, the test data is sampled independently from the training data but from the same distribution.
+            For instance, if you repeat an experiment 100 times in identical conditions, you might use the first 80 data points as training data and the last 20 as test data.
         In time-series data, however, your data arrives sequentially and except in special cases <strong>timepoints are not independent</strong>. How do you divide a time-series dataset into training and test data?</p>
           <p>The <strong>wrong</strong> thing to do is select a random set of timepoints to use as training data and to use the rest as test data.
           This is because when signals change more slowly than your sample rate, neighboring timepoints will be possibly very similar to one another, strongly breaking the independence assumption.
@@ -39,18 +39,17 @@
           First, if you have independently sampled repeats of the entire time-series (for instance, many "trials", each corresponding to a sequence of measurements) then you can use a subset of those repeats as training data and the rest as test data.
           However, if you have only one long continuous time-series, then you'll need a way to break it up into approximately independent samples.
           One way of doing this is to estimate the autocorrelation function of the data and see if it has a characteristic timescale, e.g. by fitting an exponential and estimating tau.
-          Then timepoints separated by much more than tau can be treated as approximately independent samples.
-          As long as each test data point is sufficiently far from all training points, then it is fair to treat them as independent.
+          Then timepoints separated by much more than tau can be treated as approximately independent samples, so as long as each test data point is sufficiently far away from all training data points, then it is fair to treat them as independent.
           </p>
           <p>
-          Note, however, that the second apporach requires that the signal has both a well-defined and relatively short autocorrelation time, which will not be the case for e.g. nonstationary time-series data. Unfortunately, sometimes your data is simply too non-stationary to clearly identify independent samples. This doesn't mean you can't model it, but test-set prediction accuracy might not be a good metric.
+          Note, however, that the second apporach requires that the signal has both a well-defined and relatively short autocorrelation time, which will not be the case for e.g. nonstationary time-series data. Unfortunately, if your data is sufficiently non-stationary that there is no clear way to identify independent samples, then computing test-set prediction accuracy might not be the best analysis. (But this doesn't mean one can't do statistics; see below.)
           </p>
         
-          <h2>Multicollinearity and unstable filter weights</h2>
-          <p>One common technique in analyzing time-series data is to fit filters that predict one time point, say y(t), from a set of predictor timepoints, say x(t-1), x(t-2), ... x(t-T).
-          This means that one assigns a weight to each timepoint of the predictor series, w_1, ..., w_T, then weights the predictors x(t-1), ..., x(T) by these weights, sums them up, and then uses the sum to predict y(t), possibly including an additional nonlinearity or transformation.
+          <h3>Multicollinearity and unstable filter weights</h3>
+          <p>One very common technique in analyzing time-series data is to fit filters that predict one time point, say y(t) from some other set of timepoints say x(t-1), x(t-2), ... x(t-T).
+          This means that one assigns a weight to each timepoint of the predictor series, e.g. w_1, ..., w_T, then weights the predictors x(t-1), ..., x(T) by these weights, sums them up, and then uses the sum to predict y(t), possibly including an additional nonlinearity or transformation.
           </p>
-          <p>However, when x(t) are highly correlated, i.e. x(t) is very similar to x(t+1), then <strong>there is a fundamental ambiguity in how to assign the weights</strong>.
+          <p>However, when x(t) are very correlated, meaning that x(t) is very similar to x(t+1), then <strong>there is a fundamental ambiguity in how to assign the weights</strong>.
           If the ground truth is y(t) = 3x(t-n), then y(t) can also be predicted well by 3x(t-n-1), or 1.5x(t-n) + 1.5x(t-n-1).
           If there is any noise in the data, then without additional constraints there can be huge instabilities when trying to learn these weights, making estimates of them completely unreliable. This is true EVEN if they predict independently sampled test data quite well. In other words, this is NOT a consequence of overfitting. This problem is called <strong>multicollinearity</strong>.</p>
           <p>Alas, there is no "correct" solution for how to handle this problem, since there is simply an unresolvable ambiguity. 
@@ -64,7 +63,7 @@
           But remember: the key thing is to <strong>be aware of how you're handling multicollinearity</strong>, rather than choosing a method blindly and then accidentally mistaking a consequence of your method for a property of your data.</p>
           <p>As you can see, most of the problems analyzing real-world time-series data come from temporal correlations.</p>
           
-        <h2>Statistical testing</h2>
+        <h3>Statistical testing</h3>
           <p>
           How do you argue that the result of an analysis you performed on your time-series data was unlikely to have emerged by chance?
           While there are entire books of statistical tests to use in different situations, the hard truth is that for many modern datasets, especially for time-series, none of these directly apply.

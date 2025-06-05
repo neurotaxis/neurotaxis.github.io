@@ -81,10 +81,24 @@ section {
 
 .archive {
   text-align: left;
+  padding: 20px 300px;
 }
 
 .post {
   text-align: left;
+  padding: 20px 300px;
+}
+
+.post h1 {
+  font-size: 2rem; /* Adjust this value as needed */
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.post h2 {
+  font-size: 1.5rem; /* Adjust this value as needed */
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 
 a {
