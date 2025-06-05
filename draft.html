@@ -28,8 +28,8 @@
           <div class="hero-content">
     <div class="hero-text">
       <h1>Expert consulting in neural data science</h1>
-          <p>We provide high quality services and resources to help efficiently extract scientific results from complex data.</p>
-          <p>Check out our blog our courses for how to get started on your own.</p>
+          <p>We provide high quality services to help efficiently extract scientific results from complex data.</p>
+          <p>We also make educational resources so that you can spend your time skillfully while addressing the big questions that matter most to you. Check out our <a href="/archive.html">blog</a> or online <a href="/courses.html">courses</a> to get started.</p>
         <br /><br /><br /><br />
     </div>
     <div class="hero-image">
@@ -43,12 +43,14 @@
 
       <section class="sidekick">
         <h1>Experience in</h1>
-        <p>Time-series analysis, mathematical modeling, simulations, spike trains, calcium imaging, behavioral recordings, data management strategies</p>
-        <p>We also offer manuscript review services.</p>
+        <p>Time-series analysis, mathematical/computational modeling, simulations, spike trains, calcium imaging, behavioral analysis, data management strategies.</p>
+        <p>We also offer manuscript review services and more.</p>
+        <p>Check out our list of recommended services <a href="/services.html">here</a>.</p>
         
       </section>
 
       <section class="sidekick">
+          <div class="rec-reading">
         <h1>Recommended reading</h1>
           <p>
               <a href="blog/2025/getting_started_with_a_new_dataset.html">Getting started with a new dataset</a>
@@ -56,15 +58,16 @@
         <p>
             <a href="blog/2025/three_things_everyone_should_know_about_time_series_analysis.html">Three things everyone should know about analyzing time-series data</a>
         </p>
-
-        <p>
-            <a href="#">The inverse problem of data science</a>
-        </p>
         
         <p>
-            <a href="#">How to write an interesting data paper in two weeks</a>
+            <a href="blog/2025/tips_and_tricks_computational_research.html">Tips and tricks for improving your computational research experience</a>
+        </p>
+              
+        <p>
+            <a href="blog/2025/how_to_write_an_interesting_data_paper.html">How to write an interesting data paper in two weeks</a>
         </p>
 
+          </div>
       </section>
 
       <section class="sidekick">
@@ -74,9 +77,17 @@
         
     </main>
 
-    <footer>
-      <p>&copy; 2025 Neurotaxis. All rights reserved.</p>
-    </footer>
+    <div id="footer-placeholder"></div>
+
+    <script>
+      fetch('footer.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('footer-placeholder').innerHTML = data;
+        })
+        .catch(error => console.error('Error loading footer:', error));
+    </script>
+    
   </div>
 </body>
 </html>

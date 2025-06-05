@@ -3,7 +3,7 @@ body {
   margin: 0;
   padding: 0;
   line-height: 1.6;
-  background: #f4f4f4;
+  background: #f2f2f2;
 }
 
 .container {
@@ -73,10 +73,31 @@ section {
 }
 
 .sidekick h1 {
-  font-size: 1.8rem; /* Adjust this value as needed */
+  font-size: 1.6rem; /* Adjust this value as needed */
   font-weight: bold;
   margin-bottom: 20px;
 }
+
+.rec-reading a {
+      text-decoration: none; /* Remove the underline */
+      color: #3498db; /* Set a custom color */
+      font-weight: bold; /* Make it bold */
+      padding: 5px 10px; /* Add some padding */
+      border-radius: 5px; /* Rounded corners */
+      transition: all 0.3s ease; /* Smooth transition */
+    }
+
+/* Hover effect */
+.rec-reading a:hover {
+      background-color: #3498db; /* Change background */
+      color: white; /* Change text color */
+      transform: scale(1.1); /* Slight zoom effect */
+    }
+
+/* Active state */
+.rec-reading a:active {
+      background-color: #2980b9; /* Darker background when clicked */
+    }
 
 footer {
   background: #333;
