@@ -79,6 +79,14 @@ section {
   margin-bottom: 20px;
 }
 
+.archive {
+  text-align: left;
+}
+
+.post {
+  text-align: left;
+}
+
 a {
   text-decoration: none; /* Remove the underline */
   color: #3498db; /* Set a custom color */
