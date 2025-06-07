@@ -79,6 +79,35 @@ section {
   margin-bottom: 20px;
 }
 
+.team {
+  padding: 20px 150px;
+}
+
+.team-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1000px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.team-text {
+  flex: 4; /* 2 parts out of 3 */
+  padding-right: 40px;
+}
+
+.team-image {
+  flex: 1; /* 1 part out of 3 */
+  text-align: right;
+}
+
+.team-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
 .archive {
   text-align: left;
   padding: 20px 300px;

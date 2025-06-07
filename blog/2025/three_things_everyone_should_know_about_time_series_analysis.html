@@ -27,11 +27,11 @@
           <strong>Rich Pang</strong><br />2025-07-07
           
           <h2>Data leakage through correlated training and test data</h2>
-        <p>We usually fit models on training data and evaluate their performance on held-out validation or test data, which helps us avoid overfitting.
+        <p>We usually fit models on training data and evaluate their performance on held-out test (or validation) data, which helps us avoid overfitting.
         Ideally, the test data is sampled independently from the training data but from the same distribution.
-        In time-series data, however, your data arrives sequentially and except in special cases <strong>timepoints are not independent</strong>. How do you divide a time-series dataset into training and test data?</p>
-          <p>The <strong>wrong</strong> thing to do is select a random set of timepoints to use as training data and to use the rest as test data.
-          This is because when signals change more slowly than your sample rate, neighboring timepoints will be possibly very similar, breaking the independence assumption.
+        With time-series, however, your data arrives sequentially and except in special cases <strong>timepoints are not independent</strong>. How do you divide a time-series dataset into training and test data?</p>
+          <p>The <strong>wrong</strong> thing to do is select a random set of timepoints to use as training data and use the rest as test data.
+          This is because when signals change more slowly than your sample rate, neighboring timepoints may be very similar, breaking the independence assumption.
           This makes the test data correlated with the training data, and so good prediction of the test data can in fact be an artifact of overfitting to the training data. So what do we do instead?
           </p>
           <p>
@@ -43,16 +43,19 @@
           As long as each test data point is sufficiently far from all training points, then it could be reasonable to treat them as independent.
           </p>
           <p>
-          Note, however, that the second apporach requires that the signal has both a well-defined and relatively short autocorrelation time, which may not be the case for e.g. strongly nonstationary time-series. Unfortunately, sometimes your data is simply too non-stationary to clearly identify independent samples. This doesn't mean you can't model it, but test-set prediction accuracy might not be a good metric.
+          Note, however, that the second apporach requires that the signal has both a well-defined and relatively short autocorrelation time, which may not be the case for e.g. strongly nonstationary time-series. Unfortunately, sometimes your data is simply too non-stationary to cleanly break into independent samples. This doesn't mean you can't model it, but test-set prediction accuracy might not be a good metric.
           </p>
         
           <h2>Multicollinearity and unstable filter weights</h2>
           <p>One common technique in analyzing time-series data is to fit filters that predict one time point, say y(t), from a set of predictor timepoints, say x(t-1), x(t-2), ... x(t-T).
           This means that one assigns a weight to each timepoint of the predictor series, w_1, ..., w_T, then weights the predictors x(t-1), ..., x(T) by these weights, sums them up, and then uses the sum to predict y(t), possibly including an additional nonlinearity or transformation.
           </p>
-          <p>However, when x(t) are highly correlated, i.e. x(t) is similar to x(t+1), then <strong>there is a fundamental ambiguity in how to assign the weights</strong>.
-          If the ground truth is y(t) = 3x(t), then y(t) can also be predicted well by 3x(t+1), or 1.5x(t) + 1.5x(t+1), etc.
-          If there is any noise in the data, then without additional constraints there can be huge instabilities when trying to learn these weights, making estimates of them highly variable and unreliable. This is true EVEN if they predict independent test data well. In other words, this is NOT a consequence of overfitting. This problem is called <strong>multicollinearity</strong>.</p>
+          <p>However, when x(t) are highly correlated, i.e. x(t) is similar to x(t-1), then <strong>there is a fundamental ambiguity in how to assign the weights</strong>.
+          If the ground truth is y(t) = 3x(t), then y(t) can also be predicted well by 3x(t-1), or 1.5x(t) + 1.5x(t-1), etc.
+          If there is any noise in the data, then without additional constraints there can be huge instabilities when trying to learn these weights, making estimates of them highly variable and unreliable.
+          This is true EVEN if they predict independent test data well. In other words, this is NOT a consequence of overfitting.
+          This problem is called <strong>multicollinearity</strong>.
+          </p>
           <p>Alas, there is no "correct" solution for how to handle multicollinearity, since there is simply a fundamental ambiguity in which predictor timepoints matter most. 
           The best one can do is instead to conciously choose an approach, while being aware of the consequences of your choice.
           One common option, for instance, is to add a regularization term to your loss function, such as an L2 ("Ridge") or L1 ("Lasso") penalty.
@@ -80,7 +83,7 @@
           While there is no universal answer there are at least some good rules of thumb.
           First, what a null dataset actually means is an ensemble or collection of datasets, each formatted equivalently to your real data but created using a different random number generator seed.
           From each instantiation compute the effect size using the same analysis pipeline as your real data, then create a histogram of these effect sizes for the null data.
-          The rule of thumb is to create enough null instantiations to so that you can accurately estimate how far away your real effect size lies from the bulk of the null distribution of effect sizes.
+          The rule of thumb is to create enough null instantiations that you can accurately estimate how far away your real effect size lies from the bulk of the null distribution of effect sizes.
           </p>
           <p>
           The second key rule of thumb is to <strong>create a null dataset that retains as many features of your data as possible, excluding the specific effect you're looking for</strong>.

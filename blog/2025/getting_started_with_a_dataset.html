@@ -27,14 +27,14 @@
           <strong>Rich Pang</strong><br />2025-07-14
           
           <p>
-          Have a dataset in your hands you're not sure what to do with? It's great to follow your intuition, but if you find yourself running in circles, try the following to expedite your journey.
+          Have a dataset in your hands you're not sure what to do with? It's great to follow your nose, but if you find yourself running in circles, the following may help expedite your journey.
           </p>
           
           <h2>Build a mental model of the data</h2>
           The better your mental model of the data, the easier it is to simulate analyses in your head, at the bus stop or in the shower, to see which ones are more or less likely to produce something interesting vs hit dead ends.
           
           <h4>Plot of bunch of typical and atypical examples in your data.</h4>
-          <p>Knowing what your raw (or lightly pre-processed) data just <em>looks like</em> is crucial for interpreting possibly complex analysis results. Figure out what examples represent "typical" system behavior and which "atypical" examples are likely caused by artifacts vs something truly interesting. Make sure there is clear signal in the data, or if not, that you have strong reason for believing a clear signal can be extracted with the proper analysis technique.</p>
+          <p>Knowing what your raw (or lightly pre-processed) data just <em>looks like</em> is crucial for interpreting downstream analysis results. Which examples represent "typical" system behavior that would help someone else get a feel for what you're working with? Which "atypical" examples are likely caused by artifacts vs something truly interesting? Make sure there is clear signal in the data, or if not, that you have strong reason for believing a clear signal can be extracted with the proper methods.</p>
           
           <h4>Learn as much as you can about how the data was collected</h4>
           <p>Datasets hide a ton of experimental context.
@@ -42,11 +42,11 @@
           
           <h4>Compute all the basic stats</h4>
           <p>
-          Before you try anything sophisticated, compute all the basic histograms and correlations.
+          Before you do anything sophisticated, compute all the basic histograms and correlations.
           How many trials are there? How many timepoints per trial?
           How big are the signals you're looking at?
           What are the basic timescales of the system?
-          Which features are "real" vs artifactual? If it seems like it might be interesting to apply sophisticated technique XYZ, don't do it yet, but write down the idea and why it might be interesting.</p>
+          Which features are real vs artifacts? If you feel the urge to do anything remotely sophisticated, don't do it yet, but write down the idea and why it might be interesting.</p>
           
           <h4>Make an executive summary of the data</h4>
           <p>
@@ -86,6 +86,7 @@
               Sometimes the data is high quality but the most interesting phenomena are hidden below the surface.
               A tried-and-true approach to making data interesting is to identify two mutually exclusive models that are both reasonable in the field, and ask which one better explains the data (or which models explain which aspects of the data).
               This allows you to "triangulate" where the data live in a space of models.
+              If this is your approach, think carefully through what reasonable models to compare, and how you would compare them against the data.
           </p>
 
           
@@ -121,10 +122,10 @@
           
         <h2>Beware the twilight zone</h2>
           <p>
-          The <strong>twilight zone</strong> is when one applies a complex analysis or reduction method to the data, not knowing exactly what to expect, then tries to interpret the results.
+          The <strong>twilight zone</strong> is when one applies a complex method to the data, not knowing exactly what to expect, then tries to interpret the results.
           Dimensionality reduction and clustering techniques are a common example.
-          While these can sometimes be sound and powerful, and are often touted as "letting the data speak for itself", rather than going in with overly biased hypotheses, <strong>it is easy to mistake a feature of the data for a feature of the reduction method</strong>.
-          For instance, quantities like "number of clusters" are often a consequence of a parameter in the clustering algorithm (e.g. specifying cluster size), rather than a reflection of the best guess "true" number of clusters in a dataset.
+          While these can sometimes be sound and powerful, and are often touted as "letting the data speak for itself", rather than going in with overly biased hypotheses, <strong>it is all too easy to mistake a feature of the data for a feature of the method</strong>.
+          For instance, quantities like "number of clusters" are often a consequence of a parameter in the clustering algorithm (e.g. specifying cluster size), rather than a reflection of the "true" number of clusters in a dataset.
           </p>
           <p>
           The best way to verify results obtained in the twilight zone is to run the same methods on artificial datasets of the same format as your real data but in which more ground truth is known, which serve as controls.
