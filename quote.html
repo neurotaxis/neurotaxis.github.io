@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expert consulting in neuroscience</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div id="header-placeholder"></div>
+
+    <script>
+    fetch('../../header.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('header-placeholder').innerHTML = data;
+      })
+      .catch(error => console.error('Error loading header:', error));
+    </script>
+
+    <main>
+        
+      <section>
+        <h2>(site draft)</h2>
+      </section>
+        
+      <section class="sidekick">
+        <h1>Send us an inquiry or get a quote</h1>
+        <p>
+        Fill out the following <a href="https://docs.google.com/forms/d/e/1FAIpQLSclia9FnedXjyEG4o5q9DZWaIzgJKy5xb5n1W5U1B5smmcuGQ/viewform?usp=sharing&ouid=100742227071264838228">form</a> to help us better understand how we can help.
+        </p>
+      </section>
+        
+    </main>
+
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+      fetch('footer.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('footer-placeholder').innerHTML = data;
+        })
+        .catch(error => console.error('Error loading footer:', error));
+    </script>
+  </div>
+</body>
+</html>

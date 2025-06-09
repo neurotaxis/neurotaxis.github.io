@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sliding scale policy</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div id="header-placeholder"></div>
+
+    <script>
+    fetch('../../header.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('header-placeholder').innerHTML = data;
+      })
+      .catch(error => console.error('Error loading header:', error));
+    </script>
+
+    <main>
+        
+      <section>
+        <h2>(site draft)</h2>
+      </section>
+        
+      <section class="sidekick">
+        <h1>Sliding scale policy</h1>
+        <p>
+        We want to help great scientists regardless of their funding situation. If funding is slim, just tell us your situation and we'll see what we can do.
+        </p>
+      </section>
+        
+    </main>
+
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+      fetch('footer.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('footer-placeholder').innerHTML = data;
+        })
+        .catch(error => console.error('Error loading footer:', error));
+    </script>
+  </div>
+</body>
+</html>
