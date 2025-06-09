@@ -130,6 +130,10 @@ section {
   margin-bottom: 20px;
 }
 
+.service {
+  padding: 20px 150px;
+}
+
 a {
   text-decoration: none; /* Remove the underline */
   color: #3498db; /* Set a custom color */
