@@ -73,10 +73,23 @@ section {
   margin-bottom: 20px;
 }
 
+.sidekick {
+  padding: 20px 150px;
+}
+
 .sidekick h1 {
   font-size: 1.6rem; /* Adjust this value as needed */
   font-weight: bold;
   margin-bottom: 20px;
+}
+
+.sidekick-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1000px;
+  margin: 0 auto;
+  flex-wrap: wrap;
 }
 
 .team {
@@ -128,6 +141,19 @@ section {
   font-size: 1.5rem; /* Adjust this value as needed */
   font-weight: bold;
   margin-bottom: 20px;
+}
+
+.course {
+  padding: 20px 150px;
+}
+
+.course-content {
+  /* display: flex; */
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1000px;
+  margin: 0 auto;
+  flex-wrap: wrap;
 }
 
 .service {

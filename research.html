@@ -11,7 +11,7 @@
     <div id="header-placeholder"></div>
 
     <script>
-    fetch('../../header.html')
+    fetch('/header.html')
       .then(response => response.text())
       .then(data => {
         document.getElementById('header-placeholder').innerHTML = data;
@@ -21,20 +21,16 @@
 
     <main>
         
-      <section>
-        <h2>(site draft)</h2>
-      </section>
-        
       <section class="sidekick">
         <h1>Research</h1>
-          <p>At Neurotaxis we are actively engaged in computational neuroscience research. Current research interests include:</p>
-        <p><strong>Spiking neural networks</strong><br />
+          <p>At Neurotaxis we are actively engaged in computational neuroscience research. Current research interests include episodic memory and learning, computation in spiking neural networks, and latent variable modeling.</p>
+        <!-- <p><strong>Spiking neural networks</strong><br />
         A pervasive characteristic of cortical activity in awake mammals is asynchronous irregular activity, characterized by strongly fluctuating synaptic inputs and Poisson-like spike trains. However, despite being observed for decades, we still don't know what the role of this striking dynamical regime is in neural information processing. We address these questions in spiking network models, with a particular focus on how asynchronous irregular activity can not only co-exist with, but actively support flexible nonlinear dynamics in recurrently connected spiking networks to drive computations. This research avenue has broad implications for modeling large-scale neural recordings and designing neuromorphic computing devices.
         </p>
 
         <p><strong>Episodic memory and learning</strong><br />
         Episodic memories are crucial to human and animal behavior and usually formed after only a single experience (e.g. a conversation with a friend or a walk through a new part of town). However, it remains unknown how cellular learning processes support one-shot memory formation. To shed light on this problem, we study plasticity mechanisms inspired by biological circuits such as the hippocampal mossy fiber pathway or the insect mushroom body, which often exhibit simpler plasticity rules even than the classic Hebbian rule ("neurons that fire together wire together"), which has traditionally dominated episodic memory models. In this line of research we investigate how empirical plasticity rules, which are likely stronger and faster yet less intuitive than Hebbian rules, can produce robust learning of complex information structures by capitalizing on "priors" such as a model of the world. This work has wide implications for connecting cellular to systems-level neural processes and for fundamental societal institutions such as witness testimony or education, which rely heavily on one-shot memory formation.
-        </p>
+        </p> -->
       </section>
         
       <!-- <section class="sidekick">
