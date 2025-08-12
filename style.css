@@ -149,11 +149,16 @@ section {
 
 .course-content {
   /* display: flex; */
+  font-size: 1rem;
   align-items: center;
   justify-content: space-between;
   max-width: 1000px;
   margin: 0 auto;
   flex-wrap: wrap;
+}
+
+.course-outline {
+  font-size: .85rem;
 }
 
 .service {
