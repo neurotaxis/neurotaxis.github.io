@@ -24,7 +24,8 @@ footer {
   background-color: #333;
   color: #fff;
   text-align: center;  /* center the text */
-  padding: 20px 0;
+  padding: 10px 0;
+  font-size: .9rem;
 }
 
 /* Header and footer containers: no background color */
@@ -159,9 +160,6 @@ section {
 }
 
 /* About page */
-.team {
-  padding: 20px 150px;
-}
 
 .team-content {
   display: flex;
@@ -186,6 +184,12 @@ section {
   max-width: 100%;
   height: auto;
   border-radius: 8px;
+}
+
+.team h1 {
+  font-size: 1.6rem; /* Adjust this value as needed */
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 
 /* Blog archive */
@@ -323,27 +327,15 @@ hr {
   }
     
   .logo img {
-    height: 25px;
+    height: 27px;
+  }
+
+  .hamburger {
+    display: flex;
   }
 
   .hero h1 {
     font-size: 1.5rem; /* Adjust this value as needed */
-  }
-
-  .sidekick h1 {
-    font-size: 1.3rem;
-  }
-    
-  .post h1 {
-    font-size: 1.5rem;
-  }
-    
-  .post h2 {
-    font-size: 1.3rem;
-  }
-    
-  .hamburger {
-    display: flex;
   }
     
   .hero-content {
@@ -353,7 +345,7 @@ hr {
 
   .hero-text, .hero-image {
     flex: 100%;
-    padding: 20px 0;
+    padding: 0 0;
   }
 
   .hero-image {
@@ -362,5 +354,35 @@ hr {
     
   .topics-grid {
     grid-template-columns: 1fr; /* 1 column */
+  }
+    
+  .sidekick h1 {
+    font-size: 1.3rem;
+  }
+    
+  .team h1 {
+    font-size: 1.3rem; /* Adjust this value as needed */
+  }
+    
+  .team-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .team-text, .team-image {
+    flex: 100%;
+    padding: 0 0;
+  }
+
+  .team-image {
+    text-align: center;
+  }
+    
+  .post h1 {
+    font-size: 1.5rem;
+  }
+    
+  .post h2 {
+    font-size: 1.3rem;
   }
 }
