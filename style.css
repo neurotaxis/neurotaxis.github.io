@@ -131,10 +131,6 @@ section {
 
 /* "Side kick sections" */
 
-/* .sidekick {
-  padding: 20px 150px;
-} */
-
 .sidekick h1 {
   font-size: 1.6rem; /* Adjust this value as needed */
   font-weight: bold;
@@ -194,8 +190,14 @@ section {
 
 /* Blog archive */
 .archive {
-  padding: 30px 20px;
+  padding: 15px 20px;
   text-align: left;
+}
+
+.archive h1 {
+  font-size: 1.6rem; /* Adjust this value as needed */
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 
 /* Limit the width of the content */
@@ -378,6 +380,10 @@ hr {
 
   .team-image {
     text-align: center;
+  }
+    
+  .archive h1 {
+    font-size: 1.3rem; /* Adjust this value as needed */
   }
     
   .post h1 {
