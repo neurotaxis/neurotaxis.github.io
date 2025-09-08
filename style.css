@@ -13,27 +13,80 @@ body {
   padding: 0 20px; /* Adds side padding */
 }
 
+
+/* Header and footer themselves span full width and have dark background */
 header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #333;
+  background-color: #333;
   color: #fff;
-  padding: 1rem;
 }
 
-header .logo img {
-  height: 60px; /* Adjust logo size */
+footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;  /* center the text */
+  padding: 20px 0;
+}
+
+/* Header and footer containers: no background color */
+.header-container {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 15px 20px;
+  justify-content: space-between;
+  background-color: transparent; /* remove white so header/footer shows #333 */
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px 20px;
+  background-color: transparent; /* keep the dark background showing */
+}
+
+.logo img {
+  height: 60px;
 }
 
 nav {
   display: flex;
+  align-items: center; /* vertical centering for menu + hamburger */
 }
 
-nav a {
+/* Desktop menu items */
+nav ul.menu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul.menu li {
+  margin-left: 30px; /* a bit more spacing between items */
+}
+
+nav ul.menu li a {
   color: #fff;
-  margin: 0 15px;
   text-decoration: none;
+  font-size: 1.1rem; /* increase menu text size */
+  line-height: 1;     /* remove extra spacing */
+  display: flex;
+  align-items: center; /* vertically centers text within li */
+}
+
+/* Hamburger menu hidden on desktop */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background-color: #fff;
+  display: block;
 }
 
 section {
@@ -41,6 +94,8 @@ section {
   padding: 20px 60px;
   background-color: #f9f9f9;
 }
+
+/* Landing page top section */
 
 .hero-content {
   display: flex;
@@ -73,6 +128,8 @@ section {
   margin-bottom: 20px;
 }
 
+/* "Side kick sections" */
+
 .sidekick {
   padding: 20px 150px;
 }
@@ -92,6 +149,16 @@ section {
   flex-wrap: wrap;
 }
 
+/* "Experience in" section */
+.topics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columns on desktop */
+  gap: 20px; /* spacing between text items */
+  /* font-size: 1rem; */
+  text-align: center;
+}
+
+/* About page */
 .team {
   padding: 20px 150px;
 }
@@ -121,10 +188,20 @@ section {
   border-radius: 8px;
 }
 
+/* Blog archive */
 .archive {
+  padding: 60px 20px;
   text-align: left;
-  padding: 20px 300px;
 }
+
+/* Limit the width of the content */
+.archive-content,
+.archive-content h2 {
+  max-width: 600px;      /* controllable max-width */
+  margin: 0 auto;         /* center horizontally */
+}
+
+/* Blog posts */
 
 .post {
   text-align: left;
@@ -204,13 +281,13 @@ header a:hover {
       color: #aaaaaa; /* Change text color */
     }
 
-footer {
+/* footer {
   background: #333;
   color: #fff;
   text-align: center;
   padding: 1rem 0;
   margin-top: 0; /* Removes space between content and footer */
-}
+} */
 
 hr { 
     height: 1px; 
@@ -218,7 +295,28 @@ hr {
     border: none; 
 } 
 
+
+/* Mobile */
 @media (max-width: 768px) {
+  nav ul.menu {
+    display: none;
+    flex-direction: column;
+    background-color: #333;
+    position: absolute;
+    right: 20px;
+    top: 60px;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  nav ul.menu.open {
+    display: flex;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+    
   .hero-content {
     flex-direction: column;
     text-align: center;
@@ -231,5 +329,9 @@ hr {
 
   .hero-image {
     text-align: center;
+  }
+    
+  .topics-grid {
+    grid-template-columns: 1fr; /* 1 column */
   }
 }

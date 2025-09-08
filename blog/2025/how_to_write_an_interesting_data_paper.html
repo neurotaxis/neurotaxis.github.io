@@ -10,15 +10,6 @@
   <div class="container">
     <div id="header-placeholder"></div>
 
-    <script>
-        fetch('/header.html')
-          .then(response => response.text())
-          .then(data => {
-            document.getElementById('header-placeholder').innerHTML = data;
-          })
-          .catch(error => console.error('Error loading header:', error));
-      </script>
-
     <main>
         
       <section class="post">
@@ -69,9 +60,26 @@
         
     </main>
 
-    <footer>
-      <p>&copy; 2025 Rich Pang. All rights reserved.</p>
-    </footer>
+    
+    <div id="footer-placeholder"></div>
+
+  <script>
+    // Simple header/footer inclusion
+    fetch('/header.html')
+      .then(response => response.text())
+      .then(data => document.getElementById('header-placeholder').innerHTML = data);
+
+    fetch('/footer.html')
+      .then(response => response.text())
+      .then(data => document.getElementById('footer-placeholder').innerHTML = data);
+
+    // Hamburger menu toggle
+    document.addEventListener('click', function(e){
+      if(e.target.closest('.hamburger')){
+        document.querySelector('.menu').classList.toggle('open');
+      }
+    });
+  </script>
   </div>
 </body>
 </html>

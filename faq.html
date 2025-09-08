@@ -10,23 +10,10 @@
   <div class="container">
     <div id="header-placeholder"></div>
 
-    <script>
-    fetch('/header.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('header-placeholder').innerHTML = data;
-      })
-      .catch(error => console.error('Error loading header:', error));
-    </script>
-
     <main>
       <section class="sidekick">
           <br />
         <h1>Frequently asked questions</h1>
-        <!-- <p>
-        <strong>Can I pay for your services using my NIH grant?</strong><br />
-        Yes! Our services are covered under the <a href="https://grants.nih.gov/grants/policy/nihgps/HTML5/section_7/7.9_allowability_of_costs_activities.htm#Professional_Services_Costs">Professional Services Costs section</a> of the NIH Grants Policy statement on Allowability of Costs/Activities. If you will need to move funds from other budget items to pay for our services please see <a href="https://grants.nih.gov/grants/policy/nihgps/html5/section_8/8.1_changes_in_project_and_budget.htm">Changes in Project Budget</a>.
-        </p> -->
         
         <p>
         <strong>Do you provide custom modeling/data analyses?</strong><br />
@@ -69,17 +56,25 @@
         
     </main>
 
-
     <div id="footer-placeholder"></div>
 
-    <script>
-      fetch('footer.html')
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById('footer-placeholder').innerHTML = data;
-        })
-        .catch(error => console.error('Error loading footer:', error));
-    </script>
+  <script>
+    // Simple header/footer inclusion
+    fetch('header.html')
+      .then(response => response.text())
+      .then(data => document.getElementById('header-placeholder').innerHTML = data);
+
+    fetch('footer.html')
+      .then(response => response.text())
+      .then(data => document.getElementById('footer-placeholder').innerHTML = data);
+
+    // Hamburger menu toggle
+    document.addEventListener('click', function(e){
+      if(e.target.closest('.hamburger')){
+        document.querySelector('.menu').classList.toggle('open');
+      }
+    });
+  </script>
   </div>
 </body>
 </html>

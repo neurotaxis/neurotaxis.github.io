@@ -10,15 +10,6 @@
   <div class="container">
     <div id="header-placeholder"></div>
 
-    <script>
-        fetch('/header.html')
-          .then(response => response.text())
-          .then(data => {
-            document.getElementById('header-placeholder').innerHTML = data;
-          })
-          .catch(error => console.error('Error loading header:', error));
-      </script>
-
     <main>
         
       <section class="hero">
@@ -41,34 +32,20 @@
       <section class="sidekick">
         <hr />
         <h1>Experience in</h1>
-          <p>
-              Statistical analysis
-              &nbsp; &nbsp; &nbsp
-              Time-series analysis
-              &nbsp; &nbsp; &nbsp;
-              Computational modeling
-              &nbsp; &nbsp; &nbsp;
-              Mathematical theory
-          </p>
-          <p>
-              Spike trains
-              &nbsp; &nbsp; &nbsp;
-              Calcium imaging
-              &nbsp; &nbsp; &nbsp;
-              Natural behavior
-              &nbsp; &nbsp; &nbsp;
-              Deep networks
-          </p>
-          <p>
-              Analysis strategies
-              &nbsp; &nbsp; &nbsp;
-              Data management strategies
-              &nbsp; &nbsp; &nbsp;
-              Course design
-              &nbsp; &nbsp; &nbsp; 
-              Manuscript/grant editing
-          </p>
-        
+          <div class="topics-grid">
+            <div class="topic">Statistical analysis</div>
+            <div class="topic">Time-series analysis</div>
+            <div class="topic">Computational modeling</div>
+            <div class="topic">Mathematical theory</div>
+            <div class="topic">Spike trains</div>
+            <div class="topic">Calcium imaging</div>
+            <div class="topic">Natural behavior</div>
+            <div class="topic">Deep networks</div>
+            <div class="topic">Analysis strategies</div>
+            <div class="topic">Data management</div>
+            <div class="topic">Course design</div>
+            <div class="topic">Manuscript/grant editing</div>
+          </div>
       </section>
 
       <section class="sidekick">
@@ -85,8 +62,6 @@
             <a href="blog/2025/getting_started_with_a_dataset.html">Getting started with a dataset</a>
         </p>
               
-        
-
           </div>
       </section>
 
@@ -100,15 +75,23 @@
 
     <div id="footer-placeholder"></div>
 
-    <script>
-      fetch('/footer.html')
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById('footer-placeholder').innerHTML = data;
-        })
-        .catch(error => console.error('Error loading footer:', error));
-    </script>
-    
+  <script>
+    // Simple header/footer inclusion
+    fetch('header.html')
+      .then(response => response.text())
+      .then(data => document.getElementById('header-placeholder').innerHTML = data);
+
+    fetch('footer.html')
+      .then(response => response.text())
+      .then(data => document.getElementById('footer-placeholder').innerHTML = data);
+
+    // Hamburger menu toggle
+    document.addEventListener('click', function(e){
+      if(e.target.closest('.hamburger')){
+        document.querySelector('.menu').classList.toggle('open');
+      }
+    });
+  </script>
   </div>
 </body>
 </html>
