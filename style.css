@@ -130,9 +130,9 @@ section {
 
 /* "Side kick sections" */
 
-.sidekick {
+/* .sidekick {
   padding: 20px 150px;
-}
+} */
 
 .sidekick h1 {
   font-size: 1.6rem; /* Adjust this value as needed */
@@ -318,8 +318,28 @@ hr {
     display: flex;
   }
 
+  section {
+    padding: 10px 30px;
+  }
+    
   .logo img {
-    height: 35px;
+    height: 30px;
+  }
+
+  .hero h1 {
+    font-size: 1.5rem; /* Adjust this value as needed */
+  }
+
+  .sidekick h1 {
+    font-size: 1.3rem;
+  }
+    
+  .post h1 {
+    font-size: 1.5rem;
+  }
+    
+  .post h2 {
+    font-size: 1.3rem;
   }
     
   .hamburger {
