@@ -16,26 +16,13 @@
         
         <p>
         <strong>Do you provide custom modeling/data analyses?</strong><br />
-        Yes! If you're interested in a service not listed on our services page, just <a href="#">write us to inquire</a>.
+        Yes! If you're interested in a service not listed on our services page, just <a href="https://docs.google.com/forms/d/e/1FAIpQLSclia9FnedXjyEG4o5q9DZWaIzgJKy5xb5n1W5U1B5smmcuGQ/viewform?usp=sharing&ouid=100742227071264838228">write us to inquire</a>.
         </p>
           
         <p>
         <strong>Do we get to see the code used for analyzing our data?</strong><br />
         Yes! We return all code and processed data to you.
-        Please see our <a href="analysis_workflow.html">analysis workflow</a> for a comprehensive understanding of how we write reliable, interpretable code that can be easily reused and modified by others.
-        </p>
-
-        <p>
-        <strong>How much do your services cost?</strong><br />
-            We use a combination of hourly fees and project-specific flat fees. Our rate for academic consulting is $300/hr. Project pricing depends on details and scope (inquire <a href="./quote.html">here</a> for a quote). We also offer a <a href="./sliding_scale.html">sliding scale</a> if funding is an issue.
-        </p>
-          
-        <p>
-        <strong>How can I trust the results of your analyses?</strong><br />
-        Trusting analysis results is a complex topic in the biological sciences that we have spent extensive time thinking about.
-        Our main philosophy is to validate analyses not like software engineers but like scientists.
-        This means that while we strive to write excellent code, we focus on sanity checks and scientific controls over commercial software testing strategies, which can be highly involved yet miss fundamental scientific errors.
-        One common approach we take, for instance, is to test analyses on artificial data, making it far easier to trust the results when applied to real datasets.
+        We strive to write reliable, interpretable code that can be easily reused and modified by others.
         </p>
 
         <p>
@@ -45,12 +32,23 @@
         
         <p>
         <strong>Is this going to take away projects from students and postdocs?</strong><br />
-        Not at all! Our goal is to help give everyone <em>more</em> time to think deeply about the biggest questions that matter most to you.
-        We achieve this by providing the opportunity to contract out certain tasks in the lab so that you have more time to be creative and push the frontier.
+        Not at all. Our goal is to help give everyone <em>more</em> time to think deeply about the biggest questions that matter most to you.
+        We achieve this by providing the opportunity to contract out certain tasks in the lab so that you and your group have more time to be creative and push the frontier.
         We do believe that it's important for trainees to understand the complexities and nuances of data processing and analysis, and therefore highly encourage early-career scientists to learn to implement these methods on their own.
         Time is a limited resource, however, and in a lab there can be many more tasks than people to do them.
         Luckily, we're here to help!
         </p>
+          
+        <p>
+        <strong>How much do your services cost?</strong><br />
+            Our hourly rate for academic consulting is $300/hr. We also offer flat-rate project fees, which depend on project details and scope. A typical figure package, including linear modeling/analysis, statistical testing, figure preparation, code, and methods write-up runs about $5-$10K. We also offer a <a href="./sliding_scale.html">sliding scale</a> if funding is an issue.
+        </p>
+
+        <p>
+        <strong>Can I pay for your services using my grants/startup?</strong><br />
+            Yes. The easiest way to pay is through the university purchase order system. After inquiring about a service we will prepare an official quote that can be attached a PO, and the chartstring or funding source activated. Please note that in order for our services to be billed against a PO, Neurotaxis, LLC must be established as a vendor at your university. This process can take a month or two (but it is only required once), so please let us know early if you are interested in using our services so we can become a vendor at your institution.
+        </p>
+          
       </section>
         
     </main>
@@ -59,11 +57,11 @@
 
   <script>
     // Simple header/footer inclusion
-    fetch('header.html')
+    fetch('/header.html')
       .then(response => response.text())
       .then(data => document.getElementById('header-placeholder').innerHTML = data);
 
-    fetch('footer.html')
+    fetch('/footer.html')
       .then(response => response.text())
       .then(data => document.getElementById('footer-placeholder').innerHTML = data);
 

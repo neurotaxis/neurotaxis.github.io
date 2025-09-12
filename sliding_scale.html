@@ -8,22 +8,10 @@
 </head>
 <body>
   <div class="container">
+      
     <div id="header-placeholder"></div>
 
-    <script>
-    fetch('../../header.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('header-placeholder').innerHTML = data;
-      })
-      .catch(error => console.error('Error loading header:', error));
-    </script>
-
     <main>
-        
-      <section>
-        <h2>(site draft)</h2>
-      </section>
         
       <section class="sidekick">
         <h1>Sliding scale policy</h1>
@@ -34,16 +22,24 @@
         
     </main>
 
-
     <div id="footer-placeholder"></div>
 
     <script>
-      fetch('footer.html')
+      // Simple header/footer inclusion
+      fetch('/header.html')
         .then(response => response.text())
-        .then(data => {
-          document.getElementById('footer-placeholder').innerHTML = data;
-        })
-        .catch(error => console.error('Error loading footer:', error));
+        .then(data => document.getElementById('header-placeholder').innerHTML = data);
+
+      fetch('/footer.html')
+        .then(response => response.text())
+        .then(data => document.getElementById('footer-placeholder').innerHTML = data);
+
+      // Hamburger menu toggle
+      document.addEventListener('click', function(e){
+        if(e.target.closest('.hamburger')){
+          document.querySelector('.menu').classList.toggle('open');
+        }
+      });
     </script>
   </div>
 </body>
