@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Downloading large files from Dryad</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="container">
+    <div id="header-placeholder"></div>
+
+    <main>
+        
+      <section class="post">
+          <div class="post-content">
+        
+        <h1>Downloading large files from Dryad</h1>
+          <strong>Rich Pang</strong><br />2025-09-27
+          
+          <p>
+          <a href="https://datadryad.org/">Dryad</a> is one of the major online repositories for hosting biological research data. Downloading large files (e.g. 100Gb) through the browser can be challenging, however. Bandwidth is often limited and it can require many hours to download such a file, and the download will likely be canceled if there is any interruption in network connectivity. The following provides a way to download large Dryad files through the command line. For large files it is particularly important that the download resumes even if the network connection is interrupted for a while.
+          </p>
+          
+          <h2>Get the actual file URL</h2>
+          <p>
+          If you right-click on a Dryad file and select "Copy Link" you will probably receive something like "https://datadryad.org/downloads/file_stream/4111789". Unfortunately this is an alias and not the location of the actual data file. Thus, you will get an error if you try to paste it into a command-line downloading utility.
+          </p>
+          <p>
+              To get the correct link: start the download by clicking on the data file, then navigate to your download manager and cancel it. Now right-click on the download and select "Copy Download Link". You should get something long and complicated like: "https://dryad-assetstore-merritt-west.s3.us-west-2.amazonaws.com/v3/359792/data/ImagingData1A.zip?response-content-disposition=attachment%3B%20filename%3DImagingData1A.zip&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA2KERHV5E3OITXZXC%2F20250927%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20250927T025006Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=92ae9f84a8c905c777546d04193c84d351da9759c832b3394501b62351484d2c". This is the link that you will paste into the command line. Note that these links change frequently, so make sure to perform the above procedure immediately before you start your download.
+          </p>
+          <h2>Download the file using the command line</h2>
+          <p>There are various utilities you can use to download the file.</p>
+              
+          <h3>Download using <code>curl</code></h3>
+          <p><code>curl</code> is a built-in command-line tool for downloading files from the internet. To download your data file with <code>curl</code>, use the following command (one line):</p>
+          <p> <code>
+              curl -L -C - "https://dryadassetstore-very-long-url" -o local_file_name_to_save_to.zip
+              </code>
+          </p>
+          <p>
+              Note: make sure to include the <code>-L -C -</code> flags to ensure the download will resume after network connectivity interruptions.
+          </p>
+              
+          <h3>Download using <code>aria2</code></h3>
+          <p>If you do not have aria2 installed you can install it with
+              <code>
+              sudo apt install aria2
+              </code>
+              on linux, or <code>brew install aria2</code> on Mac (note that you will first need to <a href="https://brew.sh/">install <code>brew</code></a>, an auxiliary package manager for Mac). After aria2 has been installed, run the command:
+          </p>
+
+          <p>
+          <code>
+          aria2c -x 16 -s 16 -k 1M "https://dryadassetstore-very-long-url" -o local_file_name_to_save_to.zip   
+          </code>
+          </p>
+          <p>
+              The flags here help decompose and parallelize the download for faster download speeds. More information about using <code>aria2</code> is available <a href="https://aria2.github.io/">here</a>.
+          </p>
+
+          <p>
+              Both of these commands will download the full data file. It may still take a while due to bandwidth limitations on Dryad downloads, so leave your local machine powered on until the download has finished. However, these commands will ensure that the download continues through network interruptions.
+          </p>
+              
+          </div>
+      </section>
+        
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+  <script>
+    // Simple header/footer inclusion
+    fetch('/header.html')
+      .then(response => response.text())
+      .then(data => document.getElementById('header-placeholder').innerHTML = data);
+
+    fetch('/footer.html')
+      .then(response => response.text())
+      .then(data => document.getElementById('footer-placeholder').innerHTML = data);
+
+    // Hamburger menu toggle
+    document.addEventListener('click', function(e){
+      if(e.target.closest('.hamburger')){
+        document.querySelector('.menu').classList.toggle('open');
+      }
+    });
+  </script>
+  </div>
+</body>
+</html>
