@@ -29,6 +29,8 @@
           <p>
           There are various solutions, with different advantages and disadvantages. 
           If we have independently sampled repeats of the entire time-series, e.g., many "trials", each corresponding to an independent sequence of measurements, then we can use a subset of those repeats as training data and the rest as test data.
+          </p>
+          <p>
           However, if we have only one long continuous time-series, then we'll need a way to break it up into approximately independent samples.
           One approach is to estimate the autocorrelation function of the data and check if it has a characteristic timescale, e.g. by fitting an exponential and estimating TAU.
           Then it may be fair to assume timepoints separated by much more than TAU can be treated as approximately independent samples.
