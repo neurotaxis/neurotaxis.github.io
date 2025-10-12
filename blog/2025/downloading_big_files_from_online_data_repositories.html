@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Downloading large files from Dryad</title>
+  <title>Downloading big files from online data repositories</title>
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
@@ -15,14 +15,13 @@
       <section class="post">
           <div class="post-content">
         
-        <h1>Downloading large files from Dryad</h1>
+        <h1>Downloading big files from online data repositories</h1>
           <strong>Rich Pang</strong><br />2025-09-27
           
           <p>
-          <a href="https://datadryad.org/">Dryad</a> is one of the major online repositories for hosting biological research data, and which makes it easy to download files just by clicking the download link. However, downloading large files (e.g. 100Gb) can be tricky, since limited bandwidth can yield hours-long downloads, which can easily get canceled if there is any interruption in network connectivity. 
-          </p>
-          <p>
-              To avoid these problems, do the following.
+          Online data repositories like <a href="https://datadryad.org/">Dryad</a> and <a href="https://zenodo.org">Zenodo</a> make it easy to download files just by clicking the download link.
+          Downloading large files (e.g. 100Gb) can be tricky, however, since these can take hours and get cancelled if network connectivity is interrupted. 
+          Instead, use a command-line downloading utility that can pick up where it left off if the connection is interrupted.
           </p>
           
           <h2>Get the actual file URL</h2>
@@ -70,7 +69,7 @@
           </p>
 
           <p>
-              Both of these commands will download the full data file. It may still take a while due to bandwidth limitations on Dryad downloads, so leave your local machine powered on until the download has finished. However, these commands will ensure that the download continues through network interruptions.
+              Both of these commands will download the full data file. It may still take a while due to bandwidth limitations, so leave your local machine powered on until the download has finished. However, these commands will ensure that the download continues through network interruptions.
           </p>
 
           <p>

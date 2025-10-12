@@ -18,29 +18,34 @@
         <h1>Three things everyone should know about analyzing time-series data</h1>
           <strong>Rich Pang</strong><br />2025-07-07
           
-          <h2>Data leakage through correlated training and test data</h2>
-        <p>We usually fit models on training data and evaluate their performance on held-out test (or validation) data, which helps us avoid overfitting.
+          <h2>Correlated training and test data</h2>
+        <p>We often fit models on training data and evaluate their performance on held-out test (or validation) data to avoid overfitting.
         Ideally, the test data is sampled independently from the training data but from the same distribution.
-        With time-series, however, your data arrives sequentially and except in special cases <strong>timepoints are not independent</strong>. How do you divide a time-series dataset into training and test data?</p>
+        With time-series, however, data arrives sequentially and except in special cases <strong>timepoints are not independent</strong>. How do we divide a time-series dataset into training and test data?</p>
           <p>The <strong>wrong</strong> thing to do is select a random set of timepoints to use as training data and use the rest as test data.
-          This is because when signals change more slowly than your sample rate, neighboring timepoints may be very similar, breaking the independence assumption.
-          This makes the test data correlated with the training data, and so good prediction of the test data can in fact be an artifact of overfitting to the training data. So what do we do instead?
+          This is because when signals change more slowly than your sample rate, neighboring timepoints may be very similar.
+          This makes the test data correlated with the training data, and so good prediction of the test data can in fact still be an artifact of overfitting to the training data. So what do we do instead?
           </p>
           <p>
           There are various solutions, with different advantages and disadvantages. 
-          First, if you have independently sampled repeats of the entire time-series (for instance, many "trials", each corresponding to a sequence of measurements) then you can use a subset of those repeats as training data and the rest as test data.
-          However, if you have only one long continuous time-series, then you'll need a way to break it up into approximately independent samples.
-          One way of doing this is to estimate the autocorrelation function of the data and see if it has a characteristic timescale, e.g. by fitting an exponential and estimating tau.
-          Then timepoints separated by much more than tau can be treated as approximately independent samples.
-          As long as each test data point is sufficiently far from all training points, then it could be reasonable to treat them as independent.
+          If we have independently sampled repeats of the entire time-series, e.g., many "trials", each corresponding to an independent sequence of measurements, then we can use a subset of those repeats as training data and the rest as test data.
+          However, if we have only one long continuous time-series, then we'll need a way to break it up into approximately independent samples.
+          One approach is to estimate the autocorrelation function of the data and check if it has a characteristic timescale, e.g. by fitting an exponential and estimating TAU.
+          Then it may be fair to assume timepoints separated by much more than TAU can be treated as approximately independent samples.
           </p>
           <p>
-          Note, however, that the second apporach requires that the signal has both a well-defined and relatively short autocorrelation time, which may not be the case for e.g. strongly nonstationary time-series. Unfortunately, sometimes your data is simply too non-stationary to cleanly break into independent samples. This doesn't mean you can't model it, but test-set prediction accuracy might not be a good metric.
+          Additionally, it is good practice to not use a single training/test split, but rather a large number (e.g. > 30) of training/test splits, since there can be substantial variance in the test set prediction error.
+          Estimating the mean test set prediction error over many training/test splits helps reduce this variance.
+          </p>
+          <p>
+          Note that the constructing training/test splits by splitting our time-series requires that the signal has both a well-defined and substantially shorter autocorrelation time than the experiment duration, which may not always be true, especially for strongly nonstationary time-series.
+          Sometimes our data is simply too non-stationary to cleanly break into independent samples.
+          This doesn't mean we can't model it, but test-set prediction accuracy might not be a good performance metric.
           </p>
         
           <h2>Multicollinearity and unstable filter weights</h2>
           <p>One common technique in analyzing time-series data is to fit filters that predict one time point, say y(t), from a set of predictor timepoints, say x(t-1), x(t-2), ... x(t-T).
-          This means that one assigns a weight to each timepoint of the predictor series, w_1, ..., w_T, then weights the predictors x(t-1), ..., x(T) by these weights, sums them up, and then uses the sum to predict y(t), possibly including an additional nonlinearity or transformation.
+          This means that we assign a weight to each timepoint of the predictor series, w(1), ..., w(T), then weight the predictors x(t-1), ..., x(T) by these weights, sum them up, then use the sum to predict y(t), either directly or through another nonlinearity or transformation.
           </p>
           <p>However, when x(t) are highly correlated, i.e. x(t) is similar to x(t-1), then <strong>there is a fundamental ambiguity in how to assign the weights</strong>.
           If the ground truth is y(t) = 3x(t), then y(t) can also be predicted well by 3x(t-1), or 1.5x(t) + 1.5x(t-1), etc.
@@ -48,45 +53,47 @@
           This is true EVEN if they predict independent test data well. In other words, this is NOT a consequence of overfitting.
           This problem is called <strong>multicollinearity</strong>.
           </p>
-          <p>Alas, there is no "correct" solution for how to handle multicollinearity, since there is simply a fundamental ambiguity in which predictor timepoints matter most. 
-          The best one can do is instead to conciously choose an approach, while being aware of the consequences of your choice.
-          One common option, for instance, is to add a regularization term to your loss function, such as an L2 ("Ridge") or L1 ("Lasso") penalty.
-          A good rule of thumb is that L2 "balances", i.e. assigns similar weights to predictors with similar variance and predictive power, whereas L1 "sparsifies", assigning nonzero weights to only a number of predictors, and setting the rest identically to zero.
+          <p>Unfortunately, there is no "correct" solution for handling multicollinearity, since there is simply a fundamental ambiguity in which predictor timepoints matter most. 
+          The best we can do is to choose an approach stay aware of the consequences of our choice.
+          One common option is to add a regularization term to the loss function, such as an L2 ("Ridge") or L1 ("Lasso") penalty.
+          A good rule of thumb is that L2 "balances", i.e. assigns similar weights to predictors with similar variance and predictive power, whereas L1 "sparsifies", assigning nonzero weights to only a subset of predictors, and setting the rest identically to zero.
           (Fun fact: Ridge regression was <a href="https://homepages.math.uic.edu/~lreyzin/papers/ridge.pdf">invented</a> NOT for overfitting, as we often learn in machine-learning classes, but in fact to handle multicollinearity.)</p>
           <p>
-          Other methods include building your filters from basis vectors functions, or performing a dimensionality reduction of your data before fitting your model.
+          Other methods include building the filter (the weight vector w(1), ..., w(T) )  from basis vectors functions, or performing a dimensionality reduction of the data before fitting the model.
           You can read up on more details about multicollinearity <a href="https://rkp.science/using-regularization-to-handle-correlated-predictors.html">here</a>.
-          But remember: the key thing is to <strong>be aware of how you're handling multicollinearity</strong>, rather than choosing a method blindly and then accidentally mistaking a consequence of your method for a property of your data.</p>
+          The key thing is to <strong>be aware of how we're handling multicollinearity</strong>, rather than choosing a method blindly and then accidentally mistaking a consequence of the method for a property of the data.</p>
           <p>As you can see, most of the problems analyzing real-world time-series data come from temporal correlations.</p>
           
         <h2>Statistical testing</h2>
           <p>
-          How do you argue that the result of an analysis you performed on your time-series data was unlikely to have emerged by chance?
-          While there are entire books of statistical tests to use in different situations, the hard truth is that for many modern datasets, especially for time-series, none of these directly apply.
-          Once again, this is largely because such data do not often contain clean i.i.d. (independently and identically distributed) samples, which is the baseline assumption of almost every statistical test.
+          How do we argue that the result of an analysis we performed on time-series data was unlikely to have emerged by chance?
+          While there are entire books of statistical tests to use in different situations, the hard truth is that for many modern datasets, especially for naturalistic time-series, none of these directly apply.
+          Once again, this is because such data seldom contain clean i.i.d. (independently and identically distributed) samples, which is the baseline assumption of almost every statistical test.
           </p>
           <p>
           What is true, however, is that all statistical testing boils down to basically one key question.
-          <strong>What is the probability that an effect size greater than or equal to that you've computed from your real data would have emerged from a "null dataset"?</strong>
+          <strong>What is the probability that an effect size greater than or equal to that computed from the data would have emerged from a "null dataset"?</strong>
           Allen Downey, computer science professor and author of <em>Probably Overthinking It</em> wrote a great blog post on this called <a href="https://allendowney.blogspot.com/2011/05/there-is-only-one-test.html">There is only one test!</a>
           </p>
           <p>
           The real question then, is not figuring out which statistical test to use, but what kind of null dataset to create.
           While there is no universal answer there are at least some good rules of thumb.
-          First, what a null dataset actually means is an ensemble or collection of datasets, each formatted equivalently to your real data but created using a different random number generator seed.
-          From each instantiation compute the effect size using the same analysis pipeline as your real data, then create a histogram of these effect sizes for the null data.
-          The rule of thumb is to create enough null instantiations that you can accurately estimate how far away your real effect size lies from the bulk of the null distribution of effect sizes.
           </p>
           <p>
-          The second key rule of thumb is to <strong>create a null dataset that retains as many features of your data as possible, excluding the specific effect you're looking for</strong>.
-          For example, suppose you're interested in whether two time-series x(0:T) and y(0:T) are more correlated than chance, but they each have slow autocorrelation time-scales.
-          Slow autocorrelations can easily lead to a spuriously high cross-correlation even when x and y are completely independent.
-          In this case, to create the null dataset you'll want to retain the autocorrelations but break the cross-correlations.
+          The key rule of thumb is to <strong>create a null dataset that retains as many features of the data as possible, excluding the specific effect you're looking for</strong>.
+          For example, suppose we're interested in whether two time-series x(0:T) and y(0:T) are more correlated than chance, but they each have slow autocorrelation time-scales.
+          Slow autocorrelations can easily lead to a spuriously high cross-correlation even when x and y are completely independent (exercise for the reader).
+          In this case, to create the null dataset we'll want to retain the autocorrelations but break the cross-correlations.
           This means that the <strong>wrong</strong> thing to do is shuffle the timepoints within x or y, since this destroys the autocorrelations.
-          Instead, it would make more sense to randomly circularly shift x and y relative to one another, with each instantiation of your null dataset corresponding to a random shift amount.
-          This will keep the autocorrelations but break the cross-correlations, giving you a more meaningful null distribution.
+          Instead, it makes more sense to randomly circularly shift x and y relative to one another, with a different random shift amount for each instantiation of the null dataset.
+          This will keep the autocorrelations (excluding edge effects) but break the cross-correlations, giving us a more meaningful null distribution.
           </p>
-
+          <p>
+          In general we will want to create a large number N of samples of the null data, each generated with a different RNG seed.
+          We then run the same analysis we ran on our real data for each null dataset to create a distribution of effect sizes from the null data.
+          To produce a P-value we then use the null distribution of effect sizes to estimate the probability that an effect size larger than or equal to that measured in the real data would have emerged by "chance", i.e. from the null data in which the phenomenon of interest is absent by construction.
+          In general there may be more one than one reasonable type of null dataset to construct, and we can think of each type of null dataset as a different type of control.
+          </p>
           </div>
       </section>
         
