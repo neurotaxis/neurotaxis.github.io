@@ -219,6 +219,33 @@ section {
   margin: 0 auto;
 }
 
+.post-content img {
+  display: block;
+  max-width: 100%;   /* Never overflow parent div */
+  width: 100%;       /* Fill the width of .post-content */
+  height: auto;      /* Maintain aspect ratio */
+  margin: 1.5em auto;
+  border-radius: 8px; /* optional, for nice rounded corners */
+  object-fit: contain;
+  image-rendering: auto;
+}
+
+/* Prevent MathJax equations from overflowing on mobile */
+.post-content .MathJax_Display {
+  overflow-x: auto;      /* allow horizontal scroll if truly necessary */
+  overflow-y: hidden;
+  max-width: 100%;       /* don't exceed container width */
+  display: block;
+  text-align: center;    /* nicely center block equations */
+  padding: 0.5em 0;
+}
+
+.post-content .MathJax {
+  max-width: 100%;       /* ensure inline math doesn't overflow */
+  white-space: normal !important; /* wrap long math expressions */
+  word-break: break-word;
+}
+
 .post h1 {
   font-size: 2rem; /* Adjust this value as needed */
   font-weight: bold;

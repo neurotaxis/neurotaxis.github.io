@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Understanding Synaptic Plasticity</title>
+    <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="container">
+    <div id="header-placeholder"></div>
+
+    <main>
+        
+      <section class="post">
+          <div class="post-content">
+            <h1>Understanding Synaptic Plasticity</h1>
+<p>This post explores Hebbian learning and spike-timing dependent plasticity (STDP).</p>
+<p>Inline example: <span id="math-equation">\(w = w + \eta \cdot \Delta w\)</span></p>
+<p>Block example:</p>
+<p>\[\Delta w = \eta (x_{\text{pre}} \cdot x_{\text{post}})\]</p>
+<h3>My h3 header</h3>
+<p>Blah blah blah</p>
+<p>Woohoo.</p>
+<p>My image:</p>
+<p><img alt="Alt text" src="bptt_factorization_comp_graph_1a.png" /></p>
+          </div>
+      </section>
+        
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+  <script>
+    // Simple header/footer inclusion
+    fetch('/header.html')
+      .then(response => response.text())
+      .then(data => document.getElementById('header-placeholder').innerHTML = data);
+
+    fetch('/footer.html')
+      .then(response => response.text())
+      .then(data => document.getElementById('footer-placeholder').innerHTML = data);
+
+    // Hamburger menu toggle
+    document.addEventListener('click', function(e){
+      if(e.target.closest('.hamburger')){
+        document.querySelector('.menu').classList.toggle('open');
+      }
+    });
+  </script>
+  </div>
+</body>
+</html>

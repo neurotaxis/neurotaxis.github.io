@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Partial and total derivatives on computation graphs</title>
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']]},
+    "HTML-CSS": { 
+      linebreaks: { automatic: true, width: "90% container" },
+      scale: 100
+    },
+    SVG: { linebreaks: { automatic: true } }
+  });
+</script>
+    <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="container">
+    <div id="header-placeholder"></div>
+
+    <main>
+        
+      <section class="post">
+          <div class="post-content">
+            <h1>Partial and total derivatives on computation graphs</h1>
+<p><strong>Rich Pang</strong></p>
+<p>2025-10-22</p>
+<p>Some clarifications about derivatives on computation graphs. This extends Christopher Olah's excellent <a href="https://colah.github.io/posts/2015-08-Backprop/">post</a> about this topic and is meant to help make sense of different factorizations of loss gradients, e.g. in the <em>e-prop</em> algorithm of <a href="https://www.nature.com/articles/s41467-020-17236-y">Bellec et al 2020</a>.</p>
+<h2>Partial derivatives and Jacobians</h2>
+<p>The <em>partial derivative</em> describes how a function changes with respect to one of its arguments.
+A crucial observation is that the partial derivative depends on how the functions in question are specified.
+For instance, consider case 1 where we write
+\[z = w^2 + y^2\]
+\[L = z^2 + x^2\]
+vs case 2 where we write
+\[L = 2x^2 + y^2.\]</p>
+<p>Both cases describe the same ultimate relationship between <span id="math-equation">\(L\)</span> and <span id="math-equation">\(x\)</span>, but in case 1 
+\[\frac{\partial L}{\partial x} = 2x\]
+whereas in case 2
+\[\frac{\partial L}{\partial x} = 4x.\]
+Thus when talking about the partial derivative of one variable computed through a series of intermediate steps from several other variables, one needs to be precise about what those intermediate steps are.</p>
+<p>The <em>Jacobian</em> of a function, specifically a vector-valued function of multiple arguments, is the matrix of partial derivatives of each component of the function value with respect to each argument.
+For instance, suppose</p>
+<p>\[\mathbf{y} = \mathbf{y}(\mathbf{x})\]</p>
+<p>where <span id="math-equation">\(\mathbf{x} \in \mathbb{R}^n\)</span> and <span id="math-equation">\(\mathbf{y} \in \mathbb{R}^m\)</span>. 
+Then the Jacobian <span id="math-equation">\(\mathcal{D}_{\mathbf{y}\mathbf{x}}\)</span> is</p>
+<p>\[\mathcal{D}_{\mathbf{y}\mathbf{x}} = 
+\begin{bmatrix}
+\dfrac{\partial y_1}{\partial x_1} & \cdots & \dfrac{\partial y_1}{\partial x_n} \\
+\vdots & \ddots & \vdots \\
+\dfrac{\partial f_m}{\partial x_1} & \cdots & \dfrac{\partial f_m}{\partial x_n}
+\end{bmatrix}\]</p>
+<h2>Paths on computation graphs</h2>
+<p>Computation graphs are visual representations of a series of steps used to compute a function value.
+For instance, consider a loss function <span id="math-equation">\(L\)</span> that depends on weights <span id="math-equation">\(w\)</span> in the following way:</p>
+<p>\[\mathbf{x} = \mathbf{x}(\mathbf{w})\]</p>
+<p>\[\mathbf{y} = \mathbf{y}(\mathbf{x}, \mathbf{w})\]</p>
+<p>\[\mathbf{z} = \mathbf{z}(\mathbf{y}, \mathbf{w})\]</p>
+<p>\[L = L(\mathbf{x}, \mathbf{y}, \mathbf{z}).\]</p>
+<p>This series of functions and dependencies can be represented via the following directed acyclic graph.</p>
+<p><img alt="computation graph example" src="comp_graph_example.png" /></p>
+<p>Computation graphs are a fundamental abstraction in modern machine learning and AI, and understanding them comprehensively is fundamental to understanding how core libraries like PyTorch compute gradients.</p>
+<p>Paths on computation graphs are of frequent interest.
+Mathematically, a path corresponds to a product of Jacobians backwards along that path.
+For instance, when we speak of the path from <span id="math-equation">\(\mathbf{w}\)</span> to <span id="math-equation">\(\mathbf{y}\)</span> to <span id="math-equation">\(L\)</span>, we are referring to is</p>
+<p>\[\mathcal{D}_{L\mathbf{y}} \mathcal{D}_{\mathbf{y} \mathbf{w}}.\]</p>
+<p>The path conveys the flow of information from the source variable, <span id="math-equation">\(\mathbf{w}\)</span> to the target variable <span id="math-equation">\(L\)</span>. 
+Such a picture is very useful for intuiting about e.g. vanishing gradients.
+A long path, for instance, often corresponds to a large number of Jacobians with eigenvalues less than 1, which when multiplied together will cause their product to vanish.
+This means that a small change in the source variable will lead to no change in the target variable, at least through that particular path.</p>
+<h2>Total derivatives</h2>
+<p>The total derivative of a target variable, e.g. <span id="math-equation">\(L\)</span>, with respect to a source variable, e.g. <span id="math-equation">\(\mathbf{x}\)</span>, specifies how a small change in <span id="math-equation">\(\mathbf{x}\)</span> leads to a small change in <span id="math-equation">\(L\)</span> through all possible ways that <span id="math-equation">\(\mathbf{x}\)</span> can influence <span id="math-equation">\(L\)</span>.
+On the computation graph, the total derivative of <span id="math-equation">\(dL/d\mathbf{x}\)</span> corresponds to the sum of all (directed) paths from <span id="math-equation">\(\mathbf{x}\)</span> to <span id="math-equation">\(L\)</span>.
+For instance, on the graph above, <span id="math-equation">\(dL/d\mathbf{x}\)</span> corresponds to the sum of the following three paths:</p>
+<p><img alt="All paths from x to L" src="comp_graph_sum_of_paths_example.png" /></p>
+<p>Not that the paths can overlap, e.g. multiple paths can include the same edge (link). Mathematically, this sum corresponds to</p>
+<p>\[\frac{dL}{d\mathbf{x}} \equiv \mathcal{D}_{L\mathbf{x}} = 
+\mathcal{D}_{L\mathbf{x}}
++ \mathcal{D}_{L\mathbf{y}}\mathcal{D}_{\mathbf{y}\mathbf{x}}
++ \mathcal{D}_{L\mathbf{z}}\mathcal{D}_{\mathbf{z}\mathbf{y}}\mathcal{D}_{\mathbf{y}\mathbf{x}}.\]</p>
+<p>Similarly <span id="math-equation">\(dL/d\mathbf{w}\)</span> would correspond to the sum of all six paths from <span id="math-equation">\(\mathbf{w}\)</span> to <span id="math-equation">\(L\)</span>.</p>
+<h2>Factorizing paths</h2>
+<p>Summing over paths can be a tricky combinatorics problem, and it can be useful to think about different ways to factorize the sum.
+The key point is to look for common terms.
+For instance, the sum</p>
+<p>\[\frac{dL}{d\mathbf{w}} \equiv \mathcal{D}_{L\mathbf{w}}\]</p>
+<p>\[= \mathcal{D}_{L\mathbf{x}}\mathcal{D}_{\mathbf{x}\mathbf{w}}\]</p>
+<p>\[+ \mathcal{D}_{L\mathbf{y}}\mathcal{D}_{\mathbf{y}\mathbf{x}}\mathcal{D}_{\mathbf{x}\mathbf{w}}\]</p>
+<p>\[+ \mathcal{D}_{L\mathbf{z}}\mathcal{D}_{\mathbf{z}\mathbf{y}}\mathcal{D}_{\mathbf{y}\mathbf{x}}\mathcal{D}_{\mathbf{x}\mathbf{w}}\]</p>
+<p>\[+ \mathcal{D}_{L\mathbf{y}}\mathcal{D}_{\mathbf{y}\mathbf{w}}\]</p>
+<p>\[+ \mathcal{D}_{L\mathbf{z}}\mathcal{D}_{L\mathbf{y}}\mathcal{D}_{\mathbf{y}\mathbf{w}}\]</p>
+<p>\[+ \mathcal{D}_{L\mathbf{z}}\mathcal{D}_{\mathbf{z}\mathbf{w}}\]</p>
+<p>can be factorized as</p>
+<p>\[\frac{dL}{d\mathbf{w}} =\]</p>
+<p>\[\left(\mathcal{D}_{L\mathbf{x}} + \mathcal{D}_{L\mathbf{y}}\mathcal{D}_{\mathbf{y}\mathbf{x}} + 
+\mathcal{D}_{L\mathbf{z}}\mathcal{D}_{\mathbf{z}\mathbf{y}}\mathcal{D}_{\mathbf{y}\mathbf{x}}\right)\mathcal{D}_{\mathbf{x}\mathbf{w}}\]</p>
+<p>\[+ \left(
+\mathcal{D}_{L\mathbf{y}} + \mathcal{D}_{L\mathbf{z}}\mathcal{D}_{L\mathbf{y}}
+\right)
+\mathcal{D}_{\mathbf{y}\mathbf{w}}\]</p>
+<p>\[+ \mathcal{D}_{L\mathbf{z}}\mathcal{D}_{\mathbf{z}\mathbf{w}},\]</p>
+<p>which is quite a bit more palatable.</p>
+<p>In upcoming posts we will talk about the classical factorization of back-propagation through time, as well as the <em>e-prop</em> factorization.</p>
+          </div>
+      </section>
+        
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+  <script>
+    // Simple header/footer inclusion
+    fetch('/header.html')
+      .then(response => response.text())
+      .then(data => document.getElementById('header-placeholder').innerHTML = data);
+
+    fetch('/footer.html')
+      .then(response => response.text())
+      .then(data => document.getElementById('footer-placeholder').innerHTML = data);
+
+    // Hamburger menu toggle
+    document.addEventListener('click', function(e){
+      if(e.target.closest('.hamburger')){
+        document.querySelector('.menu').classList.toggle('open');
+      }
+    });
+  </script>
+  </div>
+</body>
+</html>
