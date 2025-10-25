@@ -42,7 +42,7 @@ $$
 ## Paths on computation graphs
 
 Computation graphs are visual representations of a series of steps used to compute a function value.
-For instance, consider a loss function $L$ that depends on weights $w$ in the following way:
+Suppose a loss $L$ is computed from $w$ in the following way:
 
 $$\mathbf{x} = \mathbf{x}(\mathbf{w})$$
 
@@ -52,30 +52,29 @@ $$\mathbf{z} = \mathbf{z}(\mathbf{y}, \mathbf{w})$$
 
 $$L = L(\mathbf{x}, \mathbf{y}, \mathbf{z}).$$
 
-This series of functions and dependencies can be represented via the following directed acyclic graph.
+This series of functions and dependencies can be represented as
 
 ![computation graph example](comp_graph_example.png)
 
-Computation graphs are a fundamental abstraction in modern machine learning and AI, and understanding them comprehensively is fundamental to understanding how core libraries like PyTorch compute gradients.
+Computation graphs are a fundamental abstraction in modern AI, and understanding them is essential to understanding the computation of gradients.
 
-Paths on computation graphs are of frequent interest.
-Mathematically, a path corresponds to a product of Jacobians backwards along that path.
-For instance, when we speak of the path from $\mathbf{w}$ to $\mathbf{y}$ to $L$, we are referring to is
+Of frequent interest are paths on computation graphs.
+When we speak of the path from $\mathbf{w}$ to $\mathbf{x}$ to $\mathbf{y}$ to $L$, what we are actually referring to is the product of Jacobians backwards along that path:
 
 $$
-\mathcal{D}_{L\mathbf{y}} \mathcal{D}_{\mathbf{y} \mathbf{w}}.
+\mathcal{D}_{L\mathbf{y}} \mathcal{D}_{\mathbf{y}\mathbf{x}} \mathcal{D}_{\mathbf{x}\mathbf{w}}.
 $$
 
 The path conveys the flow of information from the source variable, $\mathbf{w}$ to the target variable $L$. 
-Such a picture is very useful for intuiting about e.g. vanishing gradients.
-A long path, for instance, often corresponds to a large number of Jacobians with eigenvalues less than 1, which when multiplied together will cause their product to vanish.
-This means that a small change in the source variable will lead to no change in the target variable, at least through that particular path.
+This can be useful for intuiting about e.g. vanishing gradients.
+A long path, for instance, often corresponds to a large number of Jacobians with eigenvalues less than 1, whose product vanishes.
+Hence a small change in the source variable will lead to no change in the target variable, at least through that particular path.
 
 ## Total derivatives
 
-The total derivative of a target variable, e.g. $L$, with respect to a source variable, e.g. $\mathbf{x}$, specifies how a small change in $\mathbf{x}$ leads to a small change in $L$ through all possible ways that $\mathbf{x}$ can influence $L$.
-On the computation graph, the total derivative of $dL/d\mathbf{x}$ corresponds to the sum of all (directed) paths from $\mathbf{x}$ to $L$.
-For instance, on the graph above, $dL/d\mathbf{x}$ corresponds to the sum of the following three paths:
+The total derivative of a target variable with respect to a source variable is the sum of all possible ways a small change in the source will lead to a small change in the target.
+On the computation graph above, the total derivative of $dL/d\mathbf{x}$ corresponds to the sum of all (directed) paths from $\mathbf{x}$ to $L$.
+That is, $dL/d\mathbf{x}$ corresponds to:
 
 ![All paths from x to L](comp_graph_sum_of_paths_example.png)
 

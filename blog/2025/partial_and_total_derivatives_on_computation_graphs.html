@@ -58,26 +58,25 @@ Then the Jacobian <span id="math-equation">\(\mathcal{D}_{\mathbf{y}\mathbf{x}}\
 \end{bmatrix}\]</p>
 <h2>Paths on computation graphs</h2>
 <p>Computation graphs are visual representations of a series of steps used to compute a function value.
-For instance, consider a loss function <span id="math-equation">\(L\)</span> that depends on weights <span id="math-equation">\(w\)</span> in the following way:</p>
+Suppose a loss <span id="math-equation">\(L\)</span> is computed from <span id="math-equation">\(w\)</span> in the following way:</p>
 <p>\[\mathbf{x} = \mathbf{x}(\mathbf{w})\]</p>
 <p>\[\mathbf{y} = \mathbf{y}(\mathbf{x}, \mathbf{w})\]</p>
 <p>\[\mathbf{z} = \mathbf{z}(\mathbf{y}, \mathbf{w})\]</p>
 <p>\[L = L(\mathbf{x}, \mathbf{y}, \mathbf{z}).\]</p>
-<p>This series of functions and dependencies can be represented via the following directed acyclic graph.</p>
+<p>This series of functions and dependencies can be represented as</p>
 <p><img alt="computation graph example" src="comp_graph_example.png" /></p>
-<p>Computation graphs are a fundamental abstraction in modern machine learning and AI, and understanding them comprehensively is fundamental to understanding how core libraries like PyTorch compute gradients.</p>
-<p>Paths on computation graphs are of frequent interest.
-Mathematically, a path corresponds to a product of Jacobians backwards along that path.
-For instance, when we speak of the path from <span id="math-equation">\(\mathbf{w}\)</span> to <span id="math-equation">\(\mathbf{y}\)</span> to <span id="math-equation">\(L\)</span>, we are referring to is</p>
-<p>\[\mathcal{D}_{L\mathbf{y}} \mathcal{D}_{\mathbf{y} \mathbf{w}}.\]</p>
+<p>Computation graphs are a fundamental abstraction in modern AI, and understanding them is essential to understanding the computation of gradients.</p>
+<p>Of frequent interest are paths on computation graphs.
+When we speak of the path from <span id="math-equation">\(\mathbf{w}\)</span> to <span id="math-equation">\(\mathbf{x}\)</span> to <span id="math-equation">\(\mathbf{y}\)</span> to <span id="math-equation">\(L\)</span>, what we are actually referring to is the product of Jacobians backwards along that path:</p>
+<p>\[\mathcal{D}_{L\mathbf{y}} \mathcal{D}_{\mathbf{y}\mathbf{x}} \mathcal{D}_{\mathbf{x}\mathbf{w}}.\]</p>
 <p>The path conveys the flow of information from the source variable, <span id="math-equation">\(\mathbf{w}\)</span> to the target variable <span id="math-equation">\(L\)</span>. 
-Such a picture is very useful for intuiting about e.g. vanishing gradients.
-A long path, for instance, often corresponds to a large number of Jacobians with eigenvalues less than 1, which when multiplied together will cause their product to vanish.
-This means that a small change in the source variable will lead to no change in the target variable, at least through that particular path.</p>
+This can be useful for intuiting about e.g. vanishing gradients.
+A long path, for instance, often corresponds to a large number of Jacobians with eigenvalues less than 1, whose product vanishes.
+Hence a small change in the source variable will lead to no change in the target variable, at least through that particular path.</p>
 <h2>Total derivatives</h2>
-<p>The total derivative of a target variable, e.g. <span id="math-equation">\(L\)</span>, with respect to a source variable, e.g. <span id="math-equation">\(\mathbf{x}\)</span>, specifies how a small change in <span id="math-equation">\(\mathbf{x}\)</span> leads to a small change in <span id="math-equation">\(L\)</span> through all possible ways that <span id="math-equation">\(\mathbf{x}\)</span> can influence <span id="math-equation">\(L\)</span>.
-On the computation graph, the total derivative of <span id="math-equation">\(dL/d\mathbf{x}\)</span> corresponds to the sum of all (directed) paths from <span id="math-equation">\(\mathbf{x}\)</span> to <span id="math-equation">\(L\)</span>.
-For instance, on the graph above, <span id="math-equation">\(dL/d\mathbf{x}\)</span> corresponds to the sum of the following three paths:</p>
+<p>The total derivative of a target variable with respect to a source variable is the sum of all possible ways a small change in the source will lead to a small change in the target.
+On the computation graph above, the total derivative of <span id="math-equation">\(dL/d\mathbf{x}\)</span> corresponds to the sum of all (directed) paths from <span id="math-equation">\(\mathbf{x}\)</span> to <span id="math-equation">\(L\)</span>.
+That is, <span id="math-equation">\(dL/d\mathbf{x}\)</span> corresponds to:</p>
 <p><img alt="All paths from x to L" src="comp_graph_sum_of_paths_example.png" /></p>
 <p>Not that the paths can overlap, e.g. multiple paths can include the same edge (link). Mathematically, this sum corresponds to</p>
 <p>\[\frac{dL}{d\mathbf{x}} = 
