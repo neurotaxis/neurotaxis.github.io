@@ -13,7 +13,7 @@ For instance, consider case 1 where we write
 $$z = x^2 + y^2$$
 $$L = z^2 + x^2$$
 vs case 2 where we write
-$$L = 2x^2 + y^2.$$
+$$L = 2x^2 + y^2,$$
 
 which describe the same relationship between $L$ and $x$.
 However, in case 1 
@@ -35,7 +35,7 @@ $$
 \begin{bmatrix}
 \dfrac{\partial y_1}{\partial x_1} & \cdots & \dfrac{\partial y_1}{\partial x_n} \\
 \vdots & \ddots & \vdots \\
-\dfrac{\partial f_m}{\partial x_1} & \cdots & \dfrac{\partial f_m}{\partial x_n}
+\dfrac{\partial y_m}{\partial x_1} & \cdots & \dfrac{\partial y_m}{\partial x_n}
 \end{bmatrix}
 $$
 
