@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The classical factorization of back-propagation through time</title>
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']]},
+    "HTML-CSS": { 
+      linebreaks: { automatic: true, width: "90% container" },
+      scale: 100
+    },
+    SVG: { linebreaks: { automatic: true } }
+  });
+</script>
+    <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="container">
+    <div id="header-placeholder"></div>
+
+    <main>
+        
+      <section class="post">
+          <div class="post-content">
+            <h1>The classical factorization of back-propagation through time</h1>
+<p><strong>Rich Pang</strong></p>
+<p>2025-10-29</p>
+<p>A graphical derivation of the "classical factorization" of the loss gradient in back-propagation through time, as defined in <a href="https://www.nature.com/articles/s41467-020-17236-y">Bellec et al 2020</a> (Eq. 15).</p>
+<p>Recommended preliminary reading: <a href="/blog/2025/partial_and_total_derivatives_on_computation_graphs.html">Partial and total derivatives on computation graphs</a>.</p>
+<h2>Back-propagation through time</h2>
+<p>Back-propagation through time is the classic extension of back-propagation to recurrent neural networks (RNNs).
+In its most general form, an RNN parameterized by weights <span id="math-equation">\(\mathbf{w}\)</span> (for simplicity we ignore biases here) has a hidden state <span id="math-equation">\(\mathbf{h}_t\)</span> that evolves over time in response to inputs <span id="math-equation">\(\mathbf{u}_t\)</span>.</p>
+<p>\[\mathbf{h}_t = \mathbf{h}_t(\mathbf{h}_{t-1}, \mathbf{u}_t; \mathbf{w}).\]</p>
+<p>Typically, the loss is a function of the hidden states:</p>
+<p>\[L = L(\{\mathbf{h}_t\}).\]</p>
+<p>Treating the inputs as constant, the weights <span id="math-equation">\(\mathbf{w}\)</span> determine the loss through the following computation graph:</p>
+<p><img alt="BPTT computation graph" src="bptt_comp_graph.png" /></p>
+<h2>Counting paths on the computation graph</h2>
+<p>To determine the total derivative <span id="math-equation">\(dL/d\mathbf{w}\)</span> of the loss with respect to the weights, we need to sum over all paths from <span id="math-equation">\(\mathbf{w}\)</span> to <span id="math-equation">\(L\)</span>, where we recall that a path corresponds to the product of Jacobians <span id="math-equation">\(\mathcal{D}_{\alpha\beta}\)</span> backwards along the path.
+To arrive at the classical factorization we group paths according to the first edge out of <span id="math-equation">\(\mathbf{w}\)</span>. That is, we take <span id="math-equation">\(dL/d\mathbf{w} =\)</span></p>
+<p><img alt="Classical factorization of BPTT computation graph" src="bptt_classical_factorization.png" /></p>
+<p>which corresponds to <span id="math-equation">\(\frac{dL}{d\mathbf{w}} =\)</span></p>
+<p>\[\dots + \left(
+\mathcal{D}_{L\mathbf{h}_{t-1}}
++ \mathcal{D}_{L\mathbf{h}_t}\mathcal{D}_{\mathbf{h}_t\mathbf{h}_{t-1}}
++ \mathcal{D}_{L\mathbf{h}_{t+1}}\mathcal{D}_{\mathbf{h}_{t+1}\mathbf{h}_{t}}\mathcal{D}_{\mathbf{h}_t\mathbf{h}_{t-1}}
++ \dots
+\right) \mathcal{D}_{\mathbf{h}_{t-1}\mathbf{w}}
++ \dots\]</p>
+<p>\[\dots + \left(
+\mathcal{D}_{L\mathbf{h}_t}
++ \mathcal{D}_{L\mathbf{h}_{t+1}}\mathcal{D}_{\mathbf{h}_{t+1}\mathbf{h}_t}
++ \mathcal{D}_{L\mathbf{h}_{t+2}}\mathcal{D}_{\mathbf{h}_{t+2}\mathbf{h}_{t+1}}\mathcal{D}_{\mathbf{h}_{t+1}\mathbf{h}_t}
++ \dots
+\right) \mathcal{D}_{\mathbf{h}_t\mathbf{w}}
++ \dots\]</p>
+<p>\[\dots + \left(
+\mathcal{D}_{L\mathbf{h}_{t+1}}
++ \mathcal{D}_{L\mathbf{h}_{t+2}}\mathcal{D}_{\mathbf{h}_{t+2}\mathbf{h}_{t+1}}
++ \mathcal{D}_{L\mathbf{h}_{t+3}}\mathcal{D}_{\mathbf{h}_{t+3}\mathbf{h}_{t+2}}\mathcal{D}_{\mathbf{h}_{t+2}\mathbf{h}_{t+1}}
++ \dots
+\right) \mathcal{D}_{\mathbf{h}_{t+1}\mathbf{w}}
++ \dots\]</p>
+<p>Now notice that the term in parentheses in each row is simply the total derivative of the loss with respect to the hidden state.</p>
+<p>In other words,</p>
+<p>\[\frac{dL}{d\mathbf{w}} = \dots + \frac{dL}{d\mathbf{h}_{t-1}} \mathcal{D}_{\mathbf{h}_{t-1}\mathbf{w}}
++ \frac{dL}{d\mathbf{h}_t} \mathcal{D}_{\mathbf{h}_t\mathbf{w}}
++ \frac{dL}{d\mathbf{h}_{t+1}} \mathcal{D}_{\mathbf{h}_{t+1}\mathbf{w}}
++ \dots\]</p>
+<p>or</p>
+<p>\[\frac{dL}{d\mathbf{w}} = \sum_t \frac{dL}{d\mathbf{h}_t} \frac{\partial \mathbf{h}_t}{\partial \mathbf{w}}\]</p>
+<p>where we have used <span id="math-equation">\(\partial\mathbf{h}_t/\partial \mathbf{w} \equiv \mathcal{D}_{\mathbf{h}_t \mathbf{w}}\)</span>.</p>
+<p>This recovers the classical factorization of the BPTT loss gradient described in Eq. 15 of Bellec et al 2020.
+Note that for simplicity we have ignored the neuron indices.
+However, these can be included in a straightforward manner following the same logic as in the derivation above (exercise for the reader).</p>
+          </div>
+      </section>
+        
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+  <script>
+    // Simple header/footer inclusion
+    fetch('/header.html')
+      .then(response => response.text())
+      .then(data => document.getElementById('header-placeholder').innerHTML = data);
+
+    fetch('/footer.html')
+      .then(response => response.text())
+      .then(data => document.getElementById('footer-placeholder').innerHTML = data);
+
+    // Hamburger menu toggle
+    document.addEventListener('click', function(e){
+      if(e.target.closest('.hamburger')){
+        document.querySelector('.menu').classList.toggle('open');
+      }
+    });
+  </script>
+  </div>
+</body>
+</html>
