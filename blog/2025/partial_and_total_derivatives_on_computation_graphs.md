@@ -10,12 +10,13 @@ Some clarifications about derivatives on computation graphs. This extends Christ
 The *partial derivative* describes how a function changes with respect to one of its arguments.
 A crucial observation is that the partial derivative depends on how the functions in question are specified.
 For instance, consider case 1 where we write
-$$z = w^2 + y^2$$
+$$z = x^2 + y^2$$
 $$L = z^2 + x^2$$
 vs case 2 where we write
 $$L = 2x^2 + y^2.$$
 
-Both cases describe the same ultimate relationship between $L$ and $x$, but in case 1 
+which describe the same relationship between $L$ and $x$.
+However, in case 1 
 $$\frac{\partial L}{\partial x} = 2x$$
 whereas in case 2
 $$\frac{\partial L}{\partial x} = 4x.$$
