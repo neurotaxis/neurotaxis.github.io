@@ -82,7 +82,7 @@ For instance, on the graph above, $dL/d\mathbf{x}$ corresponds to the sum of the
 Not that the paths can overlap, e.g. multiple paths can include the same edge (link). Mathematically, this sum corresponds to
 
 $$
-\frac{dL}{d\mathbf{x}} \equiv \mathcal{D}_{L\mathbf{x}} = 
+\frac{dL}{d\mathbf{x}} = 
 \mathcal{D}_{L\mathbf{x}}
 + \mathcal{D}_{L\mathbf{y}}\mathcal{D}_{\mathbf{y}\mathbf{x}}
 + \mathcal{D}_{L\mathbf{z}}\mathcal{D}_{\mathbf{z}\mathbf{y}}\mathcal{D}_{\mathbf{y}\mathbf{x}}.
@@ -97,30 +97,15 @@ The key point is to look for common terms.
 For instance, the sum
 
 $$
-\frac{dL}{d\mathbf{w}} \equiv \mathcal{D}_{L\mathbf{w}}
-$$
-
-$$
+\frac{dL}{d\mathbf{w}} 
 = \mathcal{D}_{L\mathbf{x}}\mathcal{D}_{\mathbf{x}\mathbf{w}}
-$$
-
-$$
 + \mathcal{D}_{L\mathbf{y}}\mathcal{D}_{\mathbf{y}\mathbf{x}}\mathcal{D}_{\mathbf{x}\mathbf{w}}
-$$
-
-$$
 + \mathcal{D}_{L\mathbf{z}}\mathcal{D}_{\mathbf{z}\mathbf{y}}\mathcal{D}_{\mathbf{y}\mathbf{x}}\mathcal{D}_{\mathbf{x}\mathbf{w}}
 $$
 
 $$
 + \mathcal{D}_{L\mathbf{y}}\mathcal{D}_{\mathbf{y}\mathbf{w}}
-$$
-
-$$
 + \mathcal{D}_{L\mathbf{z}}\mathcal{D}_{L\mathbf{y}}\mathcal{D}_{\mathbf{y}\mathbf{w}}
-$$
-
-$$
 + \mathcal{D}_{L\mathbf{z}}\mathcal{D}_{\mathbf{z}\mathbf{w}}
 $$
 
@@ -128,9 +113,6 @@ can be factorized as
 
 $$
 \frac{dL}{d\mathbf{w}} =
-$$
-
-$$
 \left(\mathcal{D}_{L\mathbf{x}} + \mathcal{D}_{L\mathbf{y}}\mathcal{D}_{\mathbf{y}\mathbf{x}} + 
 \mathcal{D}_{L\mathbf{z}}\mathcal{D}_{\mathbf{z}\mathbf{y}}\mathcal{D}_{\mathbf{y}\mathbf{x}}\right)\mathcal{D}_{\mathbf{x}\mathbf{w}}
 $$
@@ -140,12 +122,17 @@ $$
 \mathcal{D}_{L\mathbf{y}} + \mathcal{D}_{L\mathbf{z}}\mathcal{D}_{L\mathbf{y}}
 \right)
 \mathcal{D}_{\mathbf{y}\mathbf{w}}
-$$
-
-$$ 
 + \mathcal{D}_{L\mathbf{z}}\mathcal{D}_{\mathbf{z}\mathbf{w}},
 $$
 
-which is quite a bit more palatable.
+which is quite a bit more palatable, and interestingly equivalent to 
+
+$$
+\frac{dL}{d\mathbf{w}} =
+\frac{dL}{d\mathbf{x}}\mathcal{D}_{\mathbf{x}\mathbf{w}}
++ \frac{dL}{d\mathbf{y}}\mathcal{D}_{\mathbf{y}\mathbf{w}}
++ \frac{dL}{d\mathbf{z}}\mathcal{D}_{\mathbf{z}\mathbf{w}}.
+$$
+
 
 In upcoming posts we will talk about the classical factorization of back-propagation through time, as well as the *e-prop* factorization.

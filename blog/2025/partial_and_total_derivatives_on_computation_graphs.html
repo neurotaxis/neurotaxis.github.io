@@ -80,7 +80,7 @@ On the computation graph, the total derivative of <span id="math-equation">\(dL/
 For instance, on the graph above, <span id="math-equation">\(dL/d\mathbf{x}\)</span> corresponds to the sum of the following three paths:</p>
 <p><img alt="All paths from x to L" src="comp_graph_sum_of_paths_example.png" /></p>
 <p>Not that the paths can overlap, e.g. multiple paths can include the same edge (link). Mathematically, this sum corresponds to</p>
-<p>\[\frac{dL}{d\mathbf{x}} \equiv \mathcal{D}_{L\mathbf{x}} = 
+<p>\[\frac{dL}{d\mathbf{x}} = 
 \mathcal{D}_{L\mathbf{x}}
 + \mathcal{D}_{L\mathbf{y}}\mathcal{D}_{\mathbf{y}\mathbf{x}}
 + \mathcal{D}_{L\mathbf{z}}\mathcal{D}_{\mathbf{z}\mathbf{y}}\mathcal{D}_{\mathbf{y}\mathbf{x}}.\]</p>
@@ -89,23 +89,27 @@ For instance, on the graph above, <span id="math-equation">\(dL/d\mathbf{x}\)</s
 <p>Summing over paths can be a tricky combinatorics problem, and it can be useful to think about different ways to factorize the sum.
 The key point is to look for common terms.
 For instance, the sum</p>
-<p>\[\frac{dL}{d\mathbf{w}} \equiv \mathcal{D}_{L\mathbf{w}}\]</p>
-<p>\[= \mathcal{D}_{L\mathbf{x}}\mathcal{D}_{\mathbf{x}\mathbf{w}}\]</p>
-<p>\[+ \mathcal{D}_{L\mathbf{y}}\mathcal{D}_{\mathbf{y}\mathbf{x}}\mathcal{D}_{\mathbf{x}\mathbf{w}}\]</p>
-<p>\[+ \mathcal{D}_{L\mathbf{z}}\mathcal{D}_{\mathbf{z}\mathbf{y}}\mathcal{D}_{\mathbf{y}\mathbf{x}}\mathcal{D}_{\mathbf{x}\mathbf{w}}\]</p>
-<p>\[+ \mathcal{D}_{L\mathbf{y}}\mathcal{D}_{\mathbf{y}\mathbf{w}}\]</p>
-<p>\[+ \mathcal{D}_{L\mathbf{z}}\mathcal{D}_{L\mathbf{y}}\mathcal{D}_{\mathbf{y}\mathbf{w}}\]</p>
-<p>\[+ \mathcal{D}_{L\mathbf{z}}\mathcal{D}_{\mathbf{z}\mathbf{w}}\]</p>
+<p>\[\frac{dL}{d\mathbf{w}} 
+= \mathcal{D}_{L\mathbf{x}}\mathcal{D}_{\mathbf{x}\mathbf{w}}
++ \mathcal{D}_{L\mathbf{y}}\mathcal{D}_{\mathbf{y}\mathbf{x}}\mathcal{D}_{\mathbf{x}\mathbf{w}}
++ \mathcal{D}_{L\mathbf{z}}\mathcal{D}_{\mathbf{z}\mathbf{y}}\mathcal{D}_{\mathbf{y}\mathbf{x}}\mathcal{D}_{\mathbf{x}\mathbf{w}}\]</p>
+<p>\[+ \mathcal{D}_{L\mathbf{y}}\mathcal{D}_{\mathbf{y}\mathbf{w}}
++ \mathcal{D}_{L\mathbf{z}}\mathcal{D}_{L\mathbf{y}}\mathcal{D}_{\mathbf{y}\mathbf{w}}
++ \mathcal{D}_{L\mathbf{z}}\mathcal{D}_{\mathbf{z}\mathbf{w}}\]</p>
 <p>can be factorized as</p>
-<p>\[\frac{dL}{d\mathbf{w}} =\]</p>
-<p>\[\left(\mathcal{D}_{L\mathbf{x}} + \mathcal{D}_{L\mathbf{y}}\mathcal{D}_{\mathbf{y}\mathbf{x}} + 
+<p>\[\frac{dL}{d\mathbf{w}} =
+\left(\mathcal{D}_{L\mathbf{x}} + \mathcal{D}_{L\mathbf{y}}\mathcal{D}_{\mathbf{y}\mathbf{x}} + 
 \mathcal{D}_{L\mathbf{z}}\mathcal{D}_{\mathbf{z}\mathbf{y}}\mathcal{D}_{\mathbf{y}\mathbf{x}}\right)\mathcal{D}_{\mathbf{x}\mathbf{w}}\]</p>
 <p>\[+ \left(
 \mathcal{D}_{L\mathbf{y}} + \mathcal{D}_{L\mathbf{z}}\mathcal{D}_{L\mathbf{y}}
 \right)
-\mathcal{D}_{\mathbf{y}\mathbf{w}}\]</p>
-<p>\[+ \mathcal{D}_{L\mathbf{z}}\mathcal{D}_{\mathbf{z}\mathbf{w}},\]</p>
-<p>which is quite a bit more palatable.</p>
+\mathcal{D}_{\mathbf{y}\mathbf{w}}
++ \mathcal{D}_{L\mathbf{z}}\mathcal{D}_{\mathbf{z}\mathbf{w}},\]</p>
+<p>which is quite a bit more palatable, and interestingly equivalent to </p>
+<p>\[\frac{dL}{d\mathbf{w}} =
+\frac{dL}{d\mathbf{x}}\mathcal{D}_{\mathbf{x}\mathbf{w}}
++ \frac{dL}{d\mathbf{y}}\mathcal{D}_{\mathbf{y}\mathbf{w}}
++ \frac{dL}{d\mathbf{z}}\mathcal{D}_{\mathbf{z}\mathbf{w}}.\]</p>
 <p>In upcoming posts we will talk about the classical factorization of back-propagation through time, as well as the <em>e-prop</em> factorization.</p>
           </div>
       </section>
