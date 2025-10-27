@@ -3,35 +3,71 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Recommended services</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Expert consulting in neuroscience</title>
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
   <div class="container">
     <div id="header-placeholder"></div>
 
     <main>
-
-      <section class="services">
-        <h1>Recommended services</h1>
         
-          <div class="services-content">
-        <h3>Preliminary analyses for grants</h3>
-        <p>Computational simulations or analyses of pilot datasets for grant and funding applications.</p>
-        
-        <h3>Executive data report</h3>
-        <p>A basic report on your data containing a collection of typical/atypical examples, summary of key artifacts, all the basic statistics, and miscellaneous comments about interesting phenomena. An executive report also increases your data's half-life, making it infinitely easier to onboard new researchers. We return all code used to make the report so that you can easily reproduce and extend it.</p>
-              
-        <h3>Baseline model fitting</h3>
-        <p>Fit baseline models to a dataset to create a crucial reference point for further analyses. Typical baseline models include linear/logistic regression, or simple neural networks.</p>
+      <section class="hero">
+          <br /><br />
+          <div class="hero-content">
+    <div class="hero-text">
+      <h1>Consulting and neural data science support services</h1>
+          <p>We provide high quality services to help you make the most of complex data.</p>
+        <p>Join our <a href="/waitlist.html">waitlist</a> today or check out our <a href="/recommended_services.html">recommended services</a>.</p>
+        <!-- <br /><br /> -->
+    </div>
+    <!-- <div class="hero-image">
+      <img src="hero-image.png" alt="Neural data analysis examples">
+    </div> -->
+  </div>
+          
+      </section>
 
-        <h3>Analysis plan</h3>
-        <p>Precision guidance on how to extract meaningful scientific results from a specific dataset. Just tell us about your data and what you want to know.</p>
-
-        <h3>Custom analyses</h3>
-        <p>Need a preliminary figure for a grant application? Or to test a specific hypothesis? Or fit a custom model? <a href="/quote.html">Let us know</a> how we can help.</p>
+      <section class="sidekick">
+        <hr />
+        <h1>Experience in</h1>
+          <div class="topics-grid">
+            <div class="topic">Statistical analysis</div>
+            <div class="topic">Time-series analysis</div>
+            <div class="topic">Computational modeling</div>
+            <div class="topic">Mathematical theory</div>
+            <div class="topic">Spike trains</div>
+            <div class="topic">Calcium imaging</div>
+            <div class="topic">Natural behavior</div>
+            <div class="topic">Deep networks</div>
+            <div class="topic">Analysis strategies</div>
+            <div class="topic">Data management</div>
+            <div class="topic">Course design</div>
+            <div class="topic">Manuscript/grant editing</div>
           </div>
-        
+      </section>
+
+      <section class="sidekick">
+        <hr />
+          <div class="rec-reading">
+        <h1>Recommended reading</h1>
+        <p>
+            <a href="blog/2025/three_things_everyone_should_know_about_time_series_analysis.html">Three things everyone should know about time-series data</a>
+        </p>
+        <p>
+            <a href="blog/2025/tips_and_tricks_computational_research.html">Tips and tricks for improving your computational research experience</a>
+        </p>
+        <p>
+            <a href="blog/2025/getting_started_with_a_dataset.html">Getting started with a dataset</a>
+        </p>
+              
+          </div>
+      </section>
+
+      <section class="sidekick">
+        <hr />
+        <h1>Get in touch</h1>
+        <p>Need help with some data? <a href="/waitlist.html">Inquire</a> today or write us at <em>neurotaxis at gmail dot com</em>.</p>
       </section>
         
     </main>
@@ -40,11 +76,11 @@
 
   <script>
     // Simple header/footer inclusion
-    fetch('/header.html')
+    fetch('header.html')
       .then(response => response.text())
       .then(data => document.getElementById('header-placeholder').innerHTML = data);
 
-    fetch('/footer.html')
+    fetch('footer.html')
       .then(response => response.text())
       .then(data => document.getElementById('footer-placeholder').innerHTML = data);
 

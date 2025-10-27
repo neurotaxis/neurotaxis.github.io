@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recommended services</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div id="header-placeholder"></div>
+
+    <main>
+
+      <section class="services">
+        <h1>Recommended services</h1>
+        
+          <div class="services-content">
+        <h3>Preliminary analyses for grants</h3>
+        <p>Computational simulations or analyses of pilot datasets for grant and funding applications.</p>
+        
+        <h3>Executive data report</h3>
+        <p>A basic report on your data containing a collection of typical/atypical examples, summary of key artifacts, all the basic statistics, and miscellaneous comments about interesting phenomena. An executive report also increases your data's half-life, making it infinitely easier to onboard new researchers. We return all code used to make the report so that you can easily reproduce and extend it.</p>
+              
+        <h3>Baseline model fitting</h3>
+        <p>Fit baseline models to a dataset to create a crucial reference point for further analyses. Typical baseline models include linear/logistic regression, or simple neural networks.</p>
+
+        <h3>Analysis plan</h3>
+        <p>Precision guidance on how to extract meaningful scientific results from a specific dataset. Just tell us about your data and what you want to know.</p>
+
+        <h3>Custom analyses</h3>
+        <p>Need a preliminary figure for a grant application? Or to test a specific hypothesis? Or fit a custom model? <a href="/quote.html">Let us know</a> how we can help.</p>
+          </div>
+        
+      </section>
+        
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+  <script>
+    // Simple header/footer inclusion
+    fetch('/header.html')
+      .then(response => response.text())
+      .then(data => document.getElementById('header-placeholder').innerHTML = data);
+
+    fetch('/footer.html')
+      .then(response => response.text())
+      .then(data => document.getElementById('footer-placeholder').innerHTML = data);
+
+    // Hamburger menu toggle
+    document.addEventListener('click', function(e){
+      if(e.target.closest('.hamburger')){
+        document.querySelector('.menu').classList.toggle('open');
+      }
+    });
+  </script>
+  </div>
+</body>
+</html>
