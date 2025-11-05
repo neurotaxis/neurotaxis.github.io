@@ -135,3 +135,5 @@ $$
 
 
 In upcoming posts we will talk about the classical factorization of back-propagation through time, as well as the *e-prop* factorization.
+
+*Special thanks to Helena Liu for proofreading this post.*

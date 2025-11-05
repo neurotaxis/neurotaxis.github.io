@@ -87,3 +87,5 @@ where we have used $\partial\mathbf{h}_t/\partial \mathbf{w} \equiv \mathcal{D}_
 This recovers the classical factorization of the BPTT loss gradient described in Eq. 15 of Bellec et al 2020.
 Note that for simplicity we have ignored the neuron indices.
 However, these can be included in a straightforward manner following the same logic as in the derivation above (exercise for the reader).
+
+*Special thanks to Helena Liu for proofreading this post.*
