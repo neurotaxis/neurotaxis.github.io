@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A graphical derivation of e-prop</title>
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']]},
+    "HTML-CSS": { 
+      linebreaks: { automatic: true, width: "90% container" },
+      scale: 100
+    },
+    SVG: { linebreaks: { automatic: true } }
+  });
+</script>
+    <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="container">
+    <div id="header-placeholder"></div>
+
+    <main>
+        
+      <section class="post">
+          <div class="post-content">
+            <h1>A graphical derivation of e-prop</h1>
+<p><strong>Rich Pang</strong></p>
+<p>2025-11-14</p>
+<p>A graphical derivation of the "e-prop" algorithm of <a href="https://www.nature.com/articles/s41467-020-17236-y">Bellec et al 2020</a>. This study showed how a canonical loss gradient for training recurrent neural networks could be factorized in a way that admits implementation by local learning rules.</p>
+<p>Recommended preliminary reading: <a href="/blog/2025/partial_and_total_derivatives_on_computation_graphs.html">Partial and total derivatives on computation graphs</a>. Note that the notation <span id="math-equation">\(\partial \mathbf{y}/\partial \mathbf{x}\)</span> in Bellec et al, which we will use in this post, corresponds to the Jacobian <span id="math-equation">\(\mathcal{D}_{\mathbf{y}\mathbf{x}}\)</span>.</p>
+<h2>Network model</h2>
+<p>We start with a recurrent neural network whose <span id="math-equation">\(N\)</span> units have a hidden state (e.g. membrane potential, adaptation state, etc) <span id="math-equation">\(\mathbf{h}^t \in \mathbb{R}^{N\times Q}\)</span> (where Q is the number of hidden state variables per neuron) and an activation (e.g. "firing rate") <span id="math-equation">\(\mathbf{z}^t \in \mathbb{R}^N\)</span>, and which evolve in response to inputs <span id="math-equation">\(\mathbf{u}_t\)</span> according to</p>
+<p>\[\mathbf{h}^t = \mathbf{h}^t(\mathbf{z}^{t-1}, \mathbf{h}^{t-1}, \mathbf{u}^t; W)\]</p>
+<p>\[z_j^t = \phi(\mathbf{h}_j^t)\]</p>
+<p>where <span id="math-equation">\(W\)</span> are the network weights and <span id="math-equation">\(\phi\)</span> is a nonlinearity. We let the loss <span id="math-equation">\(E\)</span> (using the notation of Bellec et al) be a function of the neural activations from time <span id="math-equation">\(1\)</span> to <span id="math-equation">\(T\)</span>:</p>
+<p>\[E = E(\mathbf{z}^1, \dots, \mathbf{z}^T; W).\]</p>
+<p>We can represent this with the computation graph</p>
+<p><img alt="e-prop computation graph" src="e_prop_comp_graph.png" /></p>
+<p>where we have colored the connections from the activations to the loss (and ignored the inputs since we will not differentiate with respect to these), or its expanded version (showing just two neurons for simplicity):</p>
+<p><img alt="e-prop computation graph expanded" src="e_prop_comp_graph_expanded.png" /></p>
+<p>where <span id="math-equation">\(\mathbf{w}_j\)</span> are the synaptic weights onto neuron <span id="math-equation">\(j\)</span>.</p>
+<h2>Exact and approximate e-prop factorization</h2>
+<p>The exact e-prop factorization of the loss gradient is given by</p>
+<p>\[\frac{dE}{dW_{ji}} = \sum_{t=1}^T \frac{dE}{dz_j^t} \left[ \frac{dz_j^t}{dW_{ji}} \right]_{\text{local}}\]</p>
+<p>where <span id="math-equation">\(W_{ji}\)</span> is the synapse from neuron <span id="math-equation">\(i\)</span> to neuron <span id="math-equation">\(j\)</span>. </p>
+<p>The term <span id="math-equation">\(dE/dz_j^t\)</span>, also called the "learning signal" <span id="math-equation">\(L_j^t\)</span>, is the total derivative of the loss with respect to <span id="math-equation">\(z_j^t\)</span>.</p>
+<p>The term subscripted "local", called the "eligibility trace" <span id="math-equation">\(e_{ji}^t\)</span> is defined as</p>
+<p>\[e_{ji}^t \equiv \left[ \frac{dz_j^t}{dW_{ji}} \right]_{\text{local}}
+= \frac{\partial z_j}{\partial \mathbf{h}_j^t} \sum_{t' = 1}^t \frac{\partial \mathbf{h}_j^t}{\partial \mathbf{h}_j^{t-1}} \cdots \frac{\partial \mathbf{h}_j^{t' + 1}}{\partial \mathbf{h}_j^{t'}} \frac{\partial \mathbf{h}_j^{t'}}{\partial W_{ji}}.\]</p>
+<p>Note that <span id="math-equation">\(\left[ \frac{dz_j^t}{dW_{ji}} \right]_{\text{local}}\)</span> is <em>not</em> a total derivative, since it does not include all paths from <span id="math-equation">\(W_{ji}\)</span> to <span id="math-equation">\(z_j^t\)</span>, but rather only paths that can be computed "locally", i.e. via sequences of hidden variables <span id="math-equation">\(\mathbf{h}_j^t\)</span>.</p>
+<p>The approximate e-prop factorization is</p>
+<p>\[\frac{dE}{dW_{ji}} = \sum_{t=1}^T \frac{\partial E}{\partial z_j^t} \left[ \frac{dz_j^t}{dW_{ji}} \right]_{\text{local}}\]</p>
+<p>where the first term has been replaced with a partial derivative.</p>
+<h2>Paths in the eligibility trace</h2>
+<p>Before we derive the full factorization, first note the set of paths included in the eligbility trace <span id="math-equation">\(e_{ji}^t\)</span>. This corresponds to all paths to <span id="math-equation">\(z_j^t\)</span> that go only through the hidden states <span id="math-equation">\(\mathbf{h}_j^t\)</span> of neuron <span id="math-equation">\(j\)</span>. Graphically (hiding the <span id="math-equation">\(z \to E\)</span> paths for visualization purposes), these are</p>
+<p><img alt="e-prop eligibility trace paths" src="e_prop_et_paths.png" /></p>
+<p>Note that we have used <span id="math-equation">\(\mathbf{w}_j\)</span> here for simplicity, but one finds an equivalent set of paths from each element <span id="math-equation">\(W_{ji}\)</span> of <span id="math-equation">\(\mathbf{w}_j\)</span> to <span id="math-equation">\(z_j^t\)</span>. </p>
+<h2>Paths in the learning signal <span id="math-equation">\(dE/d z_j^t\)</span></h2>
+<p>The term <span id="math-equation">\(dE/d z_j^t\)</span>, <em>is</em> a total derivative, and corresponds to the sum of all paths from <span id="math-equation">\(z_j^t\)</span> to <span id="math-equation">\(E\)</span>, which includes paths through other neurons, unlike the eligbility trace. That is, <span id="math-equation">\(dE/dz_j^t =\)</span></p>
+<p><img alt="e-prop paths in dE/dz_j^t" src="e_prop_dEdz_paths.png" /></p>
+<p>For simplicity, let us represent the sum of all these paths, i.e. the total derivative <span id="math-equation">\(dE/dz_j^t\)</span>, as</p>
+<p><img alt="e-prop total derivative notation" src="e_prop_total_deriv_notation.png" /></p>
+<p>so that e.g.</p>
+<p><img alt="e-prop total derivative notation auxiliary" src="e_prop_total_deriv_notation_2.png" /></p>
+<p>corresponds to</p>
+<p>\[\frac{dE}{dz_j^t}\left(
+\frac{\partial z_j^t}{\partial \mathbf{h}_j^t} \frac{\partial \mathbf{h}_j^t}{\partial \mathbf{w}_j}
++ \frac{\partial z_j^t}{\partial \mathbf{h}_j^t} \frac{\partial \mathbf{h}_j^t}{\partial \mathbf{h}_j^{t-1}} \frac{\partial \mathbf{h}_j^{t-1}}{\partial \mathbf{w}_j}
++ \dots
+\right)
+= \frac{dE}{dz_j^t}\left[ \frac{dz_j^t}{dW_{ji}} \right]_{\text{local}}\]</p>
+<h2>Deriving the exact factorization</h2>
+<p>To validate the e-prop factorization we need to convince ourselves that the total sum</p>
+<p>\[\frac{dE}{dW_{ji}} = \sum_{t=1}^T \frac{dE}{dz_j^t} \left[ \frac{dz_j^t}{dW_{ji}} \right]_{\text{local}}\]</p>
+<p>accounts for all paths from <span id="math-equation">\(W_{ji}\)</span> to <span id="math-equation">\(E\)</span>.</p>
+<p>Graphically, this sum corresponds to the following set of paths, where each row of paths is a term in the sum:</p>
+<p><img alt="e-prop all paths" src="e_prop_all_paths.png" /></p>
+<p>In fact, this collection of paths <em>does</em> account for everything, and nothing is double-counted. To see this, consider the "diagonal" set of paths:</p>
+<p><img alt="e-prop all paths diagonally organized" src="e_prop_all_paths_diagonal.png" /></p>
+<p>This contains all paths from <span id="math-equation">\(\mathbf{w}_j\)</span> through <span id="math-equation">\(\mathbf{h}_j^{t-1}\)</span>.
+To see this, observe that the bottom row contains all paths <span id="math-equation">\(\mathbf{w}_j\)</span> through <span id="math-equation">\(\mathbf{h}_j^{t-1}\)</span> EXCEPT those containing the link <span id="math-equation">\(\mathbf{h}_j^{t-1} \to \mathbf{h}_j^t\)</span>.
+The middle row contains all remaining paths through <span id="math-equation">\(\mathbf{h}_j^{t-1}\)</span> (i.e. not going through <span id="math-equation">\(z_j^{t-1}\)</span>), EXCEPT those containing the link <span id="math-equation">\(\mathbf{h}_j^t \to \mathbf{h}_j^{t+1}\)</span>.
+The top row continues the pattern, hence the complete "diagonal" set of these paths contains all paths going from <span id="math-equation">\(\mathbf{w}_j\)</span> through <span id="math-equation">\(\mathbf{h}_j^{t-1}\)</span> and eventually ending at <span id="math-equation">\(E\)</span>.</p>
+<p>In general, the <span id="math-equation">\(t\)</span>-th diagonal contains all paths from <span id="math-equation">\(\mathbf{w}_j\)</span> (or equivalently <span id="math-equation">\(W_{ji}\)</span>) through <span id="math-equation">\(\mathbf{h}_j^t\)</span> and ending at E. Summing over <span id="math-equation">\(t\)</span> in turn sums all paths from <span id="math-equation">\(\mathbf{w}_j\)</span> to <span id="math-equation">\(E\)</span>, grouped by which <span id="math-equation">\(\mathbf{h}_j^t\)</span> they go through. </p>
+<p>Hence, the e-prop factorization represents a valid factorization of the total derivative <span id="math-equation">\(dE/dW_{ji}\)</span>.</p>
+          </div>
+      </section>
+        
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+  <script>
+    // Simple header/footer inclusion
+    fetch('/header.html')
+      .then(response => response.text())
+      .then(data => document.getElementById('header-placeholder').innerHTML = data);
+
+    fetch('/footer.html')
+      .then(response => response.text())
+      .then(data => document.getElementById('footer-placeholder').innerHTML = data);
+
+    // Hamburger menu toggle
+    document.addEventListener('click', function(e){
+      if(e.target.closest('.hamburger')){
+        document.querySelector('.menu').classList.toggle('open');
+      }
+    });
+  </script>
+  </div>
+</body>
+</html>
