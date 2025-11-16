@@ -9,7 +9,7 @@ Recommended preliminary reading: <a href="/blog/2025/partial_and_total_derivativ
 
 ## Network model
 
-We start with a recurrent neural network whose $N$ units have a hidden state (e.g. membrane potential, adaptation state, etc) $\mathbf{h}^t \in \mathbb{R}^{N\times Q}$ (where Q is the number of hidden state variables per neuron) and an activation (e.g. "firing rate") $\mathbf{z}^t \in \mathbb{R}^N$, and which evolve in response to inputs $\mathbf{u}_t$ according to
+We start with a recurrent neural network whose $N$ units have a hidden state (e.g. membrane potential, adaptation state, etc) $\mathbf{h}^t \in \mathbb{R}^{N\times Q}$ (where Q is the number of hidden state variables per neuron) and an activation (e.g. "firing rate") $\mathbf{z}^t \in \mathbb{R}^N$, and which evolve in response to inputs $\mathbf{u}^t$ according to
 
 $$
 \mathbf{h}^t = \mathbf{h}^t(\mathbf{z}^{t-1}, \mathbf{h}^{t-1}, \mathbf{u}^t; W)
@@ -97,9 +97,9 @@ $$
 = \frac{dE}{dz_j^t}\left[ \frac{dz_j^t}{dW_{ji}} \right]_{\text{local}}
 $$
 
-## Deriving the exact factorization
+## Validating the exact factorization
 
-To validate the e-prop factorization we need to convince ourselves that the total sum
+To validate the e-prop factorization we need to convince ourselves that the sum
 
 $$
 \frac{dE}{dW_{ji}} = \sum_{t=1}^T \frac{dE}{dz_j^t} \left[ \frac{dz_j^t}{dW_{ji}} \right]_{\text{local}}
@@ -116,8 +116,8 @@ In fact, this collection of paths *does* account for everything, and nothing is 
 ![e-prop all paths diagonally organized](e_prop_all_paths_diagonal.png)
 
 This contains all paths from $\mathbf{w}_j$ through $\mathbf{h}_j^{t-1}$.
-To see this, observe that the bottom row contains all paths $\mathbf{w}_j$ through $\mathbf{h}_j^{t-1}$ EXCEPT those containing the link $\mathbf{h}_j^{t-1} \to \mathbf{h}_j^t$.
-The middle row contains all remaining paths through $\mathbf{h}_j^{t-1}$ (i.e. not going through $z_j^{t-1}$), EXCEPT those containing the link $\mathbf{h}_j^t \to \mathbf{h}_j^{t+1}$.
+To see this, observe that the bottom row contains all paths $\mathbf{w}_j$ through $\mathbf{h}_j^{t-1}$ *except* those containing the link $\mathbf{h}_j^{t-1} \to \mathbf{h}_j^t$.
+The middle row contains all remaining paths through $\mathbf{h}_j^{t-1}$ (i.e. not going through $z_j^{t-1}$), *except* those containing the link $\mathbf{h}_j^t \to \mathbf{h}_j^{t+1}$.
 The top row continues the pattern, hence the complete "diagonal" set of these paths contains all paths going from $\mathbf{w}_j$ through $\mathbf{h}_j^{t-1}$ and eventually ending at $E$.
 
 In general, the $t$-th diagonal contains all paths from $\mathbf{w}_j$ (or equivalently $W_{ji}$) through $\mathbf{h}_j^t$ and ending at E. Summing over $t$ in turn sums all paths from $\mathbf{w}_j$ to $E$, grouped by which $\mathbf{h}_j^t$ they go through. 
