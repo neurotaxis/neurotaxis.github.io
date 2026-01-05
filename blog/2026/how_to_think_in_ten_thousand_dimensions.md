@@ -1,12 +1,12 @@
 # How to think in ten thousand dimensions
 **Rich Pang**
 
-2025-12-30
+2026-01-05
 
 Many neuroscience and AI models operate in high-dimensional (HD) spaces, for instance with each dimension corresponding to the activation of a neuron.
-HD spaces have many interesting and useful properties, yet which can appear rather counterintuitive.
+HD spaces have many interesting and useful properties that can appear rather counterintuitive.
 
-In high-dimensions, for instance, one can encode sets by averaging random codewords for their elements.
+In high dimensions, for instance, one can encode a set by summing or averaging its elements together.
 In low dimensions averaging throws away a lot of information:
 if one replaced the set $\{3, 10, 2\}$ with its average, 5, it would be hard to decode or recover the original three elements from the number 5.
 In HD spaces such averaging can in fact preserve the original elements, which may seem surprising.
@@ -15,7 +15,7 @@ Below are two tricks to help make HD vectors more intuitive and predictable to t
 
 ## Imagine high-dimensional vectors as images
 
-That sets can be represented as averages of their high-dimensional (HD) codewords can be derived either mathematically, or understood intuitively by thinking of the codewords as images.
+That sets can be represented as averages of their high-dimensional (HD) vector representations, or codewords, can be either derived mathematically or understood intuitively by thinking of the codewords as images.
 
 Mathematically, random HD vectors are almost orthogonal with very high probability:
 
@@ -68,25 +68,25 @@ Curiously, whereas decoding the elements from the image in the algebraic manner 
 
 ## Think of sparse binary vectors as one-hot vectors in an even higher dimensional space
 
-Sparse binary vectors are useful when non-negativity and finite resolution needed, e.g. when mapping codewords to binary memory elements in a computer. 
-Although codewords are highly "distributed" (this is one of their benefits, in fact), they can be intuitied about by imagining them as 1-hot vectors in an even higher dimensional space.
+Sparse binary HD vectors are useful when non-negativity and finite resolution needed, e.g. when mapping codewords to binary memory elements in a computer or neural "spike words".
+Although such vectors distribute information over multiple elements of the vector (this is one of their benefits, in fact), they can often be intuitied about by imagining them as 1-hot vectors in an even higher dimensional space.
 In both cases, all elements are positive, different codewords are orthogonal (or nearly orthogonal), and the codewords are sparse, with most elements zero.
 
-For example, this perspective illuminates the basic action of a Bloom filter.
-Bloom filters are probabilistic data structures used for set membership querying (e.g. to test whether a URL is in a set of previously visited URLs). 
+This perspective illuminates the basic action of a Bloom filter, for example.
+Bloom filters are data structures used for set membership querying (e.g. to test whether a URL is in a set of previously visited URLs). 
 They operate by mapping each element (URL) to a collection of $Q$ bits in an array of size $B$ using a hash function, such that the bits assigned to each element are a pseudorandom deterministic function of the element.
 Elements are added to the BF by setting their bits in the array to 1.
 Elements are decoded by comparing the codeword for an element with the BF itself.
 If fewer than $Q$ bits match, the element is not in the BF.
 If all $Q$ bits match, the element may be in the BF, with a false positive rate that depends on how many elements have been stored.
 
-The analogy lets us think of the element codewords, which are $Q$-hot vectors in a $B$-dimensional space, as 1-hot vectors in an $\sim \exp{cB}$ dimensional space.
+Our analogy lets us think of the element codewords, which are $Q$-hot vectors in a $B$-dimensional space, as 1-hot vectors in an $\sim \exp{cB}$ dimensional space.
 In turn, storing elements corresponds to looking up the index "assigned" to the element in the $\sim \exp{cB}$ dimensional space and setting its bit to 1.
-Querying the BF then amounts to computing the codeword for a test element and checking whether the bit at its address in the ultra high-dimensional space is set to 1.
+Querying the BF then amounts to computing the codeword for a test element and checking whether the bit at its address in the higher dimensional space is set to 1.
 
 ![diagram of Bloom filter as summing 1-hot vectors in a very HD space](how_to_think_in_ten_thousand_dimensions_bloom_filter.png)
 
-Thus, sparse binary HD vectors receive the benefits of dimensionality yet act in many ways like 1-hot vectors, which may be easier to intuit about. The correspondence breaks down when the BF inevitably "fills up", but does so gracefully. The above picture makes intuiting about variations of BFs simpler as well, for instance if elements decay over time. The image analogy discussed above can also be relevant to Bloom filters. 
+Thus, sparse binary HD vectors receive the benefits of dimensionality yet act in many ways like 1-hot vectors. The correspondence breaks down when the BF inevitably "fills up", but it does so gracefully. The above picture makes intuiting about variations of BFs simpler as well, for instance if elements decay over time. The image analogy discussed above can also be relevant to Bloom filters. 
 
 Many brain areas are also thought to exhibit sparse HD neural codes, for instance in the hippocampus or insect mushroom body, which are thought to reflect the results of pattern-separation or decorrelation operations. As we have seen, such codes can behave similarly to 1-hot codes in higher dimensional spaces.
 
@@ -96,4 +96,4 @@ Many brain areas are also thought to exhibit sparse HD neural codes, for instanc
 * [Musco lecture notes](https://www.chrismusco.com/amlds2025/lectures/lec4.pdf)
 * [Wegner lecture notes](https://arxiv.org/pdf/2101.05841)
 * [Bloom filter Wikipedia Page](https://en.wikipedia.org/wiki/Bloom_filter)
-* [Cayco-Gajic and Silver 2019](https://pmc.ncbi.nlm.nih.gov/articles/PMC7028396/)
+* [Sparse high-dimensionsal codes in the brain](https://pmc.ncbi.nlm.nih.gov/articles/PMC7028396/)
