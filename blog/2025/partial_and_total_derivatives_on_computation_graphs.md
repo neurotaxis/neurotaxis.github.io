@@ -134,6 +134,6 @@ $$
 $$
 
 
-In upcoming posts we will talk about the classical factorization of back-propagation through time, as well as the *e-prop* factorization.
+In upcoming posts we will talk about the [classical factorization of back-propagation through time](/blog/2025/classical_factorization_of_back_propagation_through_time.html), as well as the [e-prop factorization](/blog/2025/graphical_derivation_of_e_prop.html).
 
 *Special thanks to Helena Liu for proofreading this post.*
