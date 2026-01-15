@@ -4,14 +4,14 @@
 2026-01-05
 
 Many neuroscience and AI models operate in high-dimensional (HD) spaces, for instance with each dimension corresponding to the activation of a neuron.
-HD spaces have many interesting and useful properties that can appear rather counterintuitive.
+HD vectors have many interesting and useful properties that can appear rather counterintuitive.
 
-In high dimensions, for instance, one can encode a set by summing or averaging its elements together.
+In HD, for example, one can encode a set by summing or averaging its elements together.
 In low dimensions averaging throws away a lot of information:
 if one replaced the set $\{3, 10, 2\}$ with its average, 5, it would be hard to decode or recover the original three elements from the number 5.
 In HD spaces such averaging can in fact preserve the original elements, which may seem surprising.
 
-Below are two tricks to help make HD vectors more intuitive and predictable to think about.
+Below are two tricks to help make HD vectors more intuitive and predictable to think about. They are in fact quite related and meant to reflect dense and sparse, or "L2" and "L1" settings, which are important in both neuroscience and AI.
 
 ## Imagine high-dimensional vectors as images
 
