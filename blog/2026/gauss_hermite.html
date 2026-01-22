@@ -40,7 +40,10 @@ How do we choose the <span id="math-equation">\(\{x_i\}\)</span> at which to eva
 where <span id="math-equation">\(x_i\)</span> are the roots of the <a href="https://en.wikipedia.org/wiki/Hermite_polynomials">physicist's Hermite polynomial</a> <span id="math-equation">\(H_n(x)\)</span> and the weights are given by
 \[w_j = \frac{2^{n-1}n!\sqrt{\pi}}{n^2 H_{n-1}(x_i)^2}.\]</p>
 <h2>Example</h2>
+<p>Here we evaluate the integral for <span id="math-equation">\(g(x) = cos(x/2)(x/2)^2\)</span>. 
+The plot below shows the roots of <span id="math-equation">\(H_n\)</span> for <span id="math-equation">\(n=5\)</span>, and their associated weights.</p>
 <p><img alt="Plot of Gauss-Hermite quadrature approximation of Gaussian expectation of cos(x/2)*(x/2)^2" src="gauss_hermite_1.png" /></p>
+<p>As we can see, the G-H approximation is quite accurate even for low <span id="math-equation">\(n\)</span>.</p>
 <p><img alt="G-H approximation vs n" src="gauss_hermite_2.png" /></p>
 <h2>Comparison to other approaches</h2>
 <p>If we were to use the <a href="https://en.wikipedia.org/wiki/Trapezoidal_rule">trapezoid rule</a>, we would have had to truncate the integration bounds, for instance from <span id="math-equation">\(-L\)</span> to <span id="math-equation">\(L\)</span>, leaving us with another decision to make about how to choose <span id="math-equation">\(L\)</span>. G-H is thus simpler, since we only have to choose <span id="math-equation">\(n\)</span>, which controls the accuracy of the approximation.</p>

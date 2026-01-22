@@ -23,7 +23,12 @@ $$
 
 ## Example
 
+Here we evaluate the integral for $g(x) = cos(x/2)(x/2)^2$. 
+The plot below shows the roots of $H_n$ for $n=5$, and their associated weights.
+
 ![Plot of Gauss-Hermite quadrature approximation of Gaussian expectation of cos(x/2)*(x/2)^2](gauss_hermite_1.png)
+
+As we can see, the G-H approximation is quite accurate even for low $n$.
 
 ![G-H approximation vs n](gauss_hermite_2.png)
 
