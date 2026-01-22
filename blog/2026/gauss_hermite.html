@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gauss-Hermite quadrature: a principled approximation of Gaussian integrals</title>
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']]},
+    "HTML-CSS": { 
+      linebreaks: { automatic: true, width: "90% container" },
+      scale: 100
+    },
+    SVG: { linebreaks: { automatic: true } }
+  });
+</script>
+    <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="container">
+    <div id="header-placeholder"></div>
+
+    <main>
+        
+      <section class="post">
+          <div class="post-content">
+            <h1>Gauss-Hermite quadrature: a principled approximation of Gaussian integrals</h1>
+<p><strong>Rich Pang</strong></p>
+<p>2026-01-21</p>
+<p><strong>TL;DR: A principled, deterministic approximation of a Gaussian integral when only <span id="math-equation">\(n\)</span> function calls are allowed.</strong></p>
+<p>Consider a function of the form</p>
+<p>\[f = \int_{-\infty}^{\infty}dx \mathcal{N}(x) g(x)\]</p>
+<p>where <span id="math-equation">\(\mathcal{N}(x)\)</span> is the standard Gaussian distribution and <span id="math-equation">\(g\)</span> is such that we cannot compute the integral analytically. Computing <span id="math-equation">\(f\)</span> numerically requires evaluating <span id="math-equation">\(g\)</span> at a set of <span id="math-equation">\(x\)</span>'s and then combining the results to approximate the integral. Where are the "best" <span id="math-equation">\(x\)</span> at which to evaluate <span id="math-equation">\(g(x)\)</span> and how do we combine these to estimate <span id="math-equation">\(f\)</span>?</p>
+<h2>Trapezoid and Monte-Carlo approaches</h2>
+<p>One approach is to truncate the integration bounds at <span id="math-equation">\(\pm L\)</span>, evaluate <span id="math-equation">\(x\)</span> at a grid of <span id="math-equation">\(n\)</span> evenly spaced points and use the trapezoid rule. This requires <span id="math-equation">\(n\)</span> function evaluations, and when <span id="math-equation">\(L\)</span> and <span id="math-equation">\(n\)</span> are large we will generally observe good results as long as <span id="math-equation">\(g\)</span> is sufficiently well-behaved. Yet when it comes time to write the code it is not clear how to pick <span id="math-equation">\(L\)</span> nor whether <span id="math-equation">\(n\)</span> evenly spaced grid points are where we should evaluate <span id="math-equation">\(g\)</span>.</p>
+<p>Alternatively, since <span id="math-equation">\(f\)</span> is itself an expectation value, <span id="math-equation">\(f = \text{E}_{\mathcal{N}(x)}[g(x)]\)</span>, we could take the Monte Carlo approach of sampling <span id="math-equation">\(x_1 \dots x_n\)</span>wfrom <span id="math-equation">\(N(x)\)</span> and approximate <span id="math-equation">\(f\)</span> using the law of large numbers:</p>
+<p>\[f \approx \sum_{i=1}^n g(x_i).\]
+Now we don't have to worry about <span id="math-equation">\(L\)</span>. However, the MC approach introduces variance in the approximation due to variation in how the <span id="math-equation">\(x_i\)</span> are sampled. One sample of <span id="math-equation">\(x_i\)</span> might yield a very good approximation and another a rather poor one.</p>
+<p>Suppose <span id="math-equation">\(g\)</span> is a rather expensive to evaluate. If we allow ourselves only <span id="math-equation">\(n\)</span> evaluations of <span id="math-equation">\(g\)</span>, what <span id="math-equation">\(x_1 \dots x_n\)</span> should we pick and how should we combine these to approximate <span id="math-equation">\(f\)</span>?</p>
+<h2>Gauss-Hermite quadrature</h2>
+<p>Gauss-Hermite quadrature provides a principled, deterministic solution for exactly how we should distribute our <span id="math-equation">\(n\)</span> function evaluations. Specifically, G-H quadrature approximates the integral as
+\[f \approx \sum_{i=1}^n w_i g(x_i)\]
+where <span id="math-equation">\(x_i\)</span> are the roots of the <a href="https://en.wikipedia.org/wiki/Hermite_polynomials">physicist's Hermite polynomial</a> <span id="math-equation">\(H_n(x)\)</span> and the weights are given by</p>
+<p>\[w_j = \frac{2^{n-1}n!\sqrt{pi}}{n^2 H_{n-1}(x_i)^2}.\]</p>
+<p>Unlike the trapezoid rule, we no longer have to choose a truncation, and unlike the MC approach, <span id="math-equation">\(x_i\)</span> are purely deterministic.</p>
+<h2>Example</h2>
+<p><img alt="Plot of Gauss-Hermite quadrature approximation of Gaussian expectation of sin(x)*x**3" src="gauss_hermite.png" /></p>
+<h2>Python Code</h2>
+<p>The Python code is quite simple, since we can use numpy's <code>hermgauss</code> function:</p>
+<pre><code>import numpy as np
+from numpy.polynomial.hermite import hermgauss
+
+n = 16
+x_i, w_i = hermgauss(n)
+
+def g(x):
+    return sin(x)*x**3
+
+# evaluate (note the additional scaling factors needed)
+f = (1. / np.sqrt(np.pi)) * np.sum(w_i * g(np.sqrt(2.0) * x_i))
+</code></pre>
+<h3>Generalization to non-standard Gaussian</h3>
+<p>To approximate</p>
+<p>\[f = \int_{-\infty}^{\infty}dx \frac{1}{\sqrt{2\pi \sigma^2}}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right) g(x)\]
+we first change variables via <span id="math-equation">\(y = (x - \mu)/\sigma\)</span>, <span id="math-equation">\(dy = dx/\sigma\)</span>:
+\[f = \int_{-\infty}^{\infty}dy \frac{1}{\sqrt{2\pi}}\exp\left(-\frac{y^2}{2}\right) g(\sigma y + \mu) = \int_{-\infty}^{\infty} dy \mathcal{N} h(y)\]
+where <span id="math-equation">\(h(y) = g(\sigma y + \mu)\)</span>.</p>
+<p>The code is</p>
+<pre><code>import numpy as np
+from numpy.polynomial.hermite import hermgauss
+
+mu = 1
+sd = 2
+
+n = 16
+y_i, w_i = hermgauss(n)
+
+def g(x):
+    return sin(x)*x**3
+
+def h(y):
+    return g(sd*y + \mu)
+
+f = (1. / np.sqrt(np.pi)) * np.sum(w_i * h(np.sqrt(2.0) * y_i))
+</code></pre>
+<h2>Remark</h2>
+<p>In general, the G-H approximation is not necessarily optimal, and its accuracy will depend on <span id="math-equation">\(g\)</span>. For instance, if <span id="math-equation">\(g\)</span> is a sum of <span id="math-equation">\(n\)</span> delta functions, the optimal function evaluations should take place at the locations of the delta functions. In practice, however, it can be quite accurate for well-behaved <span id="math-equation">\(g\)</span> and notably its accuracy is determined only by a single parameter <span id="math-equation">\(n\)</span>, the number of function evaluations.</p>
+<h2>Further reading</h2>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Gauss–Hermite_quadrature">Wikipedia page</a></li>
+</ul>
+          </div>
+      </section>
+        
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+  <script>
+    // Simple header/footer inclusion
+    fetch('/header.html')
+      .then(response => response.text())
+      .then(data => document.getElementById('header-placeholder').innerHTML = data);
+
+    fetch('/footer.html')
+      .then(response => response.text())
+      .then(data => document.getElementById('footer-placeholder').innerHTML = data);
+
+    // Hamburger menu toggle
+    document.addEventListener('click', function(e){
+      if(e.target.closest('.hamburger')){
+        document.querySelector('.menu').classList.toggle('open');
+      }
+    });
+  </script>
+  </div>
+</body>
+</html>
