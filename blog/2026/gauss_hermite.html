@@ -35,10 +35,10 @@
 where <span id="math-equation">\(\mathcal{N}(x)\)</span> is the standard normal distribution.
 Suppose also that <span id="math-equation">\(g\)</span> is rather expensive to compute and we would like to approximate this integral using only <span id="math-equation">\(n\)</span> function evaluations <span id="math-equation">\(g(x_1), \dots, g(x_n)\)</span>.
 How do we choose the <span id="math-equation">\(\{x_i\}\)</span> at which to evaluate <span id="math-equation">\(g\)</span>?</p>
-<p>Enter Gauss-Hermite quadrature, which states that we should choose
+<p>Enter Gauss-Hermite quadrature, which states that
 \[f \approx \sum_{i=1}^n w_i g(x_i)\]
 where <span id="math-equation">\(x_i\)</span> are the roots of the <a href="https://en.wikipedia.org/wiki/Hermite_polynomials">physicist's Hermite polynomial</a> <span id="math-equation">\(H_n(x)\)</span> and the weights are given by
-\[w_j = \frac{2^{n-1}n!\sqrt{\pi}}{n^2 H_{n-1}(x_i)^2}.\]</p>
+\[w_i = \frac{2^{n-1}n!\sqrt{\pi}}{n^2 H_{n-1}(x_i)^2}.\]</p>
 <h2>Example</h2>
 <p>Here we evaluate the integral for <span id="math-equation">\(g(x) = cos(x/2)(x/2)^2\)</span>. 
 The plot below shows the roots of <span id="math-equation">\(H_n\)</span> for <span id="math-equation">\(n=5\)</span>, and their associated weights.</p>
@@ -46,7 +46,7 @@ The plot below shows the roots of <span id="math-equation">\(H_n\)</span> for <s
 <p>As we can see, the G-H approximation is quite accurate even for low <span id="math-equation">\(n\)</span>.</p>
 <p><img alt="G-H approximation vs n" src="gauss_hermite_2.png" /></p>
 <h2>Comparison to other approaches</h2>
-<p>If we were to use the <a href="https://en.wikipedia.org/wiki/Trapezoidal_rule">trapezoid rule</a>, we would have had to truncate the integration bounds, for instance from <span id="math-equation">\(-L\)</span> to <span id="math-equation">\(L\)</span>, leaving us with another decision to make about how to choose <span id="math-equation">\(L\)</span>. G-H is thus simpler, since we only have to choose <span id="math-equation">\(n\)</span>, which controls the accuracy of the approximation.</p>
+<p>If we were to use the trapezoid rule, in addition to picking <span id="math-equation">\(n\)</span>, we would have had to truncate the integration bounds, for instance from <span id="math-equation">\(-L\)</span> to <span id="math-equation">\(L\)</span>, leaving us with another decision to make about how to choose <span id="math-equation">\(L\)</span>. G-H is thus simpler, since the accuracy of the approximation is controlled only by the single parameter <span id="math-equation">\(n\)</span>.</p>
 <p>Alternatively, we could have employed a Monte Carlo approach by sampling <span id="math-equation">\(n\)</span> values <span id="math-equation">\(x_1 \dots x_n\)</span> from <span id="math-equation">\(N(x)\)</span>, then approximating <span id="math-equation">\(f \approx \sum_i g(x_i)\)</span>. MC approaches, however, have the drawback of being nondeterministic — certain samples of <span id="math-equation">\(\{x_i\}\)</span> might yield better approximations than others. G-H, on the other hand, is purely deterministic.</p>
 <h2>Python Code</h2>
 <p>The Python code for implementing G-H quadrature is quite simple, since we can use numpy's <code>hermgauss</code> function:</p>
@@ -67,6 +67,7 @@ f = (1. / np.sqrt(np.pi)) * np.sum(w_i * g(np.sqrt(2.0) * x_i))
 <h2>Further reading</h2>
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/Gauss–Hermite_quadrature">Wikipedia page</a></li>
+<li><a href="http://www.jaeckel.org/ANoteOnMultivariateGaussHermiteQuadrature.pdf">Multivariate Gauss-Hermite quadrature</a></li>
 </ul>
           </div>
       </section>

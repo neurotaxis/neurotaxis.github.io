@@ -12,13 +12,13 @@ where $\mathcal{N}(x)$ is the standard normal distribution.
 Suppose also that $g$ is rather expensive to compute and we would like to approximate this integral using only $n$ function evaluations $g(x_1), \dots, g(x_n)$.
 How do we choose the $\{x_i\}$ at which to evaluate $g$?
 
-Enter Gauss-Hermite quadrature, which states that we should choose
+Enter Gauss-Hermite quadrature, which states that
 $$
 f \approx \sum_{i=1}^n w_i g(x_i)
 $$
 where $x_i$ are the roots of the [physicist's Hermite polynomial](https://en.wikipedia.org/wiki/Hermite_polynomials) $H_n(x)$ and the weights are given by
 $$
-w_j = \frac{2^{n-1}n!\sqrt{\pi}}{n^2 H_{n-1}(x_i)^2}.
+w_i = \frac{2^{n-1}n!\sqrt{\pi}}{n^2 H_{n-1}(x_i)^2}.
 $$
 
 ## Example
@@ -35,7 +35,7 @@ As we can see, the G-H approximation is quite accurate even for low $n$.
 
 ## Comparison to other approaches
 
-If we were to use the [trapezoid rule](https://en.wikipedia.org/wiki/Trapezoidal_rule), we would have had to truncate the integration bounds, for instance from $-L$ to $L$, leaving us with another decision to make about how to choose $L$. G-H is thus simpler, since we only have to choose $n$, which controls the accuracy of the approximation.
+If we were to use the trapezoid rule, in addition to picking $n$, we would have had to truncate the integration bounds, for instance from $-L$ to $L$, leaving us with another decision to make about how to choose $L$. G-H is thus simpler, since the accuracy of the approximation is controlled only by the single parameter $n$.
 
 Alternatively, we could have employed a Monte Carlo approach by sampling $n$ values $x_1 \dots x_n$ from $N(x)$, then approximating $f \approx \sum_i g(x_i)$. MC approaches, however, have the drawback of being nondeterministic — certain samples of $\{x_i\}$ might yield better approximations than others. G-H, on the other hand, is purely deterministic.
 
@@ -64,3 +64,4 @@ G-H quadrature is not necessarily optimal, and its accuracy will depend on $g$. 
 ## Further reading
 
 * [Wikipedia page](https://en.wikipedia.org/wiki/Gauss–Hermite_quadrature)
+* [Multivariate Gauss-Hermite quadrature](http://www.jaeckel.org/ANoteOnMultivariateGaussHermiteQuadrature.pdf)
