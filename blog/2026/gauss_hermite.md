@@ -37,7 +37,7 @@ As we can see, the G-H approximation is quite accurate even for low $n$.
 
 If we were to use the [trapezoid rule](https://en.wikipedia.org/wiki/Trapezoidal_rule), we would have had to truncate the integration bounds, for instance from $-L$ to $L$, leaving us with another decision to make about how to choose $L$. G-H is thus simpler, since we only have to choose $n$, which controls the accuracy of the approximation.
 
-Alternatively, we could have employed a Monte Carlo approach by sampling $n$ values $x_1 \dots x_n$ from $N(x)$, then approximating $f \approx \sum_i f(x_i)$. MC approaches, however, have the drawback of being nondeterministic — certain samples of $\{x_i\}$ might yield better approximations than others. G-H, on the other hand, is purely deterministic.
+Alternatively, we could have employed a Monte Carlo approach by sampling $n$ values $x_1 \dots x_n$ from $N(x)$, then approximating $f \approx \sum_i g(x_i)$. MC approaches, however, have the drawback of being nondeterministic — certain samples of $\{x_i\}$ might yield better approximations than others. G-H, on the other hand, is purely deterministic.
 
 ## Python Code
 
