@@ -1,0 +1,104 @@
+# Getting up to speed in a new research area fast
+**Rich Pang**
+
+2026-04-15
+
+Whether you're changing fields, just starting off in science or embarking on an interdisciplinary research journey, knowing how to get to the state-of-the-art efficiently in a new area is fundamental.
+Reading a huge list of papers and textbooks is usually not the best approach.
+Here are some tips for accelerating this process so that you can start making original research contributions sooner rather than later.
+
+## Don't collect a giant list of papers and simply try to read them all
+
+Papers are very important, but there are much more efficient ways of getting to the frontier.
+
+## Identify the current major figures in the field
+
+At the end of the day, science is made out of people.
+In many areas, the major voices come from a handful of labs/PIs, each telling a specific story about their area of expertise that extends far beyond any individual paper.
+When getting started, "who" is more important than "what".
+When you start writing your own papers and giving your own talks in this new area, perfect citations and references (although important) are less crucial than ensuring that you are speaking directly to the actual people in the field that will be reading or listening to your ideas.
+This means knowing who they are and how they think.
+
+To begin, search around to figure out whose names come up over and over again around the topic in question and make a list.
+I like to make a living document or folder with subheadings or directory for each major lab/PI, under which I'll add major papers, accessible talks, and key ideas coming from their group.
+In many years of research, I have found that grouping works by lab has been the best way to get to know a field.
+Even if you disagree with their work or think some of the minor voices in the field will be more promising in the long run, demonstrating that you know who's who in the field and what stories they are telling will strongly help your contributions to be taken seriously.
+
+## Figure out their mental models and the stories they are telling
+
+Once you have a list of the current major players in the field, figure out their mental models and the stories they are telling.
+While not always true, often a single PI or lab will have a major theme or idea that serves as a common throughline underlying a large portion of their work.
+They may be trying to convince the world of a specific theoretical perspective, a top experts in specific experimental system, or the leader in a certain technical method that they apply to many different questions.
+
+Find any online talks or short review articles from each PI in your list above.
+Watch and read these--how do they summarize the entire field and its gaps or conflicts in a few slides or sentences?
+If possible, watch multiple talks and read multiple reviews to gain a better feeling for what themes the PI repeats over and over again vs which may be targeted for a one-time venue.
+What diagrams come up consistently in their figure schematics?
+What phrases come up over and over again?
+What specific metaphors do they use when explaining their ideas?
+If possible, attend conferences where these figures are speaking.
+If the figures are famous or extremely busy, talk to anyone that knows their work well to help get up to speed on how they think.
+
+If there are any tutorial videos about the subject of interest, especially by researchers at the forefront of the field, watch these.
+These will be incredibly helpful.
+Pay attention too, to the citations on their slides, since you will need these later.
+
+Next---this requires a bit of patience but it will definitely pay off---go through each major figure's publication list, sorted chronologically, and download/bookmark every single one of their major papers.
+"Major paper" here means well cited, or published in a high-profile journal or conference.
+Don't use AI for this. 
+The goal here is for *you* to internalize the PI's mental model.
+Store links or PDFs of the papers organized chronologically.
+You might be surprised by how much you can learn about a scientist's way of thinking simply by reading the titles of their papers in the order they were published.
+
+## Identify major results in the field
+
+What results are well known in the field and generally thought to be highly reproducible?
+These will consitute either highly repeated experimental findings or foundational mathematical discoveries.
+Note that this is different from what everyone *thinks*.
+Most of the field could share a certain portion of their mental model that has not, in fact, been strongly supported by experiments.
+But knowing the key empirical and/or theoretical results in the field gives you crucial landmarks for referencing your own developing ideas.
+
+## Identify major papers and their significance
+
+Truly reproducible results are in a sense independent of any specific paper.
+However, it is still very important to know which papers are commonly cited for a specific result.
+If you miss citing well known papers for a result (even if you cite other papers that reproduced it), it can come across as not knowing the field well to reviewer and readers, which can invite doubt about your own ideas.
+
+A curious observation, however, is that it is often very hard to tell the *significance* of a paper simply by reading it.
+For instance, a paper may sell its importance as addressing a specific scientific question, but is in fact largely cited and referenced in the field for its application of a specific method.
+More generally, a paper's true significance may not be understood until many years later.
+
+Hence, while a high citation count often indicates that a paper *is* significant, figuring out *why* it's significant usually entails looking downstream and examining how it is referred to, i.e. how people "use the paper in a sentence."
+When watching talks, look at the citations listed in the slides relative to the content of the slide.
+Read introductions to modern papers citing the paper in question and look at how they are referenced.
+Asking LLMs why a paper is signficant is another helpful approach these days.
+
+## Figure out the missing pieces and conflicts in existing mental models and scientific stories
+
+This is fundamental but generally quite hard, especially from reading papers alone.
+Many papers may downplay missing pieces of their results or conflicts with other stories.
+If you already know the field well these may start to be clear when you read, but in the beginning they can be quite hard to parse.
+
+Listen carefully to the questions asked during talks and how the speakers answer them.
+Often a speaker will dodge a question or simply say they have no idea about something.
+If a famous PI says they have no idea how some process happens or how some part of their system of study works then this may be a real gap.
+If they change the subject when asked a specific question this can also indicate that this piece of understanding is significantly missing from the literature, or that the idea posed in the question may represent a real conflict or challenge to their model.
+
+Another great way to see how people think is to read publicly available reviews.
+More journals these days, such as eLife and PLoS journals, now post reviews and author responses publicly when the paper is published.
+Being able to read back-and-forths between authors and reviewers is extremely helpful for gaining insight into what the experts in the field disagree on and where there may real room for new ideas.
+
+## Iterate the following until convergence
+
+Most of the above will end up incomplete on the first pass.
+As you explore you may discover a whole new research lab that is very well established but you somehow missed.
+Add it to your list and repeat all of the above.
+
+## Write down all your questions and confusions
+
+When confusion arises in your learning process, it can be quite hard to tell whether it arises from your lack of understanding vs from an actual conflict in the stories being told in the field.
+Write these all down as you go.
+Many will probably be resolved as you get to know the field better.
+Others, however, may remain and come to prove themselves as real confusions that are not just yours but everyone's.
+These can be excellent starting points for a puzzle that will motivate your own contributions to the field.
+
