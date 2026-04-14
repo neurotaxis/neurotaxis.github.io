@@ -15,7 +15,7 @@ Papers are very important, but there are much more efficient ways of getting to 
 
 At the end of the day, science is made out of people.
 In many areas, the major voices come from a handful of labs/PIs, each telling a specific story about their area of expertise that extends far beyond any individual paper.
-When getting started, who is doing/thinking what is more important than just "what".
+When getting started, who is doing/thinking what is more important than just what is known.
 When you start writing your own papers and giving your own talks in this new area, perfect citations and references (although important) are less crucial than ensuring that you are speaking directly to the actual people in the field that will be reading or listening to your ideas.
 This means knowing who they are and how they think.
 
@@ -42,7 +42,7 @@ If the figures are famous or extremely busy, try to find people that know their 
 If there are any tutorial videos about the subject of interest, especially by researchers at the forefront of the field, these will be incredibly helpful, so do watch them.
 Write down all the citations on their slides as well, since you will need these later.
 
-Next---this requires a bit of patience but it will definitely pay off---go through each major figure's publication list, sorted chronologically, and download/bookmark every single one of their major papers.
+Next---this requires a bit of patience but will definitely pay off---go through each major figure's publication list, sorted chronologically, and download/bookmark every single one of their major papers.
 "Major paper" here means well cited, or recently published in a high-profile journal or conference.
 Don't use AI for this. 
 The goal here is for *you* to internalize the PI's mental models and stories.
@@ -61,7 +61,7 @@ But knowing the key empirical and/or theoretical results in the field gives you 
 
 Truly reproducible results are in a sense independent of any specific paper.
 However, it is still very important to know which papers are commonly cited for a specific result.
-If you miss citing well known papers for a result (even if you cite other papers that reproduced it), it can come across as not knowing the field well to reviewer and readers, which can invite doubt about your own ideas.
+If you miss citing well known papers for a result (even if you cite other papers that reproduced it), it can come across as not knowing the field well to reviewers and readers, which can invite doubt about your own ideas.
 
 A curious observation is that it is often very hard to tell the *significance* of a paper simply by reading it.
 For instance, a paper may sell its importance as addressing a specific scientific question but is in fact largely referenced for its application of a specific method.
@@ -86,12 +86,12 @@ If they change the subject when asked a specific question this can also indicate
 
 Another great way to identify conflicts between established researchers' stories and mental models is to read publicly available reviews.
 More journals these days, such as eLife and PLoS journals, now post reviews and author responses when the paper is published.
-Being able to read back-andwforths between authors and reviewers is extremely helpful for gaining insight into what the experts in the field disagree on and where there may real room for new ideas.
+Being able to read back-and-forths between authors and reviewers is extremely helpful for gaining insight into what the experts in the field disagree on and where there may real room for new ideas.
 
 ## Iterate the following until convergence
 
 Most of the above will end up incomplete on the first pass.
-As you explore you may discover a whole new research lab that is very well established but you somehow missed.
+As you explore you may discover a whole new lab that is well established but you somehow missed.
 Add it to your list and repeat all of the above.
 
 ## Write down all your questions and confusions
