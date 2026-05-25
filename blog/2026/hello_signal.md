@@ -9,7 +9,7 @@ A hello_signal file is a single file, usually a PDF, that contains a minimal des
 
 Make it easy to quickly estimate the complexity of a dataset. Does the data use standard formats, or are bespoke file types and software involved? Will this data require a GPU cluster or can I analyze it on my laptop? 
 
-Expedite on-boarding newcomers to specific data, such as new lab members or computational collaborators, by eliminating time and errors in the data munging process. It's very easy to make small errors when loading and pre-processing someone else's data, even with detailed instructions on how to work with it. A hello_signal file demonstrates precisely how to load the data and confirm it looks how it's supposed to.
+Expedite on-boarding newcomers to specific data, such as new lab members or computational collaborators, by eliminating time and errors in the data munging process. It's very easy to make errors when loading and pre-processing someone else's data, even given detailed instructions. A hello_signal file demonstrates precisely how to load the data and confirm it looks how it's supposed to.
 
 Are a great way to organize a lab's datasets, which may be scattered across hard drives, computers, and the cloud, along with inconsistent or partial documentation. Making hello_signal files doesn't require reorganizing existing data, but a directory of hello_signal files for a lab's datasets makes an excellent gateway to the data and can dramatically increase their effective half-lives.
 
