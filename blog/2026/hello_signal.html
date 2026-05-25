@@ -40,9 +40,9 @@
 <p>A useful format:</p>
 <p>YYYYMMDD_hello_datasetname_signalplotted.pdf</p>
 <h4>1. Brief description of the nature, structure, and dimensions of the data</h4>
-<p>Roughly what is in the data? Spike trains? Tracked animal behavior? BOLD signals?</p>
-<p>What is the associated publication, if any?</p>
-<p>How is the data structured? How many files are there? How big are they?</p>
+<p>Roughly what is in the data? Spike trains? Tracked animal behavior? BOLD signals?
+What is the associated publication, if any?
+How is the data structured? How many files are there? How big are they?</p>
 <h4>2. Instructions for downloading or accessing the data</h4>
 <p>How does one download or access the data?</p>
 <h4>3. Software used</h4>
@@ -51,11 +51,10 @@
 <p>Minimal code for opening data and plotting signal(s) of interest.
 This includes extracting relevant signals, aligning timestamps, etc.
 This should be plain text that one can simply paste into a code editor and run.
-The clearer and more convincing the signal displayed the better.
-For instance, plotting a single spike train is worse than plotting several spike trains clearly responding to a stimulus presented in the dataset.</p>
+The clearer and more convincing the signal displayed the better,
+for instance several neurons' spike trains clearly responding to a stimulus.</p>
 <h4>5. Outputs</h4>
-<p>Visualizations expected from running the above.
-This is to confirm that the code was run correctly.</p>
+<p>Visualizations expected from running the above to confirm the everything is correct.</p>
 <h4>6. Notes</h4>
 <p>Sections of the data that may be corrupted, artifacts to be aware of, etc.
 Other elements of experimental context that are important to know about.</p>
@@ -65,16 +64,15 @@ Other elements of experimental context that are important to know about.</p>
 </ul>
 <h2>Who should create hello_signal files</h2>
 <p>A hello_signal file can often be put together from a dataset given sufficient documentation and familiarity of the person compiling the hello_signal file with the type of data involved.
-The person who can generally do this the fastest is the person who collected the data.</p>
+In general the person who can do this the fastest is the person who collected the data.</p>
 <h2>Other benefits of hello_signal files</h2>
 <ul>
 <li>No specialized software involved. Very flexible.</li>
-<li>Quite easy to make a hello_signal file if one is familiar with the data.</li>
+<li>Very easy to make if one is already familiar with the data.</li>
 <li>Works with both in-house and public datasets.</li>
-<li>Lightweight yet robust. Can even be printed out and put on the fridge.</li>
-<li>Only break if the dataset is moved. For this reason it is useful to archive the data in a specific place.</li>
-<li>Works in concert with highly heterogeneous datasets instead of fighting to standardize them.</li>
-<li>Can likely be produced with LLMs given a collection of partial documentation (but should be verified).</li>
+<li>Lightweight yet robust format. You can even print it out.</li>
+<li>Only break if the dataset is moved or required software becomes inaccessible.</li>
+<li>Works in concert with heterogeneous datasets instead of fighting to standardize them.</li>
 <li>Greatly reduce overall time spent data munging, creating more time for science.</li>
 </ul>
           </div>
