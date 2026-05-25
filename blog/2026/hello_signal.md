@@ -35,7 +35,7 @@ How does one download or access the data?
 
 Software/packages + versions used to run the code below.
 
-#### 4. Minimal code for plotting clear signal(s) in the data
+#### 4. Code
 
 Minimal code for opening data and plotting signal(s) of interest.
 This includes extracting relevant signals, aligning timestamps, etc.
