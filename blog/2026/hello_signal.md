@@ -24,9 +24,7 @@ YYYYMMDD_hello_datasetname_signalplotted.pdf
 #### 1. Brief description of the nature, structure, and dimensions of the data
 
 Roughly what is in the data? Spike trains? Tracked animal behavior? BOLD signals?
-
 What is the associated publication, if any?
-
 How is the data structured? How many files are there? How big are they?
 
 #### 2. Instructions for downloading or accessing the data
@@ -42,13 +40,12 @@ Software/packages + versions used to run the code below.
 Minimal code for opening data and plotting signal(s) of interest.
 This includes extracting relevant signals, aligning timestamps, etc.
 This should be plain text that one can simply paste into a code editor and run.
-The clearer and more convincing the signal displayed the better.
-For instance, plotting a single spike train is worse than plotting several spike trains clearly responding to a stimulus presented in the dataset.
+The clearer and more convincing the signal displayed the better,
+for instance several neurons' spike trains clearly responding to a stimulus.
 
 #### 5. Outputs
 
-Visualizations expected from running the above.
-This is to confirm that the code was run correctly.
+Visualizations expected from running the above to confirm the everything is correct.
 
 #### 6. Notes
 
@@ -62,15 +59,14 @@ Other elements of experimental context that are important to know about.
 ## Who should create hello_signal files
 
 A hello_signal file can often be put together from a dataset given sufficient documentation and familiarity of the person compiling the hello_signal file with the type of data involved.
-The person who can generally do this the fastest is the person who collected the data.
+In general the person who can do this the fastest is the person who collected the data.
 
 ## Other benefits of hello_signal files
 
 * No specialized software involved. Very flexible.
-* Quite easy to make a hello_signal file if one is familiar with the data.
+* Very easy to make if one is already familiar with the data.
 * Works with both in-house and public datasets.
-* Lightweight yet robust. Can even be printed out and put on the fridge.
-* Only break if the dataset is moved. For this reason it is useful to archive the data in a specific place.
-* Works in concert with highly heterogeneous datasets instead of fighting to standardize them.
-* Can likely be produced with LLMs given a collection of partial documentation (but should be verified).
+* Lightweight yet robust format. You can even print it out.
+* Only break if the dataset is moved or required software becomes inaccessible.
+* Works in concert with heterogeneous datasets instead of fighting to standardize them.
 * Greatly reduce overall time spent data munging, creating more time for science. 
