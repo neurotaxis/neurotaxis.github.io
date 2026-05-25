@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hello_signal</title>
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']]},
+    "HTML-CSS": { 
+      linebreaks: { automatic: true, width: "90% container" },
+      scale: 100
+    },
+    SVG: { linebreaks: { automatic: true } }
+  });
+</script>
+    <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="container">
+    <div id="header-placeholder"></div>
+
+    <main>
+        
+      <section class="post">
+          <div class="post-content">
+            <h1>hello_signal</h1>
+<p><strong>Rich Pang</strong></p>
+<p>2026-05-23</p>
+<p>A hello_signal file is a single file, usually a PDF, that contains a minimal description of a dataset and a minimal demonstration of how to access the data and clearly display one or more signals thought to be present in it.</p>
+<h2>hello_signal files:</h2>
+<p>Make it easy to quickly estimate the complexity of a dataset. Does the data use standard formats, or are bespoke file types and software involved? Will this data require a GPU cluster or can I analyze it on my laptop? </p>
+<p>Expedite on-boarding newcomers to specific data, such as new lab members or computational collaborators, by eliminating time and errors in the data munging process. It's very easy to make small errors when loading and pre-processing someone else's data, even with detailed instructions on how to work with it. A hello_signal file demonstrates precisely how to load the data and confirm it looks how it's supposed to to minimize errors.</p>
+<p>Are a great way to organize a lab's datasets, which may be scattered across hard drives, computers, and the cloud, along with inconsistent or partial documentation. Making hello_signal files for these dataset doesn't require any reorganization of existing data. A directory of hello_signal files for a lab's datasets makes an excellent gateway to the data and can dramatically increase its effective half-life.</p>
+<h2>Structure of a hello_signal file</h2>
+<h4>Filename</h4>
+<p>A useful format:</p>
+<p>YYYYMMDD_hello_datasetname_signalplotted.pdf</p>
+<h4>1. Brief description of the nature, structure, and dimensions of the data</h4>
+<p>Roughly what is in the data? Spike trains? Tracked animal behavior? BOLD signals?</p>
+<p>What is the associated publication, if any?</p>
+<p>How is the data structured? How many files are there? How big are they?</p>
+<h4>2. Instructions for downloading or accessing the data</h4>
+<p>How does one download or access the data?</p>
+<h4>3. Software used</h4>
+<p>Software/packages + versions used to run the code below.</p>
+<h4>4. Minimal code for plotting clear signal(s) in the data</h4>
+<p>Minimal code for opening data and plotting signal(s) of interest.
+This includes extracting relevant signals, aligning timestamps, etc.
+This should be plain text that one can simply paste into a code editor and run.
+The clearer and more convincing the signal displayed the better.
+For instance, plotting a single spike train is worse than plotting several spike trains clearly responding to a stimulus presented in the dataset.</p>
+<h4>5. Outputs</h4>
+<p>Visualizations expected from running the above.
+This is to confirm that the code was run correctly.</p>
+<h4>6. Notes</h4>
+<p>Sections of the data that may be corrupted, artifacts to be aware of, etc.
+Other elements of experimental context that are important to know about.</p>
+<h2>Example hello_signal files</h2>
+<ul>
+<li><a href="20260525_hello_flywire2024_single_neuron_swc_morphology.pdf">20260525_hello_flywire2024_single_neuron_swc_morphology.pdf</a></li>
+</ul>
+<h2>Who should create hello_signal files</h2>
+<p>A hello_signal file can often be put together from a dataset given sufficient documentation and familiarity of the person compiling the hello_signal file with the type of data involved.
+The person who can generally do this the fastest is the person who collected the data.</p>
+<h2>Other benefits of hello_signal files</h2>
+<ul>
+<li>No specialized software involved. Very flexible.</li>
+<li>Quite easy to make a hello_signal file if one is familiar with the data.</li>
+<li>Works with both in-house and public datasets.</li>
+<li>Lightweight yet robust. Can even be printed out and put on the fridge.</li>
+<li>Only break if the dataset is moved. For this reason it is useful to archive the data in a specific place.</li>
+<li>Works in concert with highly heterogeneous datasets instead of fighting to standardize them.</li>
+<li>Can likely be produced with LLMs given a collection of partial documentation (but should be verified).</li>
+<li>Greatly reduce overall time spent data munging, creating more time for science.</li>
+</ul>
+          </div>
+      </section>
+        
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+  <script>
+    // Simple header/footer inclusion
+    fetch('/header.html')
+      .then(response => response.text())
+      .then(data => document.getElementById('header-placeholder').innerHTML = data);
+
+    fetch('/footer.html')
+      .then(response => response.text())
+      .then(data => document.getElementById('footer-placeholder').innerHTML = data);
+
+    // Hamburger menu toggle
+    document.addEventListener('click', function(e){
+      if(e.target.closest('.hamburger')){
+        document.querySelector('.menu').classList.toggle('open');
+      }
+    });
+  </script>
+  </div>
+</body>
+</html>
