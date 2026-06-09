@@ -31,7 +31,7 @@ How is the data structured? How many files are there? How big are they?
 
 #### 2. Instructions for downloading or accessing the data
 
-How does one download or access the data?
+Precise, unambiguous instructions for retrieving the dataset needed to run the code that follows.
 
 #### 3. Software used
 
