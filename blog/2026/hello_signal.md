@@ -57,6 +57,7 @@ Other elements of experimental context that are important to know about.
 ## Example hello_signal files
 
 * [20260525_hello_flywire2024_single_neuron_swc_morphology.pdf](20260525_hello_flywire2024_single_neuron_swc_morphology.pdf)
+* [20260525_hello_zolin2021context_DAN_timeseries_overlaid_with_locomotion.pdf](20260525_hello_zolin2021context_DAN_timeseries_overlaid_with_locomotion.pdf)
 
 ## Who should create hello_signal files
 
