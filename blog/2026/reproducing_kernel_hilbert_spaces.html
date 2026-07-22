@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What are reproducing kernel Hilbert spaces all about?</title>
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']]},
+    "HTML-CSS": { 
+      linebreaks: { automatic: true, width: "90% container" },
+      scale: 100
+    },
+    SVG: { linebreaks: { automatic: true } }
+  });
+</script>
+    <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="container">
+    <div id="header-placeholder"></div>
+
+    <main>
+        
+      <section class="post">
+          <div class="post-content">
+            <h1>What are reproducing kernel Hilbert spaces all about?</h1>
+<p><strong>Rich Pang</strong></p>
+<p>2026-07-22</p>
+<p>Reproducing kernel Hilbert spaces (RKHS) are the indispensable spaces underlying the formal foundations of kernel methods.</p>
+<p>What are they and what is interesting about them?</p>
+<h2>What is a RKHS?</h2>
+<p>A RKHS is the space of functions along with a specific inner product, where that space of functions corresponds to the functions that can be learned with a kernel machine.
+A kernel machine is a model that generates predictions about a test input <span id="math-equation">\(x\)</span> by comparing it to a set of training inputs <span id="math-equation">\(\{x_c\}\)</span> where comparison is formalized via a kernel function,
+\[k(x, x_c),\]
+typically symmetric and positive definite in RKHS theory, which returns a value quantifying how similar <span id="math-equation">\(x\)</span> and <span id="math-equation">\(x_c\)</span> are.
+A common kernel is the squared-exponential kernel, <span id="math-equation">\(k(x, x_c) = \exp(-(x-x_c)^2/(2\lambda))\)</span>.
+If we hold <span id="math-equation">\(x_c\)</span> fixed and let
+\[K_{x_c}(x) \equiv k(x, x_c)\]
+we call <span id="math-equation">\(K_{x_c}(x)\)</span> the kernel function with center <span id="math-equation">\(x_c\)</span>.</p>
+<p>Kernel machines produce predictions of the target value associated with a test input <span id="math-equation">\(x\)</span> via a weighted sum of <span id="math-equation">\(k(x, x_c)\)</span> for all the training data points <span id="math-equation">\(x_c\)</span>.
+\[f(x) = \sum_{x_c} \alpha_{x_c} k(x, x_c) = 
+\sum_{x_c} \alpha_{x_c} K_{x_c}(x)\]
+where the <span id="math-equation">\(\{\alpha_{x_c}\}\)</span> are determined by an optimization process and the sum runs over all the training data or centers.</p>
+<p>A RKHS for a kernel <span id="math-equation">\(k\)</span> is, roughly, the span of all the <span id="math-equation">\(K_{x_c}(x)\)</span>, i.e. the space of functions that can be produced as a linear combination of the kernels with different centers. (Strictly speaking, one must deal with a continuous analog of this statement.)
+If any continuous function <span id="math-equation">\(f\)</span> can be reproduced to arbitrary accuracy by choosing sufficient centers <span id="math-equation">\(\{x_c\}\)</span> and weights <span id="math-equation">\(\{\alpha_{x_c}\}\)</span>, the kernel <span id="math-equation">\(k\)</span> is called universal; i.e. the RKHS is dense in the space <span id="math-equation">\(C\)</span> of continuous functions.</p>
+<h2>An interesting inner product</h2>
+<p>A Hilbert space is a complete inner product space.
+To be a Hilbert space, the RKHS therefore requires an inner product,
+\[\langle f_1, f_2 \rangle\]
+that takes in two functions in the RKHS as arguments are returns some notion of how similar they are.</p>
+<p>If you are used to inner products equipped to function spaces, you may be familiar with the following inner product,
+\[\langle f_1, f_2 \rangle \equiv \int f_1(x) f_2(x) dx,\]
+which is in some sense the simplest continous generalization of the finite-dimensional dot product, <span id="math-equation">\(\langle \mathbf{v}, \mathbf{w}\rangle \equiv \sum_i v_iw_i\)</span>.
+This, however, is not the inner product of a RHKS.</p>
+<p>The inner product of a RKHS, applied to two functions <span id="math-equation">\(K_{x_c}\)</span> and <span id="math-equation">\(K_{y_c}\)</span> is
+not <span id="math-equation">\(\langle K_{x_c}, K_{y_c} \rangle = \int K_{x_c}(x) K_{y_c}(x)dx\)</span>, but rather
+\[\langle K_{x_c}, K_{y_c} \rangle = k(x_c, y_c).\]
+Note that no integral is involved, which is also computationally advantageous.
+What is the inner product between <span id="math-equation">\(K_{y_c}\)</span> and some arbitrary function <span id="math-equation">\(f(x)\)</span> in the RKHS?
+By linearity of the inner product we have
+\[\langle f, K_{y_c} \rangle = 
+\langle \sum_{x_c} \alpha_{x_c} K_{x_c}, K_{y_c} \rangle =\]
+\[\sum_{x_c} \alpha_{x_c} \langle K_{x_c}, K_{y_c} \rangle = 
+\sum_{x_c} \alpha_{x_c} k(x_c, y_c) = f(y_c).\]
+This is called the reproducing property, the essential mathematical feature of an RKHS.
+The reproducing property is the property that the inner product of a function <span id="math-equation">\(f\)</span> in the RKHS, with a kernel centered at <span id="math-equation">\(x\)</span> is simply <span id="math-equation">\(f(x)\)</span>.</p>
+<p>Similarly, the inner product of an arbitrary pair of functions in the RKHS is
+\[\langle f, g \rangle = 
+\sum_{x_c, y_c} \alpha_{x_c} \alpha_{y_c} k(x_c, y_c)\]
+where we have let <span id="math-equation">\(g(x) = \sum_{y_c} \alpha_{y_c} K_{y_c}(x).\)</span></p>
+<p>Thus, the inner product of a RKHS is not the ordinary continuous generalization of the dot product, but deeply related to function evaluation.</p>
+<h2>Function evaluation as a linear operation</h2>
+<p>It is at first glance very strange that one can perform function evaluation in a RKHS via a linear operation, namely the inner product. 
+How can function evaluation be linear and emerge from an inner product operation?
+In fact, this idea is not as strange as it sounds and emerges even with simpler inner products.
+If we consider again the standard inner product 
+\[\langle f, g \rangle \equiv \int f(x)g(x)dx,\]
+and let <span id="math-equation">\(\delta_y \equiv \delta(x-y)\)</span> we in turn find that
+\[\langle f, \delta_y \rangle = \int f(x)\delta(x-y)dx = f(y).\]
+Thus, inner products and function evaluation are quite closely related even without RKHSes.
+The RKHS, however, represents a very powerful generalization of this idea to spaces produced from kernel functions.</p>
+<h2>Further reading/watching</h2>
+<p><a href="https://en.wikipedia.org/wiki/Kernel_method">Kernel method (Wikipedia)</a></p>
+<p><a href="https://www.youtube.com/watch?v=IzGS8uKc5E4">Kernel methods in machine learning lectures by Julien Mairal and Jean-Philippe Vert</a></p>
+<p><a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf">Bishop, 2006 (Ch. 6).</a></p>
+<p><a href="https://www.jstor.org/stable/1990404">Aronszajn, 1950. "Theory of Reproducing Kernels"</a></p>
+<p><a href="https://www.jmlr.org/papers/volume2/steinwart01a/steinwart01a.pdf">Steinwert, 2001. "On the influence of the kernel on the consistency of Support Vector Machines</a></p>
+          </div>
+      </section>
+        
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+  <script>
+    // Simple header/footer inclusion
+    fetch('/header.html')
+      .then(response => response.text())
+      .then(data => document.getElementById('header-placeholder').innerHTML = data);
+
+    fetch('/footer.html')
+      .then(response => response.text())
+      .then(data => document.getElementById('footer-placeholder').innerHTML = data);
+
+    // Hamburger menu toggle
+    document.addEventListener('click', function(e){
+      if(e.target.closest('.hamburger')){
+        document.querySelector('.menu').classList.toggle('open');
+      }
+    });
+  </script>
+  </div>
+</body>
+</html>
