@@ -84,7 +84,7 @@ and let <span id="math-equation">\(\delta_y \equiv \delta(x-y)\)</span> we in tu
 Hence, inner products and function evaluation are quite closely related even without RKHS.
 The RKHS, however, represents a very powerful generalization of this idea to spaces produced from kernel functions.</p>
 <p>The RKHS, moreover, supports the rigorous foundation underlying the famous "kernel trick", which is based on the observation that given a feature map <span id="math-equation">\(\psi(x) \in \mathbb{R}^N\)</span>, where <span id="math-equation">\(N \to \infty\)</span> possibly, one can naturally define <span id="math-equation">\(k(x, y) \equiv \psi(x)^T\psi(y)\)</span>, i.e. the kernel is the inner product of two feature maps.
-This in turn enables solving a possibly infinite dimensional problem (finding the infinite-dimensional <span id="math-equation">\(w\)</span> such that <span id="math-equation">\(f(x) \approx \psi(x)^T\)</span>) in finite dimensions, by finding the <span id="math-equation">\(\{\alpha_{x_c}\}\)</span> described above instead---a notable advantage of kernel methods.</p>
+This in turn enables solving a possibly infinite dimensional problem (finding the infinite-dimensional <span id="math-equation">\(w\)</span> such that <span id="math-equation">\(f(x) \approx \psi(x)^Tw\)</span>) in finite dimensions, by finding the <span id="math-equation">\(\{\alpha_{x_c}\}\)</span> described above instead---a key advantage of kernel methods.</p>
 <h2>Further reading/watching</h2>
 <p><a href="https://en.wikipedia.org/wiki/Kernel_method">Kernel method (Wikipedia)</a>.</p>
 <p><a href="https://en.wikipedia.org/wiki/Representer_theorem">Representer Theorem (Wikipedia)</a>.</p>
