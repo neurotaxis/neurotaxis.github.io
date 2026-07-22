@@ -85,12 +85,17 @@ and let $\delta_y \equiv \delta(x-y)$ we in turn find that
 $$
 \langle f, \delta_y \rangle = \int f(x)\delta(x-y)dx = f(y).
 $$
-Thus, inner products and function evaluation are quite closely related even without RKHSes.
+Hence, inner products and function evaluation are quite closely related even without RKHS.
 The RKHS, however, represents a very powerful generalization of this idea to spaces produced from kernel functions.
+
+The RKHS, moreover, supports the rigorous foundation underlying the famous ``kernel trick'', which is based on the observation that given a feature map $\psi(x) \in \mathbb{R}^N$, where $N \to \infty$ possibly, one can naturally defines $k(x, y) \equiv \psi(x)^T\psi(y)$, i.e. the kernel is the inner product of two feature maps.
+This in turn enables solving a possibly infinite dimensional problem (finding the infinite-dimensional $w$ such that $f(x) \approx \psi(x)^T$) in finite dimensions, by finding the $\{\alpha_{x_c}\}$ described above instead---a notable advantage of kernel methods.
 
 ## Further reading/watching
 
 [Kernel method (Wikipedia)](https://en.wikipedia.org/wiki/Kernel_method)
+
+[Representer Theorem (Wikipedia)](https://en.wikipedia.org/wiki/Representer_theorem)
 
 [Kernel methods in machine learning lectures by Julien Mairal and Jean-Philippe Vert](https://www.youtube.com/watch?v=IzGS8uKc5E4)
 
