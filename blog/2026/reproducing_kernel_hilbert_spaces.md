@@ -93,14 +93,14 @@ This in turn enables solving a possibly infinite dimensional problem (finding th
 
 ## Further reading/watching
 
-[Kernel method (Wikipedia)](https://en.wikipedia.org/wiki/Kernel_method)
+[Kernel method (Wikipedia)](https://en.wikipedia.org/wiki/Kernel_method).
 
-[Representer Theorem (Wikipedia)](https://en.wikipedia.org/wiki/Representer_theorem)
+[Representer Theorem (Wikipedia)](https://en.wikipedia.org/wiki/Representer_theorem).
 
-[Kernel methods in machine learning lectures by Julien Mairal and Jean-Philippe Vert](https://www.youtube.com/watch?v=IzGS8uKc5E4)
+[Kernel methods in machine learning lectures by Julien Mairal and Jean-Philippe Vert](https://www.youtube.com/watch?v=IzGS8uKc5E4).
 
-[Bishop, 2006 (Ch. 6).](https://www.microsoft.com/en-us/research/wp-content/uploads/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf)
+[Bishop, 2006. Pattern Recognition and Machine Learning (Ch. 6)](https://www.microsoft.com/en-us/research/wp-content/uploads/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf).
 
-[Aronszajn, 1950. "Theory of Reproducing Kernels"](https://www.jstor.org/stable/1990404)
+[Aronszajn, 1950. Theory of Reproducing Kernels](https://www.jstor.org/stable/1990404).
 
-[Steinwert, 2001. "On the influence of the kernel on the consistency of Support Vector Machines](https://www.jmlr.org/papers/volume2/steinwart01a/steinwart01a.pdf)
+[Steinwert, 2001. On the influence of the kernel on the consistency of Support Vector Machines](https://www.jmlr.org/papers/volume2/steinwart01a/steinwart01a.pdf).
