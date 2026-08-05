@@ -16,98 +16,125 @@
         <h1>Analyzing time-series data in neuroscience</h1>
 
               <div class="course-outline">
-<h3>Part I: Introduction (<a href="/courses/course_analyzing_time_series_I_intro.pdf">slides -- draft</a>)</h3>
+<h3>Part I: Introduction <br />
+<a href="/courses/course_analyzing_time_series_I_intro.pdf">slides (draft)</a><br />
+</h3>
 Course structure and audience<br />
 Why analyzing time-series data is important<br />
-Challenges of analyzing time-series data<br />
+Why analyzing time-series data is hard<br />
 Course goals<br />
-Complete outline<br />
+The essentiality of predictions<br />
+Complete course outline<br />
 
-<h3>Part II: Fundamental concepts (<a href="/courses/course_analyzing_time_series_II_fundamentals.pdf">slides -- draft</a>)</h3>
+<h3>Part II: Fundamental concepts <br />
+<a href="/courses/course_analyzing_time_series_II_fundamentals.pdf">slides (draft)</a></h3>
 Data types in neuroscience<br />
 Mathematical models<br />
 Discriminative vs generative models<br />
 Parameters, fitting and overfitting<br />
+Bias-variance tradeoff<br />
 Model comparison<br />
 Random processes perspective<br />
 Dynamical systems perspective<br />
 
-<h3>Part III: Philosophy (<a href="/courses/course_analyzing_time_series_III_philosophy.pdf">slides -- draft</a>)</h3>
+<h3>Part III: Philosophy <br />
+<a href="/courses/course_analyzing_time_series_III_philosophy.pdf">slides (draft)</a></h3>
+Fundamental theorem of data analysis<br />
 Frameworks, theories, and models<br />
 Descriptive, mechanistic, and normative theories<br />
-Fundamental theorem of data analysis<br />
+Marr's levels of analysis<br />
+Building a mental model of a data set<br />
 Theory- vs data-driven approaches<br />
-The value of predictions<br />
 Transforming data into science<br />
 McNamara fallacy<br />
 
-<h3>Part IV: Common issues (<a href="/courses/course_analyzing_time_series_IV_common_issues.pdf">slides -- draft</a>)</h3>
-Lack of trials<br />
+<h3>Part IV: Common issues <br />
+<a href="/courses/course_analyzing_time_series_IV_common_issues.pdf">slides (draft)</a></h3>
 Controlled vs naturalistic data<br />
+Lack of trials<br />
 Nonstationarity/long timescales<br />
 Trials/sessions/animals/conditions<br />
+Nonstationarity and slow timescales<br />
 Binning<br />
 Missing data<br />
 Too much data<br />
 Multicollinearity<br />
-Gotchas: normalization, correlated training/test data, whats is N?<br />
-Interpreting data-driven analyses
+Normalization<br />
+Correlated train and test data<br />
+What is N?<br />
+Interpreting data-driven analysis results<br />
 
-<h3>Part V: Practical tips and tricks (<a href="/courses/course_analyzing_time_series_V_practical.pdf">slides -- draft</a>)</h3>
+<h3>Part V: Practical tips and tricks
+<br /><a href="/courses/course_analyzing_time_series_V_practical.pdf">slides (draft)</a></h3>
 Approaching/vetting a new dataset<br />
 Data pre-processing<br />
 Data munging/storage<br />
-Control datasets<br />
-Desconstructing fit models<br />
 Statistical testing<br />
+Control datasets<br />
+Comparing/desconstructing fit models<br />
 How to not make mistakes<br />
 Leveraging LLMs<br />
-Designing custom analyses<br />
-Coding strategies<br />
 Reproducibility<br />
 Data sharing<br />
+Coding strategies<br />
     
-<h3>Part VI: Canonical methods (<a href="/courses/course_analyzing_time_series_VI_methods_I_canonical.pdf">slides -- draft</a>)</h3>
-Pre-processing:<br />
-&nbsp; &nbsp; Filtering/smoothing<br />
-&nbsp; &nbsp; Detrending<br />
-&nbsp; &nbsp; Spike sorting<br />
-&nbsp; &nbsp; Estimating firing rates<br />
-&nbsp; &nbsp; Image processing/ROI extraction<br />
-&nbsp; &nbsp; Behavior keypoint tracking<br />
-&nbsp; &nbsp; Segmenting<br />
+<h3>Part VI: Canonical methods
+<br /><a href="/courses/course_analyzing_time_series_VI_methods_I_canonical.pdf">slides (draft)</a></h3>
+<u>Pre-processing</u><br />
+Smoothing/downsampling<br />
+Detrending<br />
+Motion correction<br />
+ROI extraction<br />
+Creating artificial trials<br />
+Spike detection and sorting<br />
+Pose/keypoint tracking<br />
+Estimating firing rates from spike trains<br />
 <br />
-Classical signal processing:<br />
-&nbsp; &nbsp; Correlation functions<br />
-&nbsp; &nbsp; Fourier transforms and power spectra<br />
-&nbsp; &nbsp; Linear filters and impulse response<br />
+<u>Classical signal processing</u><br />
+Estimating correlation functions<br />
+Auto- and cross-covariance of signals<br />
+Power spectral densities<br />
+Convolution theorem<br />
+Wiener-Khinchin Theorem<br />
+Cross-spectral density and coherence<br />
+Linear filters and impulse response<br />
+Classical signal processing models: MA, AR, ARMA<br />
 <br />
-Neural data analysis:<br />
-&nbsp; &nbsp; Raster plots and inter-spike interval distributions<br />
-&nbsp; &nbsp; Peristimulus time histograms (PSTHs)<br />
-&nbsp; &nbsp; Tuning curves<br />
-&nbsp; &nbsp; Linear-nonlinear-Poisson (LNP) and generalized linear models (GLM)<br />
-&nbsp; &nbsp; Spike-triggered average (STA)<br />
+<u>Canonical neural data analysis</u><br />
+Raster plots and inter-spike interval distributions<br />
+Peristimulus time histograms (PSTHs)<br />
+Tuning curves<br />
+Fano factor analysis of Poisson-ness<br />
+Inter-spike interval analysis of Poisson-ness<br />
+Linear-nonlinear-Poisson (LNP) and generalized linear models (GLMs)<br />
+Spike-triggered average (STA)<br />
 
-<h3>Part VII: Modern methods (<a href="/courses/course_analyzing_time_series_VII_methods_II_modern.pdf">slides -- draft</a>)</h3>
-Dimensionality reduction<br />
-Clustering/segmentation<br />
+<h3>Part VII: Modern methods <br />
+<a href="/courses/course_analyzing_time_series_VII_methods_II_modern.pdf">slides (draft)</a></h3>
+Dimensionality reduction --- Linear methods<br />
+Dimensionality reduction --- Nonlinear methods<br />
+Clustering and segmentation<br />
 Statistical models<br />
 Latent variable models<br />
-Dynamics/state-space models<br />
+State-space and latent dynamical systems models<br />
 Mechanistic models<br />
-Connectome-based models<br />
+Connectome-constrained models<br />
+Inferring neural connectivity<br />
 Spatiotemporal analyses<br />
-Artificial/deep neural networks<br />
+Artificial neural networks as black-box function approximators<br />
+Foundation models<br />
+Artificial neural networks as models of the brain<br />
 Variational inference/ELBO<br />
-Extended learning/inference techniques<br />
-Information theory<br />
+Simulation-based inference<br />
+Popular learning and inference techniques<br />
+Information theoretic methods<br />
 Validation metrics<br />
+Designing custom analyses<br />
 
-<h3>Part VIII: Miscellaneous (<a href="/courses/course_analyzing_time_series_VIII_misc.pdf">slides -- draft</a>)</h3>
-Other methods<br />
-Common software<br />
-Frequently asked questions<br />
+<h3>Part VIII: Miscellaneous <br />
+<a href="/courses/course_analyzing_time_series_VIII_misc.pdf">slides (draft)</a></h3>
+List of other methods<br />
+Essential math/coding background<br />
 Other courses/resources<br />
               </div>
 
