@@ -58,6 +58,7 @@ Other elements of experimental context that are important to know about.
 
 * [20260525_hello_flywire2024_single_neuron_swc_morphology.pdf](20260525_hello_flywire2024_single_neuron_swc_morphology.pdf)
 * [20260525_hello_zolin2021context_DAN_timeseries_overlaid_with_locomotion.pdf](20260525_hello_zolin2021context_DAN_timeseries_overlaid_with_locomotion.pdf)
+* [20260819_hello_rich2014large_spike_times_track_positions.pdf](20260819_hello_rich2014large_spike_times_track_positions.pdf)
 
 ## Who should create hello_signal files
 
