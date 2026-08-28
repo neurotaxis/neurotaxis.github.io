@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gauss-Hermite quadrature: an elegant approximation</title>
+  <title>Gauss-Hermite quadrature: an elegant parameterization for Gaussian integrals</title>
     <script type="text/x-mathjax-config">
   MathJax.Hub.Config({
     tex2jax: {inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']]},
@@ -27,15 +27,15 @@
         
       <section class="post">
           <div class="post-content">
-            <h1>Gauss-Hermite quadrature: an elegant approximation</h1>
+            <h1>Gauss-Hermite quadrature: an elegant parameterization for Gaussian integrals</h1>
 <p><strong>Rich Pang</strong></p>
 <p>2026-01-22</p>
-<p>Suppose we would like to approximate an intractable integral of the form</p>
-<p>\[f = \text{E}_{\mathcal{N}(x)}[g(x)] = \int_{-\infty}^{\infty} \mathcal{N}(x) g(x) dx\]
-where <span id="math-equation">\(\mathcal{N}(x)\)</span> is the standard normal distribution.
-Suppose also that <span id="math-equation">\(g\)</span> is rather expensive to compute and we would like to approximate this integral using only <span id="math-equation">\(n\)</span> function evaluations <span id="math-equation">\(g(x_1), \dots, g(x_n)\)</span>.
-How do we choose the <span id="math-equation">\(\{x_i\}\)</span> at which to evaluate <span id="math-equation">\(g\)</span>?</p>
-<p>Enter Gauss-Hermite quadrature, which states that
+<p>Suppose we would like to numerically compute an intractable integral of the form</p>
+<p>\[f = \text{E}_{\mathcal{N}(x)}[g(x)] = \int_{-\infty}^{\infty} \mathcal{N}(x) g(x) dx,\]
+where <span id="math-equation">\(\mathcal{N}(x)\)</span> is the standard normal distribution,
+and we would furthermore like to cleanly parameterize how accurately we will do so.</p>
+<p>By using Gauss-Hermite (GH) quadrature, we can compute this integral using <span id="math-equation">\(n\)</span> function evaluations, <span id="math-equation">\(g(x_1), \dots, g(x_n)\)</span>, such that higher <span id="math-equation">\(n\)</span> typically yields higher accuracy.
+Specifically, GH quadrature tells us that we should compute
 \[f \approx \sum_{i=1}^n w_i g(x_i)\]
 where <span id="math-equation">\(x_i\)</span> are the roots of the <a href="https://en.wikipedia.org/wiki/Hermite_polynomials">physicist's Hermite polynomial</a> <span id="math-equation">\(H_n(x)\)</span> and the weights are given by
 \[w_i = \frac{2^{n-1}n!\sqrt{\pi}}{n^2 H_{n-1}(x_i)^2}.\]</p>
@@ -46,10 +46,10 @@ The plot below shows the roots of <span id="math-equation">\(H_n\)</span> for <s
 <p>As we can see, the G-H approximation is quite accurate even for low <span id="math-equation">\(n\)</span>.</p>
 <p><img alt="G-H approximation vs n" src="gauss_hermite_2.png" /></p>
 <h2>Comparison to other approaches</h2>
-<p>If we were to use the trapezoid rule, in addition to picking <span id="math-equation">\(n\)</span>, we would have had to truncate the integration bounds, for instance from <span id="math-equation">\(-L\)</span> to <span id="math-equation">\(L\)</span>, leaving us with another decision to make about how to choose <span id="math-equation">\(L\)</span>. G-H is thus simpler, since the accuracy of the approximation is controlled only by the single parameter <span id="math-equation">\(n\)</span>.</p>
-<p>Alternatively, we could have employed a Monte Carlo approach by sampling <span id="math-equation">\(n\)</span> values <span id="math-equation">\(x_1 \dots x_n\)</span> from <span id="math-equation">\(N(x)\)</span>, then approximating <span id="math-equation">\(f \approx \sum_i g(x_i)\)</span>. MC approaches, however, have the drawback of being nondeterministic — certain samples of <span id="math-equation">\(\{x_i\}\)</span> might yield better approximations than others. G-H, on the other hand, is purely deterministic.</p>
+<p>If we were to use the trapezoid rule, in addition to picking a resolution of our evaluation, we would have had to truncate the integration bounds, for instance from <span id="math-equation">\(-L\)</span> to <span id="math-equation">\(L\)</span>, leaving us with another decision to make about how to choose <span id="math-equation">\(L\)</span>. GH quadrature is thus simpler, since the accuracy of the approximation is controlled only by the single parameter <span id="math-equation">\(n\)</span>.</p>
+<p>Alternatively, we could have employed a Monte Carlo approach by sampling <span id="math-equation">\(n\)</span> values <span id="math-equation">\(x_1 \dots x_n\)</span> from <span id="math-equation">\(N(x)\)</span>, then approximating <span id="math-equation">\(f \approx \sum_i g(x_i)\)</span>. MC approaches, however, have the drawback of being nondeterministic — certain samples of <span id="math-equation">\(\{x_i\}\)</span> might yield better approximations than others. GH, on the other hand, is purely deterministic.</p>
 <h2>Python Code</h2>
-<p>The Python code for implementing G-H quadrature is quite simple, since we can use numpy's <code>hermgauss</code> function:</p>
+<p>The Python code for implementing GH quadrature is quite simple, since we can use numpy's <code>hermgauss</code> function:</p>
 <pre><code>import numpy as np
 from numpy.polynomial.hermite import hermgauss
 
@@ -63,7 +63,7 @@ def g(x):
 f = (1. / np.sqrt(np.pi)) * np.sum(w_i * g(np.sqrt(2.0) * x_i))
 </code></pre>
 <h2>Remark</h2>
-<p>G-H quadrature is not necessarily optimal, and its accuracy will depend on <span id="math-equation">\(g\)</span>. For instance, if <span id="math-equation">\(g\)</span> is a sum of <span id="math-equation">\(n\)</span> delta functions, the optimal function evaluations should take place at the locations of the delta functions. In practice, however, it can be quite accurate for well-behaved <span id="math-equation">\(g\)</span> and notably its accuracy is determined only by a single parameter <span id="math-equation">\(n\)</span>, the number of function evaluations. </p>
+<p>GH quadrature is not necessarily optimal, and its accuracy will depend on <span id="math-equation">\(g\)</span>. For instance, if <span id="math-equation">\(g\)</span> is a sum of <span id="math-equation">\(n\)</span> delta functions, the optimal function evaluations should take place at the locations of the delta functions. In practice, however, it is often quite accurate for well-behaved <span id="math-equation">\(g\)</span>.</p>
 <h2>Further reading</h2>
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/Gauss–Hermite_quadrature">Wikipedia page</a></li>
