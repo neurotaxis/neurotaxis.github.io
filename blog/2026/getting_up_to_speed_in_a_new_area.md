@@ -26,7 +26,7 @@ Even if you disagree with their work or think some of the minor voices in the fi
 
 ## Figure out their mental models and the stories they are telling
 
-Once you have a list of the current major players in the field, figure out their mental models and the stories they are telling.
+Once you have a list of the current major players in the field, try to figure out their mental models and the stories they are telling, at least at a high level.
 While not always true, often a single PI or lab will have a major theme or idea that serves as a common throughline underlying a large portion of their work.
 They may be a top expert in specific experimental system, a strong proponent of a specific theoretical perspective, or the leader in a certain technical method that they apply to many different questions.
 
@@ -49,9 +49,17 @@ The goal here is for *you* to internalize the PI's mental models and stories.
 Store links or PDFs of the papers organized chronologically.
 You might be surprised by how much you can learn about a scientist's way of thinking simply by reading the titles of their papers in the order they were published.
 
+## Learn any essential technical knowledge
+
+This is perhaps the largest bottleneck. 
+While significant mental models and stories in some fields can be quite accessible even to newcomers, others require highly intensive study even to be able to fully restate the claims, for instance in various mature areas of physics and mathematics.
+Some fields, such as statistical physics, also require a lot of time not just absorbing material or doing problem sets, but deeply pondering the key ideas for extended periods, so don't expect to learn an entire field in a weekend.
+Luckily, we live in an age where there are a ton great educational resources online, including lecture series targeted at many different background levels.
+If you would really like to engage with a deeply technical field that is still foreign to you, distribute your study sessions over the course of at least a semester.
+
 ## Identify major results in the field
 
-What results are well known in the field and generally thought to be highly reproducible?
+Now that you have internalized the core technical background, which results are well known in the field and generally thought to be highly reproducible?
 These will consitute either highly repeated experimental findings or foundational theoretical discoveries.
 Note that this is different from what everyone *thinks*.
 Most of the field could share a certain portion of their mental model that has not, in fact, been strongly supported by experiments.
@@ -88,7 +96,7 @@ Another great way to identify conflicts between established researchers' stories
 More journals these days, such as eLife and PLoS journals, now post reviews and author responses when the paper is published.
 Being able to read back-and-forths between authors and reviewers is extremely helpful for gaining insight into what the experts in the field disagree on and where there may real room for new ideas.
 
-## Iterate the following until convergence
+## Iterate until convergence
 
 Most of the above will end up incomplete on the first pass.
 As you explore you may discover a whole new lab that is well established but you somehow missed.
