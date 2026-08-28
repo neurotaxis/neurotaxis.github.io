@@ -5,7 +5,7 @@
 
 Reproducing kernel Hilbert spaces (RKHS) are the indispensable spaces underlying the formal foundations of kernel methods.
 
-What are they and what is interesting about them?
+What are they and why are they interesting?
 
 ## What is a RKHS?
 
@@ -30,7 +30,7 @@ where the $\{\alpha_{x_c}\}$ are determined by an optimization process and the s
 A RKHS for a kernel $k$ is, roughly, the span of all the $K_{x_c}(x)$, i.e. the space of functions that can be produced as a linear combination of the kernels with different centers. (Strictly speaking, one must deal with a continuous analog of this statement.)
 If any continuous function $f$ can be reproduced to arbitrary accuracy by choosing sufficient centers $\{x_c\}$ and weights $\{\alpha_{x_c}\}$, the kernel $k$ is called universal; i.e. the RKHS is dense in the space $C$ of continuous functions.
 
-## An interesting inner product
+## A cool inner product
 
 A Hilbert space is a complete inner product space.
 To be a Hilbert space, the RKHS therefore requires an inner product,
@@ -41,17 +41,19 @@ If you are used to inner products equipped to function spaces, you may be famili
 $$
 \langle f_1, f_2 \rangle \equiv \int f_1(x) f_2(x) dx,
 $$
-which is in some sense the simplest continous generalization of the finite-dimensional dot product, $\langle \mathbf{v}, \mathbf{w}\rangle \equiv \sum_i v_iw_i$.
-This, however, is not the inner product of a RHKS.
+which naturally generalizes the finite-dimensional dot product, $\langle \mathbf{v}, \mathbf{w}\rangle \equiv \sum_i v_iw_i$, to functions of a continuous argument $x$.
+This, however, is not the inner product of a RKHS.
 
-The inner product of a RKHS, applied to two functions $K_{x_c}$ and $K_{y_c}$ is
-not $\langle K_{x_c}, K_{y_c} \rangle = \int K_{x_c}(x) K_{y_c}(x)dx$, but rather
+The inner product of a RKHS can be constructed in terms of its application to two kernel functions with different centers, $K_{x_c}$ and $K_{y_c}$.
+Their inner product in an RKHS is *not* $\int K_{x_c}(x) K_{y_c}(x)dx$, but rather
 $$
-\langle K_{x_c}, K_{y_c} \rangle = k(x_c, y_c).
+\langle K_{x_c}, K_{y_c} \rangle = k(x_c, y_c),
 $$
+which is just our original kernel function $k(\cdot, \cdot)$ evaluated at the two centers.
 Note that no integral is involved, which is also computationally advantageous.
+
 What is the inner product between $K_{y_c}$ and some arbitrary function $f(x)$ in the RKHS?
-By linearity of the inner product we have
+Imposing linearity of the inner product to construct this, we have
 $$
 \langle f, K_{y_c} \rangle = 
 \langle \sum_{x_c} \alpha_{x_c} K_{x_c}, K_{y_c} \rangle = 
@@ -60,13 +62,14 @@ $$
 \sum_{x_c} \alpha_{x_c} \langle K_{x_c}, K_{y_c} \rangle = 
 \sum_{x_c} \alpha_{x_c} k(x_c, y_c) = f(y_c).
 $$
-This is called the reproducing property, the essential mathematical feature of an RKHS.
+This is called the *reproducing property*, the essential mathematical feature of an RKHS.
 The reproducing property is the property that the inner product of a function $f$ in the RKHS, with a kernel centered at $x$ is simply $f(x)$.
 
 Similarly, the inner product of an arbitrary pair of functions in the RKHS is
 $$
 \langle f, g \rangle = 
 \sum_{x_c, y_c} \alpha_{x_c} \alpha_{y_c} k(x_c, y_c)
+= \sum_{y_c} \alpha_{y_c} f(y_c)
 $$
 where we have let $g(x) = \sum_{y_c} \alpha_{y_c} K_{y_c}(x).$
 
@@ -89,7 +92,7 @@ Hence, inner products and function evaluation are quite closely related even wit
 The RKHS, however, represents a very powerful generalization of this idea to spaces produced from kernel functions.
 
 The RKHS, moreover, supports the rigorous foundation underlying the famous "kernel trick", which is based on the observation that given a feature map $\psi(x) \in \mathbb{R}^N$, where $N \to \infty$ possibly, one can naturally define $k(x, y) \equiv \psi(x)^T\psi(y)$, i.e. the kernel is the inner product of two feature maps.
-This in turn enables solving a possibly infinite dimensional problem (finding the infinite-dimensional $w$ such that $f(x) \approx \psi(x)^Tw$) in finite dimensions, by finding the $\{\alpha_{x_c}\}$ described above instead---a key advantage of kernel methods.
+This in turn enables solving a possibly infinite dimensional problem (finding the infinite-dimensional $w$ such that $f(x) \approx \psi(x)^Tw$) in finite dimensions, by finding the $\{\alpha_{x_c}\}$ described above instead&#8212;a key advantage of kernel methods.
 
 ## Further reading/watching
 

@@ -31,7 +31,7 @@
 <p><strong>Rich Pang</strong></p>
 <p>2026-07-22</p>
 <p>Reproducing kernel Hilbert spaces (RKHS) are the indispensable spaces underlying the formal foundations of kernel methods.</p>
-<p>What are they and what is interesting about them?</p>
+<p>What are they and why are they interesting?</p>
 <h2>What is a RKHS?</h2>
 <p>A RKHS is the space of functions along with a specific inner product, where that space of functions corresponds to the functions that can be learned with a kernel machine.
 A kernel machine is a model that generates predictions about a test input <span id="math-equation">\(x\)</span> by comparing it to a set of training inputs <span id="math-equation">\(\{x_c\}\)</span> where comparison is formalized via a kernel function,
@@ -47,30 +47,32 @@ we call <span id="math-equation">\(K_{x_c}(x)\)</span> the kernel function with 
 where the <span id="math-equation">\(\{\alpha_{x_c}\}\)</span> are determined by an optimization process and the sum runs over all the training data or centers.</p>
 <p>A RKHS for a kernel <span id="math-equation">\(k\)</span> is, roughly, the span of all the <span id="math-equation">\(K_{x_c}(x)\)</span>, i.e. the space of functions that can be produced as a linear combination of the kernels with different centers. (Strictly speaking, one must deal with a continuous analog of this statement.)
 If any continuous function <span id="math-equation">\(f\)</span> can be reproduced to arbitrary accuracy by choosing sufficient centers <span id="math-equation">\(\{x_c\}\)</span> and weights <span id="math-equation">\(\{\alpha_{x_c}\}\)</span>, the kernel <span id="math-equation">\(k\)</span> is called universal; i.e. the RKHS is dense in the space <span id="math-equation">\(C\)</span> of continuous functions.</p>
-<h2>An interesting inner product</h2>
+<h2>A cool inner product</h2>
 <p>A Hilbert space is a complete inner product space.
 To be a Hilbert space, the RKHS therefore requires an inner product,
 \[\langle f_1, f_2 \rangle\]
 that takes in two functions in the RKHS as arguments are returns some notion of how similar they are.</p>
 <p>If you are used to inner products equipped to function spaces, you may be familiar with the following inner product,
 \[\langle f_1, f_2 \rangle \equiv \int f_1(x) f_2(x) dx,\]
-which is in some sense the simplest continous generalization of the finite-dimensional dot product, <span id="math-equation">\(\langle \mathbf{v}, \mathbf{w}\rangle \equiv \sum_i v_iw_i\)</span>.
-This, however, is not the inner product of a RHKS.</p>
-<p>The inner product of a RKHS, applied to two functions <span id="math-equation">\(K_{x_c}\)</span> and <span id="math-equation">\(K_{y_c}\)</span> is
-not <span id="math-equation">\(\langle K_{x_c}, K_{y_c} \rangle = \int K_{x_c}(x) K_{y_c}(x)dx\)</span>, but rather
-\[\langle K_{x_c}, K_{y_c} \rangle = k(x_c, y_c).\]
-Note that no integral is involved, which is also computationally advantageous.
-What is the inner product between <span id="math-equation">\(K_{y_c}\)</span> and some arbitrary function <span id="math-equation">\(f(x)\)</span> in the RKHS?
-By linearity of the inner product we have
+which naturally generalizes the finite-dimensional dot product, <span id="math-equation">\(\langle \mathbf{v}, \mathbf{w}\rangle \equiv \sum_i v_iw_i\)</span>, to functions of a continuous argument <span id="math-equation">\(x\)</span>.
+This, however, is not the inner product of a RKHS.</p>
+<p>The inner product of a RKHS can be constructed in terms of its application to two kernel functions with different centers, <span id="math-equation">\(K_{x_c}\)</span> and <span id="math-equation">\(K_{y_c}\)</span>.
+Their inner product in an RKHS is <em>not</em> <span id="math-equation">\(\int K_{x_c}(x) K_{y_c}(x)dx\)</span>, but rather
+\[\langle K_{x_c}, K_{y_c} \rangle = k(x_c, y_c),\]
+which is just our original kernel function <span id="math-equation">\(k(\cdot, \cdot)\)</span> evaluated at the two centers.
+Note that no integral is involved, which is also computationally advantageous.</p>
+<p>What is the inner product between <span id="math-equation">\(K_{y_c}\)</span> and some arbitrary function <span id="math-equation">\(f(x)\)</span> in the RKHS?
+Imposing linearity of the inner product to construct this, we have
 \[\langle f, K_{y_c} \rangle = 
 \langle \sum_{x_c} \alpha_{x_c} K_{x_c}, K_{y_c} \rangle =\]
 \[\sum_{x_c} \alpha_{x_c} \langle K_{x_c}, K_{y_c} \rangle = 
 \sum_{x_c} \alpha_{x_c} k(x_c, y_c) = f(y_c).\]
-This is called the reproducing property, the essential mathematical feature of an RKHS.
+This is called the <em>reproducing property</em>, the essential mathematical feature of an RKHS.
 The reproducing property is the property that the inner product of a function <span id="math-equation">\(f\)</span> in the RKHS, with a kernel centered at <span id="math-equation">\(x\)</span> is simply <span id="math-equation">\(f(x)\)</span>.</p>
 <p>Similarly, the inner product of an arbitrary pair of functions in the RKHS is
 \[\langle f, g \rangle = 
-\sum_{x_c, y_c} \alpha_{x_c} \alpha_{y_c} k(x_c, y_c)\]
+\sum_{x_c, y_c} \alpha_{x_c} \alpha_{y_c} k(x_c, y_c)
+= \sum_{y_c} \alpha_{y_c} f(y_c)\]
 where we have let <span id="math-equation">\(g(x) = \sum_{y_c} \alpha_{y_c} K_{y_c}(x).\)</span></p>
 <p>Thus, the inner product of a RKHS is not the ordinary continuous generalization of the dot product, but deeply related to function evaluation.</p>
 <h2>Function evaluation as a linear operation</h2>
@@ -84,7 +86,7 @@ and let <span id="math-equation">\(\delta_y \equiv \delta(x-y)\)</span> we in tu
 Hence, inner products and function evaluation are quite closely related even without RKHS.
 The RKHS, however, represents a very powerful generalization of this idea to spaces produced from kernel functions.</p>
 <p>The RKHS, moreover, supports the rigorous foundation underlying the famous "kernel trick", which is based on the observation that given a feature map <span id="math-equation">\(\psi(x) \in \mathbb{R}^N\)</span>, where <span id="math-equation">\(N \to \infty\)</span> possibly, one can naturally define <span id="math-equation">\(k(x, y) \equiv \psi(x)^T\psi(y)\)</span>, i.e. the kernel is the inner product of two feature maps.
-This in turn enables solving a possibly infinite dimensional problem (finding the infinite-dimensional <span id="math-equation">\(w\)</span> such that <span id="math-equation">\(f(x) \approx \psi(x)^Tw\)</span>) in finite dimensions, by finding the <span id="math-equation">\(\{\alpha_{x_c}\}\)</span> described above instead---a key advantage of kernel methods.</p>
+This in turn enables solving a possibly infinite dimensional problem (finding the infinite-dimensional <span id="math-equation">\(w\)</span> such that <span id="math-equation">\(f(x) \approx \psi(x)^Tw\)</span>) in finite dimensions, by finding the <span id="math-equation">\(\{\alpha_{x_c}\}\)</span> described above instead&#8212;a key advantage of kernel methods.</p>
 <h2>Further reading/watching</h2>
 <p><a href="https://en.wikipedia.org/wiki/Kernel_method">Kernel method (Wikipedia)</a>.</p>
 <p><a href="https://en.wikipedia.org/wiki/Representer_theorem">Representer Theorem (Wikipedia)</a>.</p>
