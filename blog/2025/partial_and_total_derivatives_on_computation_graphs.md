@@ -54,7 +54,7 @@ $$L = L(\mathbf{x}, \mathbf{y}, \mathbf{z}).$$
 
 This series of functions and dependencies can be represented as
 
-![computation graph example](comp_graph_example.png)
+![Depiction of computation graph with arrows from w to x, y, and z; from x to y; from y to z; and from x, y, and z to L.](comp_graph_example.png)
 
 Computation graphs are a fundamental abstraction in modern AI, and understanding them is essential to understanding the computation of gradients.
 
@@ -76,7 +76,7 @@ The total derivative of a target variable with respect to a source variable is t
 On the computation graph above, the total derivative of $dL/d\mathbf{x}$ corresponds to the sum of all (directed) paths from $\mathbf{x}$ to $L$.
 That is, $dL/d\mathbf{x}$ corresponds to:
 
-![All paths from x to L](comp_graph_sum_of_paths_example.png)
+![All paths in the computation graph from x to L, highlighted in red.](comp_graph_sum_of_paths_example.png)
 
 Not that the paths can overlap, e.g. multiple paths can include the same edge (link). Mathematically, this sum corresponds to
 

@@ -64,7 +64,7 @@ Suppose a loss <span id="math-equation">\(L\)</span> is computed from <span id="
 <p>\[\mathbf{z} = \mathbf{z}(\mathbf{y}, \mathbf{w})\]</p>
 <p>\[L = L(\mathbf{x}, \mathbf{y}, \mathbf{z}).\]</p>
 <p>This series of functions and dependencies can be represented as</p>
-<p><img alt="computation graph example" src="comp_graph_example.png" /></p>
+<p><img alt="Depiction of computation graph with arrows from w to x, y, and z; from x to y; from y to z; and from x, y, and z to L." src="comp_graph_example.png" /></p>
 <p>Computation graphs are a fundamental abstraction in modern AI, and understanding them is essential to understanding the computation of gradients.</p>
 <p>Of frequent interest are paths on computation graphs.
 When we speak of the path from <span id="math-equation">\(\mathbf{w}\)</span> to <span id="math-equation">\(\mathbf{x}\)</span> to <span id="math-equation">\(\mathbf{y}\)</span> to <span id="math-equation">\(L\)</span>, what we are actually referring to is the product of Jacobians backwards along that path:</p>
@@ -77,7 +77,7 @@ Hence a small change in the source variable will lead to no change in the target
 <p>The total derivative of a target variable with respect to a source variable is the sum of all possible ways a small change in the source will lead to a small change in the target.
 On the computation graph above, the total derivative of <span id="math-equation">\(dL/d\mathbf{x}\)</span> corresponds to the sum of all (directed) paths from <span id="math-equation">\(\mathbf{x}\)</span> to <span id="math-equation">\(L\)</span>.
 That is, <span id="math-equation">\(dL/d\mathbf{x}\)</span> corresponds to:</p>
-<p><img alt="All paths from x to L" src="comp_graph_sum_of_paths_example.png" /></p>
+<p><img alt="All paths in the computation graph from x to L, highlighted in red." src="comp_graph_sum_of_paths_example.png" /></p>
 <p>Not that the paths can overlap, e.g. multiple paths can include the same edge (link). Mathematically, this sum corresponds to</p>
 <p>\[\frac{dL}{d\mathbf{x}} = 
 \mathcal{D}_{L\mathbf{x}}
