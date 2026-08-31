@@ -31,7 +31,7 @@ Treating the inputs as constant, the weights $\mathbf{w}$ determine the loss thr
 To determine the total derivative $dL/d\mathbf{w}$ of the loss with respect to the weights, we need to sum over all paths from $\mathbf{w}$ to $L$, where we recall that a path corresponds to the product of Jacobians $\mathcal{D}_{\alpha\beta}$ backwards along the path.
 To arrive at the classical factorization we group paths according to the first edge out of $\mathbf{w}$. That is, we take $dL/d\mathbf{w} = $
 
-![Classical factorization of BPTT computation graph](bptt_classical_factorization.png)
+![Classical factorization of BPTT computation graph depicting all paths from w to L.](bptt_classical_factorization.png)
 
 which corresponds to $\frac{dL}{d\mathbf{w}} = $
 

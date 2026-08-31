@@ -43,7 +43,7 @@ In its most general form, an RNN parameterized by weights <span id="math-equatio
 <h2>Counting paths on the computation graph</h2>
 <p>To determine the total derivative <span id="math-equation">\(dL/d\mathbf{w}\)</span> of the loss with respect to the weights, we need to sum over all paths from <span id="math-equation">\(\mathbf{w}\)</span> to <span id="math-equation">\(L\)</span>, where we recall that a path corresponds to the product of Jacobians <span id="math-equation">\(\mathcal{D}_{\alpha\beta}\)</span> backwards along the path.
 To arrive at the classical factorization we group paths according to the first edge out of <span id="math-equation">\(\mathbf{w}\)</span>. That is, we take <span id="math-equation">\(dL/d\mathbf{w} =\)</span></p>
-<p><img alt="Classical factorization of BPTT computation graph" src="bptt_classical_factorization.png" /></p>
+<p><img alt="Classical factorization of BPTT computation graph depicting all paths from w to L." src="bptt_classical_factorization.png" /></p>
 <p>which corresponds to <span id="math-equation">\(\frac{dL}{d\mathbf{w}} =\)</span></p>
 <p>\[\dots + \left(
 \mathcal{D}_{L\mathbf{h}_{t-1}}
