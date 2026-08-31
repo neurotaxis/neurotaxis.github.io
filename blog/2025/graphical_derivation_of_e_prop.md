@@ -27,11 +27,11 @@ $$
 
 We can represent this with the computation graph
 
-![e-prop computation graph](e_prop_comp_graph.png)
+![The overall computation graph for e-prop, depicting hidden states, activations, weights and loss.](e_prop_comp_graph.png)
 
 where we have colored the connections from the activations to the loss (and ignored the inputs since we will not differentiate with respect to these), or its expanded version (showing just two neurons for simplicity):
 
-![e-prop computation graph expanded](e_prop_comp_graph_expanded.png)
+![The e-prop computation graph expanded to show two example individual neurons.](e_prop_comp_graph_expanded.png)
 
 where $\mathbf{w}_j$ are the synaptic weights onto neuron $j$.
 
@@ -68,7 +68,7 @@ where the first term has been replaced with a partial derivative.
 
 Before we derive the full factorization, first note the set of paths included in the eligbility trace $e_{ji}^t$. This corresponds to all paths to $z_j^t$ that go only through the hidden states $\mathbf{h}_j^t$ of neuron $j$. Graphically (hiding the $z \to E$ paths for visualization purposes), these are
 
-![e-prop eligibility trace paths](e_prop_et_paths.png)
+![The e-prop computation graph with several paths from w_j to z_j^t highlighted in red.](e_prop_et_paths.png)
 
 Note that we have used $\mathbf{w}_j$ here for simplicity, but one finds an equivalent set of paths from each element $W_{ji}$ of $\mathbf{w}_j$ to $z_j^t$. 
 
@@ -76,15 +76,15 @@ Note that we have used $\mathbf{w}_j$ here for simplicity, but one finds an equi
 
 The term $dE/d z_j^t$, *is* a total derivative, and corresponds to the sum of all paths from $z_j^t$ to $E$, which includes paths through other neurons, unlike the eligbility trace. That is, $dE/dz_j^t = $
 
-![e-prop paths in dE/dz_j^t](e_prop_dEdz_paths.png)
+![The e-prop computation graph highlight several example paths from z_j^t to E.](e_prop_dEdz_paths.png)
 
 For simplicity, let us represent the sum of all these paths, i.e. the total derivative $dE/dz_j^t$, as
 
-![e-prop total derivative notation](e_prop_total_deriv_notation.png)
+![Depiction of drawing a circle around the node z_j^t to indicate the total derivative dE/dz_j^t.](e_prop_total_deriv_notation.png)
 
 so that e.g.
 
-![e-prop total derivative notation auxiliary](e_prop_total_deriv_notation_2.png)
+![E-prop computation graph expanded to highlight several paths from w_j to z_j^t.](e_prop_total_deriv_notation_2.png)
 
 corresponds to
 
@@ -109,11 +109,11 @@ accounts for all paths from $W_{ji}$ to $E$.
 
 Graphically, this sum corresponds to the following set of paths, where each row of paths is a term in the sum:
 
-![e-prop all paths](e_prop_all_paths.png)
+![All paths from w_j to E in the e-prop computation graph, expanded row-wise by the time t in z_j^t and column-wise by the time of the first hidden state in the path, using the circle notation for total derivative.](e_prop_all_paths.png)
 
 In fact, this collection of paths *does* account for everything, and nothing is double-counted. To see this, consider the "diagonal" set of paths:
 
-![e-prop all paths diagonally organized](e_prop_all_paths_diagonal.png)
+![All paths from w_j to E grouped diagonally according to the graphical expansion.](e_prop_all_paths_diagonal.png)
 
 This contains all paths from $\mathbf{w}_j$ through $\mathbf{h}_j^{t-1}$.
 To see this, observe that the bottom row contains all paths $\mathbf{w}_j$ through $\mathbf{h}_j^{t-1}$ *except* those containing the link $\mathbf{h}_j^{t-1} \to \mathbf{h}_j^t$.
