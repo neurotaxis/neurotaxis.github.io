@@ -70,6 +70,6 @@ This level of clustering also makes archiving data for later re-use much easier.
 ## Automating signal mining
 
 `hello_signal` files represent a level abstraction that could drastically simplify something like an automated "semantic search" for specific or interesting types of signals in neuroscience data.
-Their advantage over extensive documentation is that they already contain example plots of what the signals look like, along with a concise presentation of how easy or complicated it will be to access and work with the data.
+Their advantage over standard documentation is that they already contain example plots of what the signals look like, along with a concise presentation of how easy or complicated it will be to access and work with the data.
 Their advantage over published papers is that they contain many representative examples of the signals in question, giving a much stronger sense of what it will be like to work with a specific signal in a specific dataset.
 These observations are particularly relevant in modern times in which AI systems have become increasingly good at parsing text and images, and which in combination with an index of `hello_signal` files could greatly accelerate our ability to truly make the most out of existing neuroscience data by helping produce an accessible mapping between scientific questions and the datasets most relevant to answering them.
