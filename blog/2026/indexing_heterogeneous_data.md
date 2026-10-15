@@ -4,7 +4,7 @@
 2026-10-15
 
 While such a task may seem daunting, involving extensive and expensive infrastructure and pipeline engineering, it could also be much simpler and cheaper than it sounds.
-A collection of [`hello_signal`](https://neurotaxis.org/blog/2026/hello_signal.html) files provides a simple, practical, flexible and low-cost gateway to an arbitrarily large set of complex, heterogeneous datasets that makes initial assessment of their accessibility and relevance to specific questions fast and easy.
+A collection of [`hello_signal`](https://neurotaxis.org/blog/2026/hello_signal.html) files provides a simple, practical, flexible and low-cost gateway to an arbitrarily large set of complex, heterogeneous datasets that makes initial assessment of their accessibility and relevance to specific research questions fast and easy.
 
 ![a collection of hello_signal files pointing to several different data storage devices](indexing_heterogeneous_data_diagram.png)
 
@@ -18,7 +18,7 @@ A `hello_signal` file attempts to achieve exactly the latter while also providin
 
 ## What is a `hello_signal` file?
 
-As described in a previous [post](https://neurotaxis.org/blog/2026/hello_signal.html), a `hello_signal` file is a one-size-fits-all PDF that provides (1) unambiguous instructions for accessing and plotting the an important signal in a dataset; (2) clean, representative examples of what the signals in the data actually looks like, ideally giving a sense of the SNR as well; (3) all the basic numbers about number of animals, trials, stimuli, etc, and the file types and sizes that comprise the dataset; and (4) essential notes on experimental context to ensure that the signals, as well as any artifacts, do not get misinterpreted.
+As described in a previous [post](https://neurotaxis.org/blog/2026/hello_signal.html), a `hello_signal` file is a one-size-fits-all PDF that provides (1) unambiguous instructions for accessing and plotting an important signal in a dataset; (2) clean, representative examples of what the signals in the data actually look like, ideally giving a sense of the SNR as well; (3) all the basic numbers about number of animals, trials, stimuli, etc, and the file types and sizes that comprise the dataset; and (4) essential notes on experimental context to ensure that the signals, as well as any artifacts, do not get misinterpreted.
 `hello_signal` files require no specific software (whatever language and code were used to plot the data is fine), no reformatting or refactoring, no moving data to any specific storage systems, no AI, and in general no additional technology at all, which makes them extremely flexible, robust, and easy to make.
 Ideally, a stack of `hello_signals` can be printed out and left by a department coffee machine for curious investigators to browse at their leisure to see which signals might be relevant to their research interests.
 
