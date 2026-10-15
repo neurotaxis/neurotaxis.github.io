@@ -30,15 +30,15 @@ You can find some examples of `hello_signal` files in my previous [post](https:/
 Neuroscience data grows more complex and heterogeneous by the day.
 `hello_signal` files work in harmony with this observation rather than attempting to standardize things, since each `hello_signal` file is simply a PDF.
 That said, they naturally complement efforts to standardize certain data formats, e.g. in the [NWB](https://nwb.org) project. 
-A main goal of a `hello_signal` file is to give the reader a sense not only of what the signal looks like, but how easy it will be to access and work with it—hence, if a `hello_signal` file indicates that a common file format is used, this would usually indicate greater accessibility than a custom file type created by the experimental lab.
-Moreover, since the data-access portion of a `hello_signal` is essentially a pointer to where the data live and how to access them, `hello_signal` files do not require any reorganization of data storage.
-They are equally compatible with datasets stored in the cloud or on a hard drive tucked away in a file cabinet in the lab—what they provide is a sense of how complicated the data will be to access and work with and, critically, what the signal in the data looks like.
+A main goal of a `hello_signal` file is to give the reader a sense not only of what the signal looks like, but how easy it will be to access and work with it—hence, if a `hello_signal` file indicates that a common file format is used, this may indicate greater accessibility than a custom file type created by a specific lab.
+Moreover, since the data-access portion of a `hello_signal` file is essentially a pointer to where the data live and how to access them, `hello_signal` files do not require any reorganization of data storage.
+They are equally compatible with datasets stored in the cloud or on a hard drive tucked away in a file cabinet—what they provide is a sense of how complicated the data will be to access and work with and, critically, what the signal in the data looks like.
 
-A further advantage of a `hello_signal` file is that by design they prioritize signal over data.
+A further advantage of `hello_signal` files is that by design they prioritize signal over data.
 While modern science celebrates big data, really big signal is what we're after.
 One of the main purposes of a `hello_signal` file is to display several representative examples of exactly what you expect to see when you do load the data.
-Notably, this can be quite different from the plots reported in a paper, which for conciseness usually provide few, if any, examples of the raw signals someone would if they loaded the data on their own computer.
-Being able to quickly scan through several printed examples of what the real signal in a dataset looks like, on the other hand, can be extremely useful for assessing whether a dataset will likely be useful to dig into more deeply for a novel project.
+Notably, this can be quite different from the plots reported in a paper, which for conciseness usually provide few, if any, examples of the raw signals someone would observe if they loaded the data on their own computer.
+Being able to quickly scan through several printed examples of what the real signal in a dataset looks like, on the other hand, can be extremely helpful for assessing whether a dataset will likely be useful to dig into more deeply for a novel project.
 
 ## How to make a `hello_signal` file
 
